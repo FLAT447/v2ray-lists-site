@@ -242,6 +242,9 @@ h3 {
     position: relative;
     margin-bottom: 15px;
     min-height: 60px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .url-text {
@@ -282,4 +285,217 @@ h3 {
 
 .btn-copy-main.copied {
     background-color: var(--green-color);
+}
+
+/* Панель управления */
+.controls-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 280px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 12px 12px 45px;
+    background: var(--crust-color);
+    border: 1px solid var(--surface-color);
+    border-radius: 12px;
+    color: var(--text-color);
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.search-box input:focus {
+    border-color: var(--blue-color);
+}
+
+.filter-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Общий стиль для неактивных кнопок остается прежним */
+.filter-btn {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--surface-color);
+    background: var(--surface-color);
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* Специфические цвета для активных состояний */
+
+/* Кнопка "Все" — Синий */
+.filter-btn.all.active {
+    background: var(--blue-color);
+    border-color: var(--blue-color);
+    color: var(--crust-color);
+}
+
+/* Кнопка "Рекомендованные" — Оранжевый (Peach) */
+.filter-btn.recommended.active {
+    background: var(--yellow-color);
+    border-color: var(--yellow-color);
+    color: var(--crust-color);
+}
+
+/* Кнопка "Белые списки" — Фиолетовый (Mauve) */
+.filter-btn.sni.active {
+    background: var(--mauve-color);
+    border-color: var(--mauve-color);
+    color: #fff;
+}
+
+/* Эффект при наведении для неактивных кнопок (чуть светлее) */
+.filter-btn:not(.active):hover {
+    border-color: var(--text-color);
+    opacity: 0.8;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 38px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    opacity: 0;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 18px;
+    transition: all 0.2s ease;
+    pointer-events: none; /* Чтобы нельзя было нажать, когда она невидима */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-btn.visible {
+    opacity: 0.6;
+    pointer-events: auto;
+}
+
+.clear-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Немного отодвинем текст в инпуте справа, чтобы он не залезал под крестик */
+.search-box input {
+    padding-right: 40px !important;
+}
+
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 60px; /* Уменьшаем огромный заголовок */
+    }
+    
+    .config-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* Мобильные устройства (до 768px) */
+@media (max-width: 768px) {
+    .header-class {
+        justify-content: center; /* Центрируем элементы в шапке */
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .param-header {
+        margin-right: 0; /* Убираем margin-right, чтобы центрировалось */
+        width: 100%;
+        text-align: center;
+        order: -1; /* Логотип всегда сверху */
+    }
+
+    h1 {
+        font-size: 40px; /* Еще меньше для телефонов */
+        padding: 20px 10px 5px;
+    }
+
+    h3 {
+        font-size: 16px;
+        padding: 0 15px;
+    }
+
+    .controls-container {
+        flex-direction: column; /* Поиск и фильтры друг под другом */
+        align-items: stretch;
+    }
+
+    .filter-group {
+        justify-content: center;
+    }
+
+    .filter-btn {
+        flex: 1; /* Кнопки фильтров растягиваются по ширине */
+        text-align: center;
+        font-size: 13px;
+        padding: 10px 5px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+}
+
+/* Совсем маленькие экраны (до 480px) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .card-id {
+        font-size: 24px;
+    }
+
+    .url-text {
+        font-size: 11px; /* Чуть меньше шрифт URL, чтобы не ломал верстку */
+    }
+
+    .header-class {
+        gap: 10px;
+    }
+    
+    .divider {
+        display: none; /* Убираем разделитель на узких экранах для экономии места */
+    }
 }

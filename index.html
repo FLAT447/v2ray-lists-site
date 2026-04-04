@@ -24,8 +24,21 @@
     </header>
     <h1><p><i class="fa-solid fa-bolt"></i> V2Ray Lists</p></h1>
     <h3><p>Бесплатные конфигурации Hysteria2, ShadowSocks, VLESS, VMess, Trojan, Reality<br>Обновления каждые 3 часа</p></h3>
+    <div class="controls-container">
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="config-search" placeholder="Поиск по ID или URL...">
+        <button id="clear-search" class="clear-btn" aria-label="Очистить поиск">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    <div class="filter-group">
+        <button class="filter-btn active all" data-filter="all">Все</button>
+        <button class="filter-btn recommended" data-filter="recommended">Рекомендованные</button>
+        <button class="filter-btn sni" data-filter="sni">Белые Списки SNI/CIDR</button>
+    </div>
+    </div>
     <div class="config-grid"></div>
-
     <script src="script.js"></script>
 </body>
 </html>

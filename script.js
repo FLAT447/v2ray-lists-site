@@ -2,6 +2,8 @@ const htmlElement = document.documentElement;
 const toggleButton = document.getElementById('theme-toggle');
 const iconElement = toggleButton.querySelector('i');
 const configGrid = document.querySelector('.config-grid');
+const searchInput = document.getElementById('config-search');
+const filterBtns = document.querySelectorAll('.filter-btn');
 
 // 1. ДАННЫЕ КАРТОЧЕК (просто добавляй новые сюда)
 const configs = [
@@ -33,9 +35,28 @@ const configs = [
     { id: 26, url: 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/githubmirror/26.txt', type: 'sni' },
 ];
 
+let currentFilter = 'all';
+let searchQuery = '';
+
 // 2. ФУНКЦИЯ ОТРИСОВКИ
 function renderCards() {
-    configGrid.innerHTML = configs.map(conf => `
+    // Фильтруем данные
+    const filteredConfigs = configs.filter(conf => {
+        const matchesSearch = conf.url.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              conf.id.toString().includes(searchQuery);
+        
+        const matchesFilter = currentFilter === 'all' || conf.type === currentFilter;
+        
+        return matchesSearch && matchesFilter;
+    });
+
+    // Отрисовываем
+    if (filteredConfigs.length === 0) {
+        configGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; opacity: 0.5; padding: 40px;">Ничего не найдено</p>`;
+        return;
+    }
+
+    configGrid.innerHTML = filteredConfigs.map(conf => `
         <div class="card">
             <div class="card-header">
                 <div class="card-id">${conf.id}</div>
@@ -51,6 +72,45 @@ function renderCards() {
         </div>
     `).join('');
 }
+
+searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    toggleClearButton();
+    renderCards();
+});
+
+// Слушатели фильтров
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Меняем активную кнопку
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Устанавливаем фильтр и перерисовываем
+        currentFilter = btn.getAttribute('data-filter');
+        renderCards();
+    });
+});
+
+const clearBtn = document.getElementById('clear-search');
+
+// Функция для обновления видимости кнопки очистки
+function toggleClearButton() {
+    if (searchQuery.length > 0) {
+        clearBtn.classList.add('visible');
+    } else {
+        clearBtn.classList.remove('visible');
+    }
+}
+
+// Слушатель для кнопки сброса
+clearBtn.addEventListener('click', () => {
+    searchQuery = ''; // Обнуляем переменную запроса
+    searchInput.value = ''; // Очищаем поле ввода
+    searchInput.focus(); // Возвращаем курсор в поле
+    toggleClearButton(); // Прячем кнопку
+    renderCards(); // Перерисовываем список
+});
 
 // 3. ФУНКЦИЯ КОПИРОВАНИЯ
 window.copyText = (text, btn) => {
