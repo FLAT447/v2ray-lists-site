@@ -1,0 +1,447 @@
+:root {
+    --background-color: #1e1e2e;   
+    --blue-color: #89b4fa;          
+    --red-color: #f38ba8;           
+    --green-color: #a6e3a1;
+    --yellow-color: #f9e2af;
+    --peach-color: #fab387;
+    --pink-color: #f5c2e7;
+    --mauve-color: #cba6f7;
+    --teal-color: #94e2d5;
+    --text-color: #cdd6f4;
+    --surface-color: #313244;
+    --crust-color: #11111b;
+    --saphire-color: #74c7ec;
+    
+    --control-height: 46px;
+}
+
+.light-theme {
+    --background-color: #eff1f5;
+    --blue-color: #1e66f5;
+    --red-color: #d20f39;
+    --green-color: #40a02b;
+    --yellow-color: #df8e1d;
+    --peach-color: #fe640b;
+    --pink-color: #ea76cb;
+    --mauve-color: #8839ef;
+    --teal-color: #179299;
+    --text-color: #4c4f69;
+    --surface-color: #ccd0da;
+    --crust-color: #dce0e8;
+    --saphire-color: #209fb5;
+}
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #05060a;
+    color: var(--text-color);
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.2s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.light-theme body {
+    background: #eef2f5;
+}
+
+/* ===== ПЛАВАЮЩИЕ ГРАДИЕНТНЫЕ КРУГИ (2 больших круга) ===== */
+.floating-gradients {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.gradient-ball {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* ТЁМНАЯ ТЕМА (менее навязчивые) */
+.gradient-ball {
+    filter: blur(90px);
+    opacity: 0.3;
+}
+
+/* СВЕТЛАЯ ТЕМА (более заметные) */
+.light-theme .gradient-ball {
+    filter: blur(70px);
+    opacity: 0.6;
+}
+
+/* Анимации для двух больших кругов */
+@keyframes floatRandom1 {
+    0% { transform: translate(0%, 0%) scale(1); }
+    15% { transform: translate(12%, -8%) scale(1.1); }
+    30% { transform: translate(-5%, 15%) scale(0.9); }
+    45% { transform: translate(8%, -12%) scale(1.15); }
+    60% { transform: translate(-15%, -3%) scale(0.95); }
+    75% { transform: translate(3%, 18%) scale(1.05); }
+    90% { transform: translate(-8%, -10%) scale(0.85); }
+    100% { transform: translate(0%, 0%) scale(1); }
+}
+
+@keyframes floatRandom2 {
+    0% { transform: translate(0%, 0%) scale(1); }
+    20% { transform: translate(-10%, 10%) scale(1.2); }
+    40% { transform: translate(15%, -5%) scale(0.85); }
+    60% { transform: translate(-8%, -15%) scale(1.1); }
+    80% { transform: translate(5%, 12%) scale(0.95); }
+    100% { transform: translate(0%, 0%) scale(1); }
+}
+
+/* Первый большой круг (сине-фиолетовый) */
+/* Среднее движение (золотая середина) */
+.ball1 {
+    width: 800px;
+    height: 800px;
+    top: -15%;
+    left: -10%;
+    animation: floatRandom1 25s infinite alternate ease-in-out;
+}
+
+.ball2 {
+    width: 750px;
+    height: 750px;
+    bottom: -15%;
+    right: -10%;
+    animation: floatRandom2 25s infinite alternate ease-in-out;
+}
+
+/* ЦВЕТА КРУГОВ */
+
+/* ТЁМНАЯ ТЕМА (приглушённые, элегантные) */
+.ball1 { background: radial-gradient(circle, #1e3a8a, #5b21b6, transparent 70%); }
+.ball2 { background: radial-gradient(circle, #9d174d, #ea580c, transparent 70%); }
+
+/* СВЕТЛАЯ ТЕМА (яркие, насыщенные) */
+.light-theme .ball1 { background: radial-gradient(circle, #3b82f6, #8b5cf6, transparent 65%); }
+.light-theme .ball2 { background: radial-gradient(circle, #ec4899, #f97316, transparent 65%); }
+
+/* Контент поверх кругов */
+.header, h1, h3, .controls-container, .config-grid {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Header --- */
+.header {
+    background-color: rgba(255, 255, 255, 0.05);
+    position: sticky;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    top: 0;
+    z-index: 1500;
+    box-shadow: 0 1px 35px rgba(0,0,0,0.2);
+}
+
+.header-class {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.param-header {
+    font-weight: bold;
+    font-size: 22px;
+    margin-right: auto;
+    color: var(--text-color);
+}
+
+.header-gradient {
+    background: linear-gradient(60deg, var(--blue-color), var(--saphire-color));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.social a { text-decoration: none; color: inherit; }
+.fa-brands { font-size: 22px; padding: 0 5px; transition: transform 0.3s ease; }
+.fa-brands:hover { transform: scale(1.3); }
+.fa-telegram { color: var(--blue-color); }
+.fa-youtube { color: var(--red-color); }
+
+.github { font-size: 20px; color: var(--text-color); font-weight: bold; text-decoration: none; }
+.github a { color: inherit; }
+.divider { width: 1px; height: 22px; background: rgba(255, 255, 255, 0.3); margin: 0 6px; }
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.header-logo {
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover .header-logo {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: var(--text-color);
+    transition: transform 0.2s;
+}
+.theme-toggle:hover { transform: scale(1.2); }
+
+h1 { text-align: center; font-size: 50px; margin-top: 30px; }
+h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px; }
+
+/* --- Controls Section --- */
+.controls-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.view-tabs {
+    display: flex;
+    background: var(--crust-color);
+    padding: 4px;
+    border-radius: 14px;
+    border: 1px solid var(--surface-color);
+    height: var(--control-height);
+    align-items: center;
+}
+
+.tab-btn {
+    height: 100%;
+    padding: 0 15px;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: 600;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+.tab-btn.active { background: var(--surface-color); opacity: 1; color: var(--blue-color); }
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 280px;
+    height: var(--control-height);
+}
+
+.search-box i.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.search-box input {
+    width: 100%;
+    height: 100%;
+    padding: 0 45px 0 40px;
+    background: var(--crust-color);
+    border: 1px solid var(--surface-color);
+    border-radius: 14px;
+    color: var(--text-color);
+    outline: none;
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+.search-box input:focus { border-color: var(--blue-color); }
+
+.clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    display: none;
+    padding: 5px;
+}
+.clear-btn.visible { display: block; }
+
+.filter-group {
+    display: flex;
+    gap: 10px;
+    height: var(--control-height);
+}
+
+.filter-btn {
+    height: 100%;
+    padding: 0 18px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: 0.2s;
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+.filter-btn:hover {
+    filter: brightness(1.1);
+}
+
+.filter-btn.all.active {
+    background: var(--blue-color);
+    color: var(--crust-color);
+}
+
+.filter-btn.recommended.active {
+    background: var(--yellow-color);
+    color: var(--crust-color);
+}
+
+.filter-btn.sni.active {
+    background: var(--mauve-color);
+    color: var(--crust-color);
+}
+
+/* --- Grid & Cards --- */
+.config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.config-grid.qr-active {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 15px;
+}
+
+.card {
+    background: color-mix(in srgb, var(--surface-color), transparent 65%);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.card-id {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.badge {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.badge.recommended { background: var(--yellow-color); color: #111; }
+.badge.sni { background: var(--mauve-color); color: #fff; }
+
+.url-box { background: var(--crust-color); border-radius: 12px; padding: 12px; margin-bottom: 18px; }
+.url-text { font-family: monospace; font-size: 12px; word-break: break-all; opacity: 0.8; }
+
+.btn-copy-main {
+    background: var(--blue-color);
+    color: var(--crust-color);
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+.btn-copy-main.copied { background: var(--green-color); }
+
+/* QR Mode */
+.qr-card {
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+}
+.qr-container {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    margin: 5px 0 15px;
+    display: inline-flex;
+}
+.qr-canvas { display: block; width: 150px; height: 150px; }
+.btn-download-qr { width: 100%; margin-top: auto; }
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .search-box { order: -1; width: 100%; flex: none; }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 32px; }
+    .controls-container { flex-direction: column; align-items: stretch; }
+    .view-tabs, .search-box, .filter-group { width: 100%; }
+    .filter-group { overflow-x: auto; padding-bottom: 5px; height: auto; min-height: var(--control-height); }
+    .filter-btn { padding: 10px 15px; height: var(--control-height); }
+    
+    /* Уменьшаем круги на мобильных */
+    .ball1, .ball2 {
+        transform: scale(0.5);
+        filter: blur(50px);
+    }
+    
+    .light-theme .gradient-ball {
+        filter: blur(40px);
+    }
+}
