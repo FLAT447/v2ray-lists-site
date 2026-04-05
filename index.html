@@ -6,12 +6,21 @@
     <title>V2Ray Configs Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <!-- Библиотека для генерации QR-кодов -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </head>
 <body>
+    <!-- Плавающие градиентные круги (CSS анимация) -->
+    <div class="floating-gradients">
+        <div class="gradient-ball ball1"></div>
+        <div class="gradient-ball ball2"></div>
+    </div>
+
     <header class="header">
         <div class="header-class">
-            <p class="param-header"><code>V2Ray <span class="header-gradient">Configs</span></code></p>
+            <a href="https://flat447.github.io/v2ray-lists-site" class="logo-link" target="_blank" rel="noopener">
+                <img src="images/logo.svg" width="30px" class="header-logo" alt="logo">
+                <p class="param-header"><code>V2Ray <span class="header-gradient">Lists</span></code></p>
+            </a>
             <div class="social">
                 <a href="https://t.me/flat447" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i></a>
                 <a href="https://youtube.com/@flat447" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
@@ -52,6 +61,5 @@
     <div class="config-grid"></div>
     
     <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </body>
 </html>

@@ -13,7 +13,6 @@
     --crust-color: #11111b;
     --saphire-color: #74c7ec;
     
-    /* Единая высота для элементов управления */
     --control-height: 46px;
 }
 
@@ -41,20 +40,102 @@
 }
 
 body {
-    background: radial-gradient(circle at 20% 20%, #1e3a8a40, transparent 40%),
-                radial-gradient(circle at 80% 0%, #7c3aed40, transparent 40%),
-                radial-gradient(circle at 0% 80%, #2563eb40, transparent 40%),
-                #05060a;
+    background: #05060a;
     color: var(--text-color);
     min-height: 100vh;
     transition: background 0.3s ease, color 0.2s ease;
+    position: relative;
+    overflow-x: hidden;
 }
 
 .light-theme body {
-    background: radial-gradient(circle at 20% 20%, #0099ff40, transparent 40%),
-                radial-gradient(circle at 80% 0%, #be31d740, transparent 40%),
-                radial-gradient(circle at 0% 80%, #54a7ec40, transparent 40%),
-                #eef2f5;
+    background: #eef2f5;
+}
+
+/* ===== ПЛАВАЮЩИЕ ГРАДИЕНТНЫЕ КРУГИ (2 больших круга) ===== */
+.floating-gradients {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.gradient-ball {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* ТЁМНАЯ ТЕМА (менее навязчивые) */
+.gradient-ball {
+    filter: blur(90px);
+    opacity: 0.3;
+}
+
+/* СВЕТЛАЯ ТЕМА (более заметные) */
+.light-theme .gradient-ball {
+    filter: blur(70px);
+    opacity: 0.6;
+}
+
+/* Анимации для двух больших кругов */
+@keyframes floatRandom1 {
+    0% { transform: translate(0%, 0%) scale(1); }
+    15% { transform: translate(12%, -8%) scale(1.1); }
+    30% { transform: translate(-5%, 15%) scale(0.9); }
+    45% { transform: translate(8%, -12%) scale(1.15); }
+    60% { transform: translate(-15%, -3%) scale(0.95); }
+    75% { transform: translate(3%, 18%) scale(1.05); }
+    90% { transform: translate(-8%, -10%) scale(0.85); }
+    100% { transform: translate(0%, 0%) scale(1); }
+}
+
+@keyframes floatRandom2 {
+    0% { transform: translate(0%, 0%) scale(1); }
+    20% { transform: translate(-10%, 10%) scale(1.2); }
+    40% { transform: translate(15%, -5%) scale(0.85); }
+    60% { transform: translate(-8%, -15%) scale(1.1); }
+    80% { transform: translate(5%, 12%) scale(0.95); }
+    100% { transform: translate(0%, 0%) scale(1); }
+}
+
+/* Первый большой круг (сине-фиолетовый) */
+/* Среднее движение (золотая середина) */
+.ball1 {
+    width: 800px;
+    height: 800px;
+    top: -15%;
+    left: -10%;
+    animation: floatRandom1 25s infinite alternate ease-in-out;
+}
+
+.ball2 {
+    width: 750px;
+    height: 750px;
+    bottom: -15%;
+    right: -10%;
+    animation: floatRandom2 25s infinite alternate ease-in-out;
+}
+
+/* ЦВЕТА КРУГОВ */
+
+/* ТЁМНАЯ ТЕМА (приглушённые, элегантные) */
+.ball1 { background: radial-gradient(circle, #1e3a8a, #5b21b6, transparent 70%); }
+.ball2 { background: radial-gradient(circle, #9d174d, #ea580c, transparent 70%); }
+
+/* СВЕТЛАЯ ТЕМА (яркие, насыщенные) */
+.light-theme .ball1 { background: radial-gradient(circle, #3b82f6, #8b5cf6, transparent 65%); }
+.light-theme .ball2 { background: radial-gradient(circle, #ec4899, #f97316, transparent 65%); }
+
+/* Контент поверх кругов */
+.header, h1, h3, .controls-container, .config-grid {
+    position: relative;
+    z-index: 1;
 }
 
 /* --- Header --- */
@@ -65,6 +146,7 @@ body {
     -webkit-backdrop-filter: blur(5px);
     top: 0;
     z-index: 1500;
+    box-shadow: 0 1px 35px rgba(0,0,0,0.2);
 }
 
 .header-class {
@@ -80,6 +162,7 @@ body {
     font-weight: bold;
     font-size: 22px;
     margin-right: auto;
+    color: var(--text-color);
 }
 
 .header-gradient {
@@ -96,7 +179,25 @@ body {
 .fa-youtube { color: var(--red-color); }
 
 .github { font-size: 20px; color: var(--text-color); font-weight: bold; text-decoration: none; }
+.github a { color: inherit; }
 .divider { width: 1px; height: 22px; background: rgba(255, 255, 255, 0.3); margin: 0 6px; }
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.header-logo {
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover .header-logo {
+    transform: rotate(15deg) scale(1.1);
+}
 
 .theme-toggle {
     background: transparent;
@@ -111,7 +212,7 @@ body {
 h1 { text-align: center; font-size: 50px; margin-top: 30px; }
 h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px; }
 
-/* --- Controls Section (Tabs, Search, Filters) --- */
+/* --- Controls Section --- */
 .controls-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -123,7 +224,6 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     align-items: flex-start;
 }
 
-/* Вкладки Списки/QR */
 .view-tabs {
     display: flex;
     background: var(--crust-color);
@@ -152,7 +252,6 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 }
 .tab-btn.active { background: var(--surface-color); opacity: 1; color: var(--blue-color); }
 
-/* Поиск */
 .search-box {
     position: relative;
     flex: 1;
@@ -197,7 +296,6 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 }
 .clear-btn.visible { display: block; }
 
-/* Группа фильтров */
 .filter-group {
     display: flex;
     gap: 10px;
@@ -208,18 +306,35 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     height: 100%;
     padding: 0 18px;
     border-radius: 14px;
-    border: 1px solid var(--surface-color);
-    background: var(--surface-color);
-    color: var(--text-color);
+    border: none;
     cursor: pointer;
     font-weight: 600;
     display: flex;
     align-items: center;
     white-space: nowrap;
     transition: 0.2s;
+    background: var(--surface-color);
+    color: var(--text-color);
 }
-.filter-btn:hover { background: color-mix(in srgb, var(--surface-color), white 5%); }
-.filter-btn.active { background: var(--blue-color); color: var(--crust-color); border-color: var(--blue-color); }
+
+.filter-btn:hover {
+    filter: brightness(1.1);
+}
+
+.filter-btn.all.active {
+    background: var(--blue-color);
+    color: var(--crust-color);
+}
+
+.filter-btn.recommended.active {
+    background: var(--yellow-color);
+    color: var(--crust-color);
+}
+
+.filter-btn.sni.active {
+    background: var(--mauve-color);
+    color: var(--crust-color);
+}
 
 /* --- Grid & Cards --- */
 .config-grid {
@@ -310,7 +425,7 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 
 /* --- Responsive --- */
 @media (max-width: 992px) {
-    .search-box { order: -1; width: 100%; flex: none; } /* Поиск на всю ширину сверху на планшетах */
+    .search-box { order: -1; width: 100%; flex: none; }
 }
 
 @media (max-width: 768px) {
@@ -319,4 +434,14 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     .view-tabs, .search-box, .filter-group { width: 100%; }
     .filter-group { overflow-x: auto; padding-bottom: 5px; height: auto; min-height: var(--control-height); }
     .filter-btn { padding: 10px 15px; height: var(--control-height); }
+    
+    /* Уменьшаем круги на мобильных */
+    .ball1, .ball2 {
+        transform: scale(0.5);
+        filter: blur(50px);
+    }
+    
+    .light-theme .gradient-ball {
+        filter: blur(40px);
+    }
 }

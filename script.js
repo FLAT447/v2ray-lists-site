@@ -41,6 +41,7 @@ const themeToggle = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
 const toggleIcon = themeToggle.querySelector('i');
 
+// ====================== QR-коды ======================
 function generateQRCanvas(url, size = 150) {
     const canvas = document.createElement('canvas');
     canvas.width = size;
@@ -83,6 +84,7 @@ function downloadQRCanvas(canvas, filename) {
     }
 }
 
+// ====================== РЕНДЕР КАРТОЧЕК ======================
 function renderCards() {
     const filtered = configs.filter(conf => {
         const matchSearch = conf.url.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -165,7 +167,7 @@ function copyToClipboard(text, buttonElement) {
     navigator.clipboard.writeText(text).then(() => {
         const originalHTML = buttonElement.innerHTML;
         buttonElement.classList.add('copied');
-        buttonElement.innerHTML = '<i class="fa-solid fa-check"></i>';
+        buttonElement.innerHTML = '<i class="fa-solid fa-check"></i> Копировать ссылку';
         setTimeout(() => {
             buttonElement.innerHTML = originalHTML;
             buttonElement.classList.remove('copied');
@@ -177,6 +179,7 @@ function escapeHtml(str) {
     return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
 }
 
+// ====================== ОБРАБОТЧИКИ СОБЫТИЙ ======================
 tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         tabBtns.forEach(b => b.classList.remove('active'));
@@ -208,6 +211,7 @@ filterBtns.forEach(btn => {
     });
 });
 
+// ====================== ТЕМА ======================
 function setTheme(theme) {
     htmlElement.classList.toggle('light-theme', theme === 'light');
     toggleIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
@@ -218,5 +222,6 @@ themeToggle.addEventListener('click', () => {
     setTheme(htmlElement.classList.contains('light-theme') ? 'dark' : 'light');
 });
 
+// ====================== ЗАПУСК ======================
 setTheme(localStorage.getItem('v2ray-theme') || 'dark');
 renderCards();
