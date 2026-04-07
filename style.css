@@ -52,7 +52,7 @@ body {
     background: #eef2f5;
 }
 
-/* ===== ПЛАВАЮЩИЕ ГРАДИЕНТНЫЕ КРУГИ (2 больших круга) ===== */
+/* ===== ПЛАВАЮЩИЕ ГРАДИЕНТНЫЕ КРУГИ ===== */
 .floating-gradients {
     position: fixed;
     top: 0;
@@ -71,19 +71,16 @@ body {
     transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
-/* ТЁМНАЯ ТЕМА (менее навязчивые) */
 .gradient-ball {
     filter: blur(90px);
     opacity: 0.3;
 }
 
-/* СВЕТЛАЯ ТЕМА (более заметные) */
 .light-theme .gradient-ball {
     filter: blur(70px);
     opacity: 0.6;
 }
 
-/* Анимации для двух больших кругов */
 @keyframes floatRandom1 {
     0% { transform: translate(0%, 0%) scale(1); }
     15% { transform: translate(12%, -8%) scale(1.1); }
@@ -104,8 +101,6 @@ body {
     100% { transform: translate(0%, 0%) scale(1); }
 }
 
-/* Первый большой круг (сине-фиолетовый) */
-/* Среднее движение (золотая середина) */
 .ball1 {
     width: 800px;
     height: 800px;
@@ -122,13 +117,9 @@ body {
     animation: floatRandom2 25s infinite alternate ease-in-out;
 }
 
-/* ЦВЕТА КРУГОВ */
-
-/* ТЁМНАЯ ТЕМА (приглушённые, элегантные) */
 .ball1 { background: radial-gradient(circle, #1e3a8a, #5b21b6, transparent 70%); }
 .ball2 { background: radial-gradient(circle, #9d174d, #ea580c, transparent 70%); }
 
-/* СВЕТЛАЯ ТЕМА (яркие, насыщенные) */
 .light-theme .ball1 { background: radial-gradient(circle, #3b82f6, #8b5cf6, transparent 65%); }
 .light-theme .ball2 { background: radial-gradient(circle, #ec4899, #f97316, transparent 65%); }
 
@@ -138,7 +129,7 @@ body {
     z-index: 1;
 }
 
-/* --- Header --- */
+/* --- Header (адаптивный) --- */
 .header {
     background-color: rgba(255, 255, 255, 0.05);
     position: sticky;
@@ -165,6 +156,23 @@ body {
     color: var(--text-color);
 }
 
+/* Скрываем текст в шапке на маленьких экранах */
+@media (max-width: 768px) {
+    .param-header {
+        display: none;
+    }
+    
+    .header-class {
+        padding: 12px 15px;
+        gap: 8px;
+    }
+    
+    /* Скрываем текст "GitHub", оставляем только иконку (размер не меняем) */
+    .github .github-text {
+        display: none;
+    }
+}
+
 .header-gradient {
     background: linear-gradient(60deg, var(--blue-color), var(--saphire-color));
     background-clip: text;
@@ -181,7 +189,16 @@ body {
 .github { font-size: 20px; color: var(--text-color); font-weight: bold; text-decoration: none; }
 .github a { color: inherit; }
 .divider { width: 1px; height: 22px; background: rgba(255, 255, 255, 0.3); margin: 0 6px; }
+/* При наведении на ссылку GitHub (весь блок), увеличиваем иконку внутри неё */
+.github a:hover .fa-github {
+    transform: scale(1.3);
+}
 
+/* Добавляем плавность перехода для иконки GitHub, чтобы она не увеличивалась резко */
+.fa-github {
+    transition: transform 0.3s ease;
+    display: inline-block; /* Важно для корректной работы трансформации */
+}
 .logo-link {
     display: flex;
     align-items: center;
@@ -209,10 +226,21 @@ body {
 }
 .theme-toggle:hover { transform: scale(1.2); }
 
+/* Заголовки */
 h1 { text-align: center; font-size: 50px; margin-top: 30px; }
 h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px; }
 
-/* --- Controls Section --- */
+@media (max-width: 768px) {
+    h1 { font-size: 32px; margin-top: 20px; }
+    h3 { font-size: 14px; margin-bottom: 20px; padding: 0 15px; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 26px; }
+    h3 { font-size: 12px; }
+}
+
+/* --- Controls Section (адаптивный) --- */
 .controls-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -220,8 +248,18 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: flex-start;
+    /* Изменено с flex-start на center */
+    justify-content: center; 
     align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .controls-container {
+        align-items: stretch;
+        gap: 12px;
+        margin: 15px 0;
+        padding: 0 15px;
+    }
 }
 
 .view-tabs {
@@ -232,6 +270,17 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     border: 1px solid var(--surface-color);
     height: var(--control-height);
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .view-tabs {
+        width: 100%;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        justify-content: center;
+    }
 }
 
 .tab-btn {
@@ -250,6 +299,18 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     white-space: nowrap;
     transition: 0.2s;
 }
+
+@media (max-width: 480px) {
+    .tab-btn {
+        padding: 0 10px;
+    }
+    
+    /* Скрываем текст на кнопках, оставляем только иконки (размер не меняем) */
+    .tab-btn .btn-text {
+        display: none;
+    }
+}
+
 .tab-btn.active { background: var(--surface-color); opacity: 1; color: var(--blue-color); }
 
 .search-box {
@@ -257,6 +318,13 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     flex: 1;
     min-width: 280px;
     height: var(--control-height);
+}
+
+@media (max-width: 768px) {
+    .search-box {
+        width: 100%;
+        min-width: auto;
+    }
 }
 
 .search-box i.search-icon {
@@ -300,6 +368,21 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     display: flex;
     gap: 10px;
     height: var(--control-height);
+    /* Добавлено для центрирования кнопок внутри самой группы */
+    justify-content: center; 
+}
+
+@media (max-width: 768px) {
+.filter-group {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        height: auto;
+        min-height: var(--control-height);
+        -webkit-overflow-scrolling: touch;
+        /* На мобильных лучше оставить старт, чтобы можно было скроллить */
+        justify-content: flex-start; 
+    }
 }
 
 .filter-btn {
@@ -315,6 +398,13 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     transition: 0.2s;
     background: var(--surface-color);
     color: var(--text-color);
+}
+
+@media (max-width: 480px) {
+    .filter-btn {
+        padding: 0 12px;
+        font-size: 13px;
+    }
 }
 
 .filter-btn:hover {
@@ -336,7 +426,7 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     color: var(--crust-color);
 }
 
-/* --- Grid & Cards --- */
+/* --- Grid & Cards (адаптивная сетка) --- */
 .config-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -346,9 +436,38 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     padding: 0 20px;
 }
 
+@media (max-width: 768px) {
+    .config-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+        margin: 25px auto;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 640px) {
+    .config-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* QR режим - более компактная сетка */
 .config-grid.qr-active {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
+}
+
+@media (max-width: 640px) {
+    .config-grid.qr-active {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .config-grid.qr-active {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
@@ -361,6 +480,13 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     flex-direction: column;
     transition: transform 0.2s, box-shadow 0.2s;
 }
+
+@media (max-width: 480px) {
+    .card {
+        padding: 15px;
+    }
+}
+
 .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
 
 .card-header {
@@ -369,6 +495,8 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     align-items: center;
     margin-bottom: 15px;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .card-id {
@@ -413,6 +541,7 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     text-align: center;
     padding: 15px;
 }
+
 .qr-container {
     background: white;
     padding: 10px;
@@ -420,28 +549,33 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     margin: 5px 0 15px;
     display: inline-flex;
 }
-.qr-canvas { display: block; width: 150px; height: 150px; }
-.btn-download-qr { width: 100%; margin-top: auto; }
 
-/* --- Responsive --- */
-@media (max-width: 992px) {
-    .search-box { order: -1; width: 100%; flex: none; }
+.qr-canvas { display: block; width: 150px; height: 150px; }
+
+@media (max-width: 480px) {
+    .qr-canvas {
+        width: 120px;
+        height: 120px;
+    }
 }
 
+.btn-download-qr { width: 100%; margin-top: auto; }
+
+/* Адаптация плавающих кругов на мобильных */
 @media (max-width: 768px) {
-    h1 { font-size: 32px; }
-    .controls-container { flex-direction: column; align-items: stretch; }
-    .view-tabs, .search-box, .filter-group { width: 100%; }
-    .filter-group { overflow-x: auto; padding-bottom: 5px; height: auto; min-height: var(--control-height); }
-    .filter-btn { padding: 10px 15px; height: var(--control-height); }
-    
-    /* Уменьшаем круги на мобильных */
     .ball1, .ball2 {
         transform: scale(0.5);
         filter: blur(50px);
     }
     
     .light-theme .gradient-ball {
+        filter: blur(40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .ball1, .ball2 {
+        transform: scale(0.35);
         filter: blur(40px);
     }
 }
