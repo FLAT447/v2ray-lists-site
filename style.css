@@ -591,6 +591,25 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 .url-box { background: var(--crust-color); border-radius: 12px; padding: 12px; margin-bottom: 18px; }
 .url-text { font-family: monospace; font-size: 12px; word-break: break-all; opacity: 0.8; }
 
+.short-text {
+    display: none;
+}
+
+@media (max-width: 520px) {
+    .full-text {
+        display: none; /* Скрываем полный текст */
+    }
+    .short-text {
+        display: inline; /* Показываем сокращенный текст */
+    }
+    
+    /* Дополнительно: можно немного уменьшить отступы, чтобы кнопки стали еще компактнее */
+    .filter-btn {
+        padding: 0 10px;
+        font-size: 12px;
+    }
+}
+
 .btn-copy-main {
     background: var(--blue-color);
     color: var(--crust-color);
