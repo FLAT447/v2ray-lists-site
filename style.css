@@ -55,6 +55,7 @@ body {
 a {
     text-decoration: none;
 }
+
 /* ===== ПЛАВАЮЩИЕ ГРАДИЕНТНЫЕ КРУГИ ===== */
 .floating-gradients {
     position: fixed;
@@ -660,5 +661,98 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     .ball1, .ball2 {
         transform: scale(0.35);
         filter: blur(40px);
+    }
+}
+
+/* --- Секция инструкций --- */
+.steps-container {
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.step-card {
+    background: color-mix(in srgb, var(--surface-color), transparent 65%);
+    backdrop-filter: blur(15px);
+    border-radius: 24px;
+    padding: 30px 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.5s, box-shadow 0.4s;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    .step-icon-wrapper {
+        transform: scale(1.1);
+    }
+}
+
+.step-card.blue:hover {
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--blue-color), transparent 75%);
+}
+
+.step-card.purple:hover {
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--mauve-color), transparent 75%);
+}
+
+.step-card.orange:hover {
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--peach-color), transparent 75%);
+}
+
+.step-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    transition: transform 0.5s;
+}
+
+/* Цвета иконок под стиль Catppuccin */
+.step-icon-wrapper.blue { background: rgba(137, 180, 250, 0.3); color: var(--blue-color); }
+.step-icon-wrapper.purple { background: rgba(203, 166, 247, 0.3); color: var(--mauve-color); }
+.step-icon-wrapper.orange { background: rgba(250, 179, 135, 0.3); color: var(--peach-color); }
+
+.step-card h3 {
+    text-align: left;
+    font-size: 20px;
+    margin-bottom: 12px;
+    opacity: 1;
+    font-weight: 700;
+}
+
+.step-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.7;
+    color: var(--text-color);
+}
+
+.highlight-orange {
+    color: var(--peach-color);
+    font-weight: bold;
+}
+
+noscript p {
+    text-align: center;
+    font-size: 90px;
+    margin: auto 0;
+}
+
+/* Адаптивность для карточек */
+@media (max-width: 992px) {
+    .steps-container {
+        grid-template-columns: 1fr; /* В колонку на планшетах/телефонах */
+        gap: 15px;
+    }
+    
+    .step-card {
+        padding: 20px;
     }
 }

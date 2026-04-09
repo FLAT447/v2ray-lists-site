@@ -6,7 +6,6 @@
     <title>V2Ray Configs Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </head>
 <body>
     <!-- Плавающие градиентные круги (CSS анимация) -->
@@ -14,7 +13,7 @@
         <div class="gradient-ball ball1"></div>
         <div class="gradient-ball ball2"></div>
     </div>
-
+    <noscript><p>Включите JavaScript для просмотра страницы | Enable JavaScript to view the page</p></noscript>
     <header class="header">
         <div class="header-class">
             <a href="https://flat447.github.io/v2ray-lists-site" class="logo-link" target="_blank" rel="noopener">
@@ -38,7 +37,31 @@
     </header>
     <h1><i class="fa-solid fa-bolt"></i> V2Ray Lists</h1>
     <h3>Бесплатные конфигурации Hysteria2, ShadowSocks, VLESS, VMess, Trojan, Reality<br>Обновления каждые 3 часа</h3>
-    
+    <div class="steps-container">
+        <div class="step-card blue">
+            <div class="step-icon-wrapper blue">
+                <i class="fa-solid fa-copy"></i>
+            </div>
+            <h3>1. Скопируйте</h3>
+            <p>Выберите ссылку из списка ниже и скопируйте её в один клик.</p>
+        </div>
+
+        <div class="step-card purple">
+            <div class="step-icon-wrapper purple">
+                <i class="fa-solid fa-file-import"></i>
+            </div>
+            <h3>2. Импортируйте</h3>
+            <p>Вставьте ссылку в ваш VPN-клиент (v2rayNG, Throne и др.).</p>
+        </div>
+
+        <div class="step-card orange">
+            <div class="step-icon-wrapper orange">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3>3. Подключитесь</h3>
+            <p>Найдите сервер с минимальным пингом и жмите <span class="highlight-orange">Start</span>.</p>
+        </div>
+    </div>
     <div class="controls-container">
         <div class="view-tabs">
             <button class="tab-btn active" data-view="list">
@@ -65,7 +88,7 @@
     
             <button class="filter-btn sni" data-filter="sni">
                 <span class="full-text">Белые Списки SNI/CIDR</span>
-                <span class="short-text">БС</span>
+                <span class="short-text">SNI/CIDR</span>
             </button>
     
             <button class="filter-btn mtproxy" data-filter="mtproxy">
@@ -74,9 +97,8 @@
             </button>
         </div>
     </div>
-    
     <div class="config-grid"></div>
-    
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </body>
 </html>

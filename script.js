@@ -175,7 +175,7 @@ document.querySelectorAll('.btn-copy-main').forEach(btn => {
                     const randomLines = lines.sort(() => 0.5 - Math.random()).slice(0, 10).join('\n');
                     
                     await navigator.clipboard.writeText(randomLines);
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i> 10 штук!';
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Скопировано!';
                     btn.classList.add('copied');
                     setTimeout(() => {
                         btn.innerHTML = originalHTML;
