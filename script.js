@@ -128,9 +128,39 @@ function renderCards() {
             `;
         }).join('');
         
-        document.querySelectorAll('.btn-copy-main').forEach(btn => {
-            btn.addEventListener('click', () => copyToClipboard(btn.getAttribute('data-url'), btn));
-        });
+// ====================== ОБРАБОТКА КОПИРОВАНИЯ ======================
+document.querySelectorAll('.btn-copy-main').forEach(btn => {
+    btn.addEventListener('click', async () => {
+        const url = btn.getAttribute('data-url');
+        const id = parseInt(btn.getAttribute('data-id'));
+        const originalHTML = btn.innerHTML;
+
+        // Если это ID 27 или 28 — скачиваем содержимое и копируем его
+        if (id === 27 || id === 28) {
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Загрузка...';
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error();
+                const text = await response.text();
+                
+                await navigator.clipboard.writeText(text.trim());
+                
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Скопировано!';
+                btn.classList.add('copied');
+            } catch (err) {
+                btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Ошибка сети';
+            }
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('copied');
+            }, 2000);
+        } else {
+            // Для всех остальных (обычных ссылок) используем стандартную функцию
+            copyToClipboard(url, btn);
+        }
+    });
+});
 
         document.querySelectorAll('.btn-copy-random').forEach(btn => {
             btn.addEventListener('click', async () => {
