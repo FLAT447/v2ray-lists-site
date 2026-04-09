@@ -26,6 +26,8 @@ const configs = [
     { id: 24, url: 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/githubmirror/24.txt', type: 'recommended' },
     { id: 25, url: 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/githubmirror/25.txt', type: 'recommended' },
     { id: 26, url: 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/githubmirror/26.txt', type: 'sni' },
+    { id: 27, url: 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/main/whitelist.txt', type: 'mtproxy-wl' },
+    { id: 28, url: 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/main/blacklist.txt', type: 'mtproxy-bl'}
 ];
 
 let currentView = 'list';
@@ -89,7 +91,10 @@ function renderCards() {
     const filtered = configs.filter(conf => {
         const matchSearch = conf.url.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             conf.id.toString().includes(searchQuery);
-        const matchFilter = currentFilter === 'all' || conf.type === currentFilter;
+        // Добавлено условие для MTProxy
+        const matchFilter = currentFilter === 'all' || 
+                            conf.type === currentFilter || 
+                            (currentFilter === 'mtproxy' && conf.type.startsWith('mtproxy'));
         return matchSearch && matchFilter;
     });
     
@@ -100,26 +105,57 @@ function renderCards() {
     
     if (currentView === 'list') {
         configGrid.classList.remove('qr-active');
-        configGrid.innerHTML = filtered.map(conf => `
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-id">#${conf.id}</div>
-                    <div>
-                        ${conf.type === 'recommended' ? '<span class="badge recommended">Рекомендованный</span>' : ''}
-                        ${conf.type === 'sni' ? '<span class="badge sni">Обход SNI/CIDR</span>' : ''}
+        configGrid.innerHTML = filtered.map(conf => {
+            const isProxyList = conf.type === 'mtproxy-wl' || conf.type === 'mtproxy-bl';
+            return `
+                <div class="card ${isProxyList ? 'proxy-card' : ''}">
+                    <div class="card-header">
+                        <div class="card-id">#${conf.id}</div>
+                        <div class="badges-container">
+                            ${conf.type === 'recommended' ? '<span class="badge recommended">Рекомендованный</span>' : ''}
+                            ${conf.type === 'sni' ? '<span class="badge sni">Обход SNI/CIDR</span>' : ''}
+                            ${conf.type === 'mtproxy-wl' ? '<span class="badge mtproxy-wl">MTProxy БС</span>' : ''}
+                            ${conf.type === 'mtproxy-bl' ? '<span class="badge mtproxy-bl">MTProxy ЧС</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="url-box">
+                        <p class="url-text">${escapeHtml(conf.url)}</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-copy-main" data-url="${conf.url}" data-id="${conf.id}"><i class="fa-solid fa-copy"></i> ${isProxyList ? 'Весь список' : 'Копировать ссылку'}</button>${isProxyList ? `<button class="btn-copy-random" data-url="${conf.url}"><i class="fa-solid fa-shuffle"></i> 10 рандомных</button>` : ''}
                     </div>
                 </div>
-                <div class="url-box">
-                    <p class="url-text">${escapeHtml(conf.url)}</p>
-                </div>
-                <button class="btn-copy-main" data-url="${conf.url}" data-id="${conf.id}">
-                    <i class="fa-solid fa-copy"></i> Копировать ссылку
-                </button>
-            </div>
-        `).join('');
+            `;
+        }).join('');
         
         document.querySelectorAll('.btn-copy-main').forEach(btn => {
             btn.addEventListener('click', () => copyToClipboard(btn.getAttribute('data-url'), btn));
+        });
+
+        document.querySelectorAll('.btn-copy-random').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const url = btn.getAttribute('data-url');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+                
+                try {
+                    const response = await fetch(url);
+                    const text = await response.text();
+                    const lines = text.split('\n').filter(line => line.trim().length > 5);
+                    const randomLines = lines.sort(() => 0.5 - Math.random()).slice(0, 10).join('\n');
+                    
+                    await navigator.clipboard.writeText(randomLines);
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> 10 штук!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    btn.innerHTML = '<i class="fa-solid fa-xmark"></i> Ошибка';
+                    setTimeout(() => btn.innerHTML = originalHTML, 2000);
+                }
+            });
         });
     } 
     else {
@@ -128,9 +164,11 @@ function renderCards() {
             <div class="card qr-card" data-qr-id="${conf.id}">
                 <div class="card-header">
                     <div class="card-id">#${conf.id}</div>
-                    <div>
+                    <div class="badges-container">
                         ${conf.type === 'recommended' ? '<span class="badge recommended">Рек.</span>' : ''}
                         ${conf.type === 'sni' ? '<span class="badge sni">SNI/CIDR</span>' : ''}
+                        ${conf.type === 'mtproxy-wl' ? '<span class="badge mtproxy-wl">MTP БС</span>' : ''}
+                        ${conf.type === 'mtproxy-bl' ? '<span class="badge mtproxy-bl">MTP ЧС</span>' : ''}
                     </div>
                 </div>
                 <div class="qr-container" id="qr-${conf.id}">
@@ -167,7 +205,7 @@ function copyToClipboard(text, buttonElement) {
     navigator.clipboard.writeText(text).then(() => {
         const originalHTML = buttonElement.innerHTML;
         buttonElement.classList.add('copied');
-        buttonElement.innerHTML = '<i class="fa-solid fa-check"></i> Копировать ссылку';
+        buttonElement.innerHTML = '<i class="fa-solid fa-check"></i> Скопировано';
         setTimeout(() => {
             buttonElement.innerHTML = originalHTML;
             buttonElement.classList.remove('copied');

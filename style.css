@@ -52,6 +52,9 @@ body {
     background: #eef2f5;
 }
 
+a {
+    text-decoration: none;
+}
 /* ===== ПЛАВАЮЩИЕ ГРАДИЕНТНЫЕ КРУГИ ===== */
 .floating-gradients {
     position: fixed;
@@ -426,14 +429,81 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     color: var(--crust-color);
 }
 
+.filter-btn.mtproxy.active {
+    background: var(--saphire-color);
+    color: var(--crust-color);
+}
+
 /* --- Grid & Cards (адаптивная сетка) --- */
 .config-grid {
     display: grid;
+    /* Используем auto-fill, чтобы пустые места в ряду сохранялись как колонки */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px;
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
+    /* Выравниваем карточки по левому краю, чтобы они не тянулись, если их мало */
+    justify-content: start; 
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;           /* Фиксированный зазор 10px */
+    width: 100%;
+    margin-top: auto;    /* Прижимает кнопки к низу карточки */
+}
+
+.card-actions button {
+    flex: 1;            
+    white-space: nowrap;
+    padding: 12px 10px; /* Немного уменьшим боковые отступы для компактности */
+    font-size: 14px;    /* Единый размер шрифта для всех кнопок */
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+    border: none;
+}
+
+.btn-copy-random {
+    background: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.btn-copy-random:hover {
+    background: var(--crust-color);
+    border-color: var(--blue-color);
+}
+
+.btn-copy-random.copied {
+    background: var(--green-color);
+    color: var(--crust-color);
+}
+
+.proxy-card .btn-copy-main {
+    flex: 1;
+    font-size: 13px;
+}
+
+.proxy-card .btn-copy-main,
+.proxy-card .btn-copy-random {
+    font-size: 14px; /* Увеличиваем до общего стандарта */
+    min-width: 0;    /* Позволяет кнопкам сжиматься в узких колонках */
 }
 
 @media (max-width: 768px) {
@@ -515,6 +585,8 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 }
 .badge.recommended { background: var(--yellow-color); color: #111; }
 .badge.sni { background: var(--mauve-color); color: #fff; }
+.badge.mtproxy-wl { background-color: var(--saphire-color); color: #111; }
+.badge.mtproxy-bl { background-color: var(--peach-color); color: #111; }
 
 .url-box { background: var(--crust-color); border-radius: 12px; padding: 12px; margin-bottom: 18px; }
 .url-text { font-family: monospace; font-size: 12px; word-break: break-all; opacity: 0.8; }
@@ -522,17 +594,9 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 .btn-copy-main {
     background: var(--blue-color);
     color: var(--crust-color);
-    border: none;
-    padding: 12px;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: 0.2s;
+    width: 100%;
 }
+
 .btn-copy-main.copied { background: var(--green-color); }
 
 /* QR Mode */
