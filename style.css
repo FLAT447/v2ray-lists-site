@@ -133,7 +133,7 @@ a {
     z-index: 1;
 }
 
-/* --- Header (адаптивный) --- */
+/* --- Header --- */
 .header {
     background-color: rgba(255, 255, 255, 0.05);
     position: sticky;
@@ -160,21 +160,10 @@ a {
     color: var(--text-color);
 }
 
-/* Скрываем текст в шапке на маленьких экранах */
 @media (max-width: 768px) {
-    .param-header {
-        display: none;
-    }
-    
-    .header-class {
-        padding: 12px 15px;
-        gap: 8px;
-    }
-    
-    /* Скрываем текст "GitHub", оставляем только иконку (размер не меняем) */
-    .github .github-text {
-        display: none;
-    }
+    .param-header { display: none; }
+    .header-class { padding: 12px 15px; gap: 8px; }
+    .github .github-text { display: none; }
 }
 
 .header-gradient {
@@ -193,15 +182,11 @@ a {
 .github { font-size: 20px; color: var(--text-color); font-weight: bold; text-decoration: none; }
 .github a { color: inherit; }
 .divider { width: 1px; height: 22px; background: rgba(255, 255, 255, 0.3); margin: 0 6px; }
-/* При наведении на ссылку GitHub (весь блок), увеличиваем иконку внутри неё */
-.github a:hover .fa-github {
-    transform: scale(1.3);
-}
+.github a:hover .fa-github { transform: scale(1.3); }
 
-/* Добавляем плавность перехода для иконки GitHub, чтобы она не увеличивалась резко */
 .fa-github {
     transition: transform 0.3s ease;
-    display: inline-block; /* Важно для корректной работы трансформации */
+    display: inline-block;
 }
 .logo-link {
     display: flex;
@@ -212,13 +197,8 @@ a {
     cursor: pointer;
 }
 
-.header-logo {
-    transition: transform 0.3s ease;
-}
-
-.logo-link:hover .header-logo {
-    transform: rotate(15deg) scale(1.1);
-}
+.header-logo { transition: transform 0.3s ease; }
+.logo-link:hover .header-logo { transform: rotate(15deg) scale(1.1); }
 
 .theme-toggle {
     background: transparent;
@@ -239,12 +219,7 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     h3 { font-size: 14px; margin-bottom: 20px; padding: 0 15px; }
 }
 
-@media (max-width: 480px) {
-    h1 { font-size: 26px; }
-    h3 { font-size: 12px; }
-}
-
-/* --- Controls Section (адаптивный) --- */
+/* --- Controls Section --- */
 .controls-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -252,18 +227,12 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    /* Изменено с flex-start на center */
     justify-content: center; 
     align-items: flex-start;
 }
 
 @media (max-width: 768px) {
-    .controls-container {
-        align-items: stretch;
-        gap: 12px;
-        margin: 15px 0;
-        padding: 0 15px;
-    }
+    .controls-container { align-items: stretch; gap: 12px; margin: 15px 0; padding: 0 15px; }
 }
 
 .view-tabs {
@@ -276,16 +245,7 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     align-items: center;
 }
 
-@media (max-width: 768px) {
-    .view-tabs {
-        width: 100%;
-    }
-    
-    .tab-btn {
-        flex: 1;
-        justify-content: center;
-    }
-}
+@media (max-width: 768px) { .view-tabs { width: 100%; } .tab-btn { flex: 1; justify-content: center; } }
 
 .tab-btn {
     height: 100%;
@@ -304,32 +264,11 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     transition: 0.2s;
 }
 
-@media (max-width: 480px) {
-    .tab-btn {
-        padding: 0 10px;
-    }
-    
-    /* Скрываем текст на кнопках, оставляем только иконки (размер не меняем) */
-    .tab-btn .btn-text {
-        display: none;
-    }
-}
-
+@media (max-width: 480px) { .tab-btn { padding: 0 10px; } .tab-btn .btn-text { display: none; } }
 .tab-btn.active { background: var(--surface-color); opacity: 1; color: var(--blue-color); }
 
-.search-box {
-    position: relative;
-    flex: 1;
-    min-width: 280px;
-    height: var(--control-height);
-}
-
-@media (max-width: 768px) {
-    .search-box {
-        width: 100%;
-        min-width: auto;
-    }
-}
+.search-box { position: relative; flex: 1; min-width: 280px; height: var(--control-height); }
+@media (max-width: 768px) { .search-box { width: 100%; min-width: auto; } }
 
 .search-box i.search-icon {
     position: absolute;
@@ -368,23 +307,15 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 }
 .clear-btn.visible { display: block; }
 
-.filter-group {
-    display: flex;
-    gap: 10px;
-    height: var(--control-height);
-    /* Добавлено для центрирования кнопок внутри самой группы */
-    justify-content: center; 
-}
+.filter-group { display: flex; gap: 10px; height: var(--control-height); justify-content: center; }
 
 @media (max-width: 768px) {
-.filter-group {
+    .filter-group {
         width: 100%;
         overflow-x: auto;
         padding-bottom: 5px;
         height: auto;
         min-height: var(--control-height);
-        -webkit-overflow-scrolling: touch;
-        /* На мобильных лучше оставить старт, чтобы можно было скроллить */
         justify-content: flex-start; 
     }
 }
@@ -404,141 +335,21 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     color: var(--text-color);
 }
 
-@media (max-width: 480px) {
-    .filter-btn {
-        padding: 0 12px;
-        font-size: 13px;
-    }
-}
+.filter-btn:hover { filter: brightness(1.1); }
+.filter-btn.all.active { background: var(--blue-color); color: var(--crust-color); }
+.filter-btn.recommended.active { background: var(--yellow-color); color: var(--crust-color); }
+.filter-btn.sni.active { background: var(--mauve-color); color: var(--crust-color); }
+.filter-btn.mtproxy.active { background: var(--saphire-color); color: var(--crust-color); }
 
-.filter-btn:hover {
-    filter: brightness(1.1);
-}
-
-.filter-btn.all.active {
-    background: var(--blue-color);
-    color: var(--crust-color);
-}
-
-.filter-btn.recommended.active {
-    background: var(--yellow-color);
-    color: var(--crust-color);
-}
-
-.filter-btn.sni.active {
-    background: var(--mauve-color);
-    color: var(--crust-color);
-}
-
-.filter-btn.mtproxy.active {
-    background: var(--saphire-color);
-    color: var(--crust-color);
-}
-
-/* --- Grid & Cards (адаптивная сетка) --- */
+/* --- Grid & Cards --- */
 .config-grid {
     display: grid;
-    /* Используем auto-fill, чтобы пустые места в ряду сохранялись как колонки */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 25px;
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
-    /* Выравниваем карточки по левому краю, чтобы они не тянулись, если их мало */
     justify-content: start; 
-}
-
-.card-actions {
-    display: flex;
-    gap: 10px;           /* Фиксированный зазор 10px */
-    width: 100%;
-    margin-top: auto;    /* Прижимает кнопки к низу карточки */
-}
-
-.card-actions button {
-    flex: 1;            
-    white-space: nowrap;
-    padding: 12px 10px; /* Немного уменьшим боковые отступы для компактности */
-    font-size: 14px;    /* Единый размер шрифта для всех кнопок */
-    font-weight: bold;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: 0.2s;
-    border: none;
-}
-
-.btn-copy-random {
-    background: var(--surface-color);
-    color: var(--text-color);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 12px;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: 0.2s;
-}
-
-.btn-copy-random:hover {
-    background: var(--crust-color);
-    border-color: var(--blue-color);
-}
-
-.btn-copy-random.copied {
-    background: var(--green-color);
-    color: var(--crust-color);
-}
-
-.proxy-card .btn-copy-main {
-    flex: 1;
-    font-size: 13px;
-}
-
-.proxy-card .btn-copy-main,
-.proxy-card .btn-copy-random {
-    font-size: 14px; /* Увеличиваем до общего стандарта */
-    min-width: 0;    /* Позволяет кнопкам сжиматься в узких колонках */
-}
-
-@media (max-width: 768px) {
-    .config-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 15px;
-        margin: 25px auto;
-        padding: 0 15px;
-    }
-}
-
-@media (max-width: 640px) {
-    .config-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* QR режим - более компактная сетка */
-.config-grid.qr-active {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-@media (max-width: 640px) {
-    .config-grid.qr-active {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .config-grid.qr-active {
-        grid-template-columns: 1fr;
-    }
 }
 
 .card {
@@ -550,12 +361,6 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     transition: transform 0.2s, box-shadow 0.2s;
-}
-
-@media (max-width: 480px) {
-    .card {
-        padding: 15px;
-    }
 }
 
 .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
@@ -570,11 +375,7 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     gap: 8px;
 }
 
-.card-id {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--text-color);
-}
+.card-id { font-size: 24px; font-weight: bold; color: var(--text-color); }
 
 .badge {
     font-size: 10px;
@@ -592,79 +393,86 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 .url-box { background: var(--crust-color); border-radius: 12px; padding: 12px; margin-bottom: 18px; }
 .url-text { font-family: monospace; font-size: 12px; word-break: break-all; opacity: 0.8; }
 
-.short-text {
-    display: none;
-}
-
-@media (max-width: 520px) {
-    .full-text {
-        display: none; /* Скрываем полный текст */
-    }
-    .short-text {
-        display: inline; /* Показываем сокращенный текст */
-    }
-    
-    /* Дополнительно: можно немного уменьшить отступы, чтобы кнопки стали еще компактнее */
-    .filter-btn {
-        padding: 0 10px;
-        font-size: 12px;
-    }
-}
+.card-actions { display: flex; gap: 10px; width: 100%; margin-top: auto; }
 
 .btn-copy-main {
     background: var(--blue-color);
     color: var(--crust-color);
-    width: 100%;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    transition: 0.2s;
+    flex: 1;
 }
 
 .btn-copy-main.copied { background: var(--green-color); }
 
-/* QR Mode */
+.btn-copy-random {
+    background: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+    flex: 1;
+}
+
+.btn-copy-random:hover { background: var(--crust-color); border-color: var(--blue-color); }
+.btn-copy-random.copied { background: var(--green-color); color: var(--crust-color); }
+
+/* --- QR Mode Fixes --- */
+.config-grid.qr-active {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
 .qr-card {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 15px;
+    padding: 20px;
+    min-height: 320px;
 }
 
 .qr-container {
     background: white;
-    padding: 10px;
-    border-radius: 12px;
-    margin: 5px 0 15px;
+    padding: 12px;
+    border-radius: 16px;
+    margin: 10px 0 20px 0;
     display: inline-flex;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .qr-canvas { display: block; width: 150px; height: 150px; }
 
-@media (max-width: 480px) {
-    .qr-canvas {
-        width: 120px;
-        height: 120px;
-    }
+.btn-download-qr {
+    margin-top: auto;
+    width: 100%;
 }
 
-.btn-download-qr { width: 100%; margin-top: auto; }
-
-/* Адаптация плавающих кругов на мобильных */
-@media (max-width: 768px) {
-    .ball1, .ball2 {
-        transform: scale(0.5);
-        filter: blur(50px);
-    }
-    
-    .light-theme .gradient-ball {
-        filter: blur(40px);
-    }
+@media (max-width: 640px) {
+    .config-grid.qr-active { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 }
 
 @media (max-width: 480px) {
-    .ball1, .ball2 {
-        transform: scale(0.35);
-        filter: blur(40px);
-    }
+    .config-grid.qr-active { grid-template-columns: 1fr; }
+    .qr-canvas { width: 140px; height: 140px; }
 }
 
-/* --- Секция инструкций --- */
+/* Секция инструкций */
 .steps-container {
     max-width: 1200px;
     margin: 0 auto 40px auto;
@@ -678,29 +486,18 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     background: color-mix(in srgb, var(--surface-color), transparent 65%);
     backdrop-filter: blur(15px);
     border-radius: 24px;
-    padding: 30px 30px;
+    padding: 30px;
     border: 1px solid rgba(255,255,255,0.1);
     transition: transform 0.5s, box-shadow 0.4s;
 }
 
 .step-card:hover {
     transform: translateY(-10px);
-    .step-icon-wrapper {
-        transform: scale(1.1);
-    }
 }
 
-.step-card.blue:hover {
-    box-shadow: 0 10px 25px color-mix(in srgb, var(--blue-color), transparent 75%);
-}
-
-.step-card.purple:hover {
-    box-shadow: 0 10px 25px color-mix(in srgb, var(--mauve-color), transparent 75%);
-}
-
-.step-card.orange:hover {
-    box-shadow: 0 10px 25px color-mix(in srgb, var(--peach-color), transparent 75%);
-}
+.step-card.blue:hover { box-shadow: 0 10px 25px color-mix(in srgb, var(--blue-color), transparent 75%); }
+.step-card.purple:hover { box-shadow: 0 10px 25px color-mix(in srgb, var(--mauve-color), transparent 75%); }
+.step-card.orange:hover { box-shadow: 0 10px 25px color-mix(in srgb, var(--peach-color), transparent 75%); }
 
 .step-icon-wrapper {
     width: 50px;
@@ -711,48 +508,24 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     justify-content: center;
     font-size: 22px;
     margin-bottom: 20px;
-    transition: transform 0.5s;
 }
 
-/* Цвета иконок под стиль Catppuccin */
 .step-icon-wrapper.blue { background: rgba(137, 180, 250, 0.3); color: var(--blue-color); }
 .step-icon-wrapper.purple { background: rgba(203, 166, 247, 0.3); color: var(--mauve-color); }
 .step-icon-wrapper.orange { background: rgba(250, 179, 135, 0.3); color: var(--peach-color); }
 
-.step-card h3 {
-    text-align: left;
-    font-size: 20px;
-    margin-bottom: 12px;
-    opacity: 1;
-    font-weight: 700;
+.step-card h3 { text-align: left; font-size: 20px; margin-bottom: 12px; opacity: 1; font-weight: 700; }
+.step-card p { font-size: 14px; line-height: 1.6; opacity: 0.7; }
+
+.highlight-orange { color: var(--peach-color); font-weight: bold; }
+
+@media (max-width: 992px) { .steps-container { grid-template-columns: 1fr; gap: 15px; } }
+
+.short-text { display: none; }
+@media (max-width: 520px) {
+    .full-text { display: none; }
+    .short-text { display: inline; }
+    .filter-btn { padding: 0 10px; font-size: 12px; }
 }
 
-.step-card p {
-    font-size: 14px;
-    line-height: 1.6;
-    opacity: 0.7;
-    color: var(--text-color);
-}
-
-.highlight-orange {
-    color: var(--peach-color);
-    font-weight: bold;
-}
-
-noscript p {
-    text-align: center;
-    font-size: 90px;
-    margin: auto 0;
-}
-
-/* Адаптивность для карточек */
-@media (max-width: 992px) {
-    .steps-container {
-        grid-template-columns: 1fr; /* В колонку на планшетах/телефонах */
-        gap: 15px;
-    }
-    
-    .step-card {
-        padding: 20px;
-    }
-}
+noscript p { text-align: center; font-size: 30px; margin: 50px 0; }
