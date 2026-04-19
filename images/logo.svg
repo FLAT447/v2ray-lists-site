@@ -1,87 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-
 <svg
-   fill="#000000"
-   height="800px"
-   width="800px"
+   viewBox="0 0 409600 409600"
    version="1.1"
-   id="Capa_1"
-   viewBox="0 0 458.758 458.758"
-   xml:space="preserve"
-   sodipodi:docname="planet.svg"
-   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   id="svg1"
+   sodipodi:docname="globe-solid-full.svg"
+   inkscape:export-filename="../v2ray-lists-site/images/logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   width="409600"
+   height="409600"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><defs
-   id="defs1"><rect
-     x="125.56102"
-     y="175.78542"
-     width="494.3139"
-     height="306.63322"
-     id="rect1" /><rect
-     x="125.56102"
-     y="175.78542"
-     width="494.3139"
-     height="306.63321"
-     id="rect1-7" /><filter
-     inkscape:collect="always"
-     style="color-interpolation-filters:sRGB"
-     id="filter1"
-     x="-0.035395007"
-     y="-0.083154173"
-     width="1.07079"
-     height="1.1663083"><feGaussianBlur
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <rect
+       x="125.56102"
+       y="175.78542"
+       width="494.3139"
+       height="306.63321"
+       id="rect1" />
+    <rect
+       x="125.56102"
+       y="175.78542"
+       width="494.3139"
+       height="306.63321"
+       id="rect1-7" />
+    <filter
        inkscape:collect="always"
-       stdDeviation="1.3489438"
-       id="feGaussianBlur1" /></filter></defs><sodipodi:namedview
-   id="namedview1"
-   pagecolor="#ffffff"
-   bordercolor="#000000"
-   borderopacity="0.25"
-   inkscape:showpageshadow="2"
-   inkscape:pageopacity="0.0"
-   inkscape:pagecheckerboard="0"
-   inkscape:deskcolor="#d1d1d1"
-   inkscape:zoom="0.75660426"
-   inkscape:cx="352.89254"
-   inkscape:cy="391.88254"
-   inkscape:window-width="1896"
-   inkscape:window-height="1011"
-   inkscape:window-x="0"
-   inkscape:window-y="0"
-   inkscape:window-maximized="1"
-   inkscape:current-layer="Capa_1" />
-<g
-   id="g1"
-   style="fill:#cba6f7;fill-opacity:1">
-	<g
-   id="XMLID_38_"
-   style="fill:#cba6f7;fill-opacity:1">
-		<path
-   id="XMLID_40_"
-   d="M448.189,10.579c-11.9-11.9-30.2-13.8-54.3-5.5c-10.6,3.6-22.6,9.2-36.1,16.8c-8.1,4.6-16.8,9.8-25.8,15.8    c-2.4,1.6-4.8,3.2-7.3,4.9c13.8,7,26.7,15.5,38.6,25.5c2.8-1.7,5.4-3.4,8-4.9c22.8-13.6,37.1-18.8,44.6-20.3    c-2,10.1-10.7,32.8-37.9,72c-2.2,3.1-4.4,6.3-6.7,9.5c-5.1-6.9-10.8-13.6-17.1-19.8c-68.9-68.9-180.7-68.9-249.6,0    s-68.9,180.7,0,249.6c6.3,6.3,12.9,12,19.8,17.1c-3.2,2.3-6.4,4.5-9.5,6.7c-39.2,27.1-61.9,35.9-72,37.9c1.2-6.1,4.9-17,13.8-33.4    c3.1-5.7,6.8-12.1,11.3-19.2c-9.9-11.9-18.4-24.8-25.5-38.6c-1.7,2.4-3.3,4.9-4.9,7.3c-8.3,12.6-15.2,24.3-20.7,35    c-5.1,9.8-9,18.8-11.8,26.9c-8.2,24.1-6.4,42.4,5.5,54.3s30.2,13.8,54.3,5.5c17-5.8,37.8-16.8,61.9-32.6    c47.6-31.3,104.4-79,159.8-134.4s103.2-112.2,134.4-159.8c15.8-24.1,26.8-44.9,32.6-61.9    C461.889,40.779,460.089,22.579,448.189,10.579z M103.889,246.179c-9.3,0-16.8-7.5-16.8-16.8c0-38.2,14.9-74.2,41.9-101.2    c6.6-6.6,17.2-6.6,23.8,0c6.6,6.6,6.6,17.2,0,23.8c-20.7,20.7-32.1,48.2-32.1,77.4    C120.789,238.679,113.189,246.179,103.889,246.179z"
-   style="fill:#cba6f7;fill-opacity:1" />
-		<path
-   id="XMLID_39_"
-   d="M310.189,310.179c-35,35-70.6,67-104.3,94.1c52.6,7,107.9-9.7,148.3-50.1c40.5-40.5,57.2-95.7,50.1-148.3    C377.189,239.579,345.189,275.179,310.189,310.179z"
-   style="fill:#cba6f7;fill-opacity:1" />
-	</g>
-</g>
-<text
-   xml:space="preserve"
-   transform="matrix(4.823107,0,0,4.6596268,-593.93531,-709.35524)"
-   id="text1-1"
-   style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:53.3333px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Ultra-Bold';writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1-7);display:inline;mix-blend-mode:normal;fill:#70687a;fill-opacity:1;stroke:none;stroke-width:113.386;stroke-linejoin:round;filter:url(#filter1)"
-   inkscape:label="text1-1"><tspan
-     x="125.56055"
-     y="223.66392"
-     id="tspan3">VPN</tspan></text><text
-   xml:space="preserve"
-   transform="matrix(4.7254455,0,0,4.7254455,-586.36151,-735.54408)"
-   id="text1"
-   style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:53.3333px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Ultra-Bold';writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#cdd6f4;fill-opacity:1;stroke:none;stroke-width:113.386;stroke-linejoin:round"><tspan
-     x="125.56055"
-     y="223.66392"
-     id="tspan4">VPN</tspan></text></svg>
+       style="color-interpolation-filters:sRGB"
+       id="filter1"
+       x="-0.035395007"
+       y="-0.083154173"
+       width="1.07079"
+       height="1.1663083">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.3489438"
+         id="feGaussianBlur1" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="409600"
+       height="409600"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <!--!Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+  <path
+     d="M 440.04665,350.06827 H 200.87864 c 3.63324,80.80847 21.54892,155.22744 46.98166,209.72616 14.28243,30.6947 29.69242,52.3689 43.97484,65.64906 14.03186,13.15486 23.67876,15.2847 28.69014,15.2847 5.01138,0 14.65828,-2.12984 28.69014,-15.2847 14.28243,-13.28016 29.69242,-35.07964 43.97484,-65.64906 25.43275,-54.49872 43.34842,-128.91769 46.98168,-209.72616 z M 200.75335,289.93173 H 439.92136 C 436.4134,209.12327 418.49772,134.7043 393.06498,80.205566 378.78256,49.636152 363.37256,27.836662 349.09014,14.55651 335.05828,1.4016437 325.41138,-0.72819216 320.4,-0.72819216 c -5.01138,0 -14.65828,2.12983586 -28.69014,15.28470216 C 277.42744,27.836662 262.01744,49.636152 247.73502,80.205566 222.30228,134.7043 204.3866,209.12327 200.75335,289.93173 Z m -60.13653,0 C 145.00177,182.68825 172.68964,83.087107 213.15651,17.688622 97.769535,58.53135 12.826675,163.64501 1.0499369,289.93173 Z M 1.0499369,350.06827 C 12.826675,476.35499 97.769535,581.46865 213.15651,622.31138 172.68964,556.91289 145.00177,457.31175 140.61682,350.06827 Z m 499.1332431,0 C 495.79823,457.31175 468.11036,556.91289 427.64349,622.31138 543.03047,581.34337 627.97332,476.35499 639.75006,350.06827 Z M 639.75006,289.93173 C 627.97332,163.64501 543.03047,58.53135 427.64349,17.688622 468.11036,83.087107 495.79823,182.68825 500.18318,289.93173 Z"
+     id="path1"
+     style="fill:#cba6f7;fill-opacity:1;stroke-width:1.25284" />
+  <text
+     xml:space="preserve"
+     transform="matrix(6.5227581,0,0,6.325611,-788.80071,-953.79224)"
+     id="text1-1"
+     style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:53.3333px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Ultra-Bold';writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1-7);display:inline;mix-blend-mode:normal;fill:#70687a;fill-opacity:1;stroke:none;stroke-width:113.386;stroke-linejoin:round;filter:url(#filter1)"
+     inkscape:label="text1-1"><tspan
+       x="125.56055"
+       y="223.66392"
+       id="tspan2">VPN</tspan></text>
+  <text
+     xml:space="preserve"
+     transform="matrix(6.434947,0,0,6.434947,-790.847,-993.99863)"
+     id="text1"
+     style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:53.3333px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Ultra-Bold';writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#cdd6f4;fill-opacity:1;stroke:none;stroke-width:113.386;stroke-linejoin:round"><tspan
+       x="125.56055"
+       y="223.66392"
+       id="tspan3">VPN</tspan></text>
+</svg>
