@@ -12,6 +12,10 @@
     --surface-color: #313244;
     --crust-color: #11111b;
     --saphire-color: #74c7ec;
+    --mtproxy-wl-color: rgb(40, 139, 185);
+    --sni-color: rgb(112, 59, 176);
+    --recommended-color: rgb(193, 138, 29);
+    --mtproxy-bl-color: rgb(183, 100, 49);
     
     --control-height: 46px;
 }
@@ -30,6 +34,10 @@
     --surface-color: #ccd0da;
     --crust-color: #dce0e8;
     --saphire-color: #209fb5;
+    --mtproxy-wl-color: rgb(10, 85, 120);
+    --sni-color: rgb(74, 26, 134);
+    --recommended-color: rgb(127, 91, 18);
+    --mtproxy-bl-color: rgb(144, 69, 23);
 }
 
 * {
@@ -179,7 +187,7 @@ a {
 .fa-telegram { color: var(--blue-color); }
 .fa-youtube { color: var(--red-color); }
 
-.github { font-size: 20px; color: var(--text-color); font-weight: bold; text-decoration: none; }
+.github { font-size: 20px; color: var(--text-color); font-weight: bold; text-decoration: none; display: flex; align-items: center; }
 .github a { color: inherit; }
 .divider { width: 1px; height: 22px; background: rgba(255, 255, 255, 0.3); margin: 0 6px; }
 .github a:hover .fa-github { transform: scale(1.3); }
@@ -337,9 +345,9 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
 
 .filter-btn:hover { filter: brightness(1.1); }
 .filter-btn.all.active { background: var(--blue-color); color: var(--crust-color); }
-.filter-btn.recommended.active { background: var(--yellow-color); color: var(--crust-color); }
-.filter-btn.sni.active { background: var(--mauve-color); color: var(--crust-color); }
-.filter-btn.mtproxy.active { background: var(--saphire-color); color: var(--crust-color); }
+.filter-btn.recommended.active { color: color-mix(in srgb, var(--recommended-color), transparent 30%); background: var(--yellow-color); }
+.filter-btn.sni.active { background: var(--mauve-color); color: color-mix(in srgb, var(--sni-color), transparent 30%); }
+.filter-btn.mtproxy.active { background: var(--saphire-color); color: color-mix(in srgb, var(--mtproxy-wl-color), transparent 30%); }
 
 /* --- Grid & Cards --- */
 .config-grid {
@@ -360,7 +368,7 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     border: 1px solid rgba(255,255,255,0.1);
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s, box-shadow 0.6s;
 }
 
 .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
@@ -385,10 +393,10 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-.badge.recommended { background: var(--yellow-color); color: #111; }
-.badge.sni { background: var(--mauve-color); color: #fff; }
-.badge.mtproxy-wl { background-color: var(--saphire-color); color: #111; }
-.badge.mtproxy-bl { background-color: var(--peach-color); color: #111; }
+.badge.recommended { background: var(--yellow-color); color: var(--recommended-color); }
+.badge.sni { background: var(--mauve-color); color: var(--sni-color); }
+.badge.mtproxy-wl { background-color: var(--saphire-color); color: var(--mtproxy-wl-color); }
+.badge.mtproxy-bl { background-color: var(--peach-color); color: var(--mtproxy-bl-color); }
 
 .url-box { background: var(--crust-color); border-radius: 12px; padding: 12px; margin-bottom: 18px; }
 .url-text { font-family: monospace; font-size: 12px; word-break: break-all; opacity: 0.8; }
@@ -495,9 +503,22 @@ h3 { text-align: center; font-weight: normal; opacity: 0.8; margin-bottom: 30px;
     transform: translateY(-10px);
 }
 
+.step-card .step-icon-wrapper {
+    transition: transform 0.6s, box-shadow 0.5s;
+
+}
+
+.step-card:hover .step-icon-wrapper {
+    transform: translateX(-2.5px) translateY(-2.5px);
+}
+
 .step-card.blue:hover { box-shadow: 0 10px 25px color-mix(in srgb, var(--blue-color), transparent 75%); }
 .step-card.purple:hover { box-shadow: 0 10px 25px color-mix(in srgb, var(--mauve-color), transparent 75%); }
 .step-card.orange:hover { box-shadow: 0 10px 25px color-mix(in srgb, var(--peach-color), transparent 75%); }
+
+.step-card.blue:hover .step-icon-wrapper.blue { box-shadow: 10px 10px 25px color-mix(in srgb, var(--blue-color), transparent 75%); }
+.step-card.purple:hover .step-icon-wrapper.purple { box-shadow: 10px 10px 25px color-mix(in srgb, var(--mauve-color), transparent 75%); }
+.step-card.orange:hover .step-icon-wrapper.orange { box-shadow: 10px 10px 25px color-mix(in srgb, var(--yellow-color), transparent 75%); }
 
 .step-icon-wrapper {
     width: 50px;

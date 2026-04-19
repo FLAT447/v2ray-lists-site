@@ -112,10 +112,10 @@ function renderCards() {
                     <div class="card-header">
                         <div class="card-id">#${conf.id}</div>
                         <div class="badges-container">
-                            ${conf.type === 'recommended' ? '<span class="badge recommended">Рекомендованный</span>' : ''}
-                            ${conf.type === 'sni' ? '<span class="badge sni">Обход SNI/CIDR</span>' : ''}
-                            ${conf.type === 'mtproxy-wl' ? '<span class="badge mtproxy-wl">MTProxy БС</span>' : ''}
-                            ${conf.type === 'mtproxy-bl' ? '<span class="badge mtproxy-bl">MTProxy ЧС</span>' : ''}
+                            ${conf.type === 'recommended' ? '<span class="badge recommended"><i class="fa-solid fa-star"></i> Рекомендованный</span>' : ''}
+                            ${conf.type === 'sni' ? '<span class="badge sni"><i class="fa-solid fa-bolt"></i> Обход SNI/CIDR</span>' : ''}
+                            ${conf.type === 'mtproxy-wl' ? '<span class="badge mtproxy-wl"><i class="fa-solid fa-fire"></i> MTProxy БС</span>' : ''}
+                            ${conf.type === 'mtproxy-bl' ? '<span class="badge mtproxy-bl"><i class="fa-solid fa-globe"></i> MTProxy ЧС</span>' : ''}
                         </div>
                     </div>
                     <div class="url-box">
@@ -127,6 +127,7 @@ function renderCards() {
                 </div>
             `;
         }).join('');
+        
         
 // ====================== ОБРАБОТКА КОПИРОВАНИЯ ======================
 document.querySelectorAll('.btn-copy-main').forEach(btn => {
@@ -195,10 +196,10 @@ document.querySelectorAll('.btn-copy-main').forEach(btn => {
                 <div class="card-header">
                     <div class="card-id">#${conf.id}</div>
                     <div class="badges-container">
-                        ${conf.type === 'recommended' ? '<span class="badge recommended">Рек.</span>' : ''}
-                        ${conf.type === 'sni' ? '<span class="badge sni">SNI/CIDR</span>' : ''}
-                        ${conf.type === 'mtproxy-wl' ? '<span class="badge mtproxy-wl">MTP БС</span>' : ''}
-                        ${conf.type === 'mtproxy-bl' ? '<span class="badge mtproxy-bl">MTP ЧС</span>' : ''}
+                        ${conf.type === 'recommended' ? '<span class="badge recommended"><i class="fa-solid fa-star"></i> РЕК.</span>' : ''}
+                        ${conf.type === 'sni' ? '<span class="badge sni"><i class="fa-solid fa-bolt"></i> SNI/CIDR</span>' : ''}
+                        ${conf.type === 'mtproxy-wl' ? '<span class="badge mtproxy-wl"><i class="fa-solid fa-fire"></i> MTP БС</span>' : ''}
+                        ${conf.type === 'mtproxy-bl' ? '<span class="badge mtproxy-bl"><i class="fa-solid fa-globe"></i> MTP ЧС</span>' : ''}
                     </div>
                 </div>
                 <div class="qr-container" id="qr-${conf.id}">
