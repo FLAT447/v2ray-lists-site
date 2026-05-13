@@ -72,6 +72,11 @@
         z-index: 999;
         box-shadow: 0 1px 35px rgba(0,0,0,0.2);
         animation: headerDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        
+        /* Для активации GPU акселерации и лучшей поддержки */
+        transform: translateZ(0);
+        will-change: backdrop-filter;
+        backface-visibility: hidden;
     }
 
     @keyframes headerDrop {
