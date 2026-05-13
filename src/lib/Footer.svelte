@@ -6,29 +6,45 @@
 <footer class="footer animate-in" style="--delay: 0.6s">
     <div class="footer__wrapper">
         <div class="footer__made-by">
-            Сделано c  
+            Сделано c
             <span class="footer__heart">
                 <FontAwesomeIcon icon={faHeart} />
             </span>
             <span class="footer__author">
-                <a href="https://github.com/FLAT447" target="_blank" class="footer__author-link">FLAT447</a>
+                <a
+                    href="https://github.com/FLAT447"
+                    target="_blank"
+                    class="footer__author-link">FLAT447</a
+                >
             </span>
         </div>
-  
+
         <div class="footer__tech">
             <span class="footer__tech-text">Написано на</span>
             <div class="footer__badge">
-                <img src="./src/assets/svelte.svg" alt="Svelte" class="footer__icon" />
+                <img
+                    src="./svelte.svg"
+                    alt="Svelte"
+                    class="footer__icon"
+                />
             </div>
             <span class="footer__tech-text">с использованием</span>
             <div class="footer__badge">
-                <img src="./src/assets/vite.svg" alt="Vite" class="footer__icon" />
+                <img 
+                    src="./vite.svg" 
+                    alt="Vite" 
+                    class="footer__icon" 
+                />
             </div>
         </div>
 
         <div class="footer__source">
             <span class="footer__tech-text">Исходный код сайта:</span>
-            <a href="https://github.com/FLAT447/v2ray-lists-site" target="_blank" class="footer__source-link">
+            <a
+                href="https://github.com/FLAT447/v2ray-lists-site"
+                target="_blank"
+                class="footer__source-link"
+            >
                 V2Ray Lists Site
             </a>
         </div>
@@ -39,8 +55,9 @@
     .footer {
         padding: 40px 20px;
         margin-top: 60px;
-        border-top: 1px solid color-mix(in srgb, var(--text-color), transparent 90%);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border-top: 1px solid
+            color-mix(in srgb, var(--text-color), transparent 90%);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background: var(--crust-color);
     }
 
@@ -69,8 +86,13 @@
     }
 
     @keyframes heartBeat {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.2); }
+        0%,
+        100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
     }
 
     .footer__author-link {
@@ -143,7 +165,8 @@
 
     /* --- БЛОК АНИМАЦИИ ПРИ ЗАГРУЗКЕ --- */
     :global(.animate-in) {
-        animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both;
+        animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s)
+            both;
     }
 
     @keyframes fadeUp {
