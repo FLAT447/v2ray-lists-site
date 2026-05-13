@@ -45,12 +45,6 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
-}
-
-html {
-    /* Гарантируем поддержку современных CSS свойств */
-    accent-color: var(--blue-color);
 }
 
 body {
@@ -58,69 +52,9 @@ body {
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
     animation: pageFadeIn 0.05s ease both;
-    
-    /* Для корректной работы backdrop-filter */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 @keyframes pageFadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
-}
-
-/* ============================================
-   ГАРАНТИРОВАННАЯ ПОДДЕРЖКА BACKDROP-FILTER
-   ============================================ */
-
-/* Универсальное правило для всех элементов с backdrop-filter */
-[style*="backdrop-filter"],
-.header,
-.configs__search-wrapper,
-.guides__container,
-.mtproxy__container {
-    /* Основное свойство */
-    -webkit-backdrop-filter: blur(var(--blur-amount, 14px));
-    backdrop-filter: blur(var(--blur-amount, 14px));
-    
-    /* Для активации GPU */
-    transform: translateZ(0) perspective(1px);
-    will-change: backdrop-filter;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-/* Специальные случаи для разных браузеров */
-@supports (backdrop-filter: blur(1px)) {
-    [style*="backdrop-filter"],
-    .header,
-    .configs__search-wrapper,
-    .guides__container,
-    .mtproxy__container {
-        backdrop-filter: blur(var(--blur-amount, 14px));
-        -webkit-backdrop-filter: blur(var(--blur-amount, 14px));
-    }
-}
-
-/* Fallback для старых браузеров */
-@supports not (backdrop-filter: blur(1px)) {
-    [style*="backdrop-filter"],
-    .header,
-    .configs__search-wrapper,
-    .guides__container,
-    .mtproxy__container {
-        background-color: rgba(30, 30, 46, 0.9);
-    }
-}
-
-/* Для Safari и webkit браузеров */
-@-webkit-keyframes pageFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* Высокий Z-index для правильного отображения */
-header, .header {
-    position: relative;
-    z-index: 999;
 }
