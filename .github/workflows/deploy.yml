@@ -1,53 +1,35 @@
-name: Build and Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['main', 'master']
+    branches: 'main'
+
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  build:
+  build_site:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
-        env:
-          # Отключаем минификацию CSS для сохранения backdrop-filter
-          VITE_SKIP_ENV_VALIDATION: true
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: './build'
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+          github_token: ${{ secrets.MY_TOKEN }}
+          publish_dir: ./dist
