@@ -458,9 +458,10 @@
 
     .guides__accordion-item {
         background: color-mix(in srgb, var(--surface-color), transparent 60%);
-        backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        will-change: backdrop-filter;
+        backdrop-filter: blur(14px);
+        isolation: isolate;
+        transform: translateZ(0);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 18px;
         overflow: hidden;

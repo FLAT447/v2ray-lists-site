@@ -62,8 +62,8 @@
     .header {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
         background-color: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(30px);
+        backdrop-filter: blur(30px);
         will-change: backdrop-filter;
         padding-block: 12px;
         font-size: 22px;

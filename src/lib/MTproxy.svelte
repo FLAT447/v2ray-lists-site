@@ -43,9 +43,10 @@
         margin: 0 auto;
         background: color-mix(in srgb, var(--surface-color), transparent 60%);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        will-change: backdrop-filter;
+        backdrop-filter: blur(14px);
+        isolation: isolate;
+        transform: translateZ(0);
         border-radius: 24px;
         padding: 40px;
         position: relative;
