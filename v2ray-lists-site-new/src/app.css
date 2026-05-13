@@ -1,0 +1,126 @@
+:root {
+    --bg-container-color: #05060a;
+    --background-color: #1e1e2e;   
+    --blue-color: #89b4fa;          
+    --red-color: #f38ba8;           
+    --green-color: #a6e3a1;
+    --yellow-color: #f9e2af;
+    --peach-color: #fab387;
+    --pink-color: #f5c2e7;
+    --mauve-color: #cba6f7;
+    --teal-color: #94e2d5;
+    --text-color: #cdd6f4;
+    --surface-color: #313244;
+    --crust-color: #11111b;
+    --saphire-color: #74c7ec;
+    --mtproxy-wl-color: rgb(40, 139, 185);
+    --sni-color: rgb(112, 59, 176);
+    --recommended-color: rgb(193, 138, 29);
+    --mtproxy-bl-color: rgb(183, 100, 49);
+    --control-height: 46px;
+    --black-color: #45475a;
+}
+
+.light-theme {
+    --bg-container-color: #eef2f5;
+    --background-color: #eff1f5;
+    --blue-color: #1e66f5;
+    --red-color: #d20f39;
+    --green-color: #40a02b;
+    --yellow-color: #df8e1d;
+    --peach-color: #fe640b;
+    --pink-color: #ea76cb;
+    --mauve-color: #8839ef;
+    --teal-color: #179299;
+    --text-color: #4c4f69;
+    --surface-color: #ccd0da;
+    --crust-color: #dce0e8;
+    --saphire-color: #209fb5;
+    --mtproxy-wl-color: rgb(10, 85, 120);
+    --sni-color: rgb(74, 26, 134);
+    --recommended-color: rgb(127, 91, 18);
+    --mtproxy-bl-color: rgb(144, 69, 23);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Гарантируем поддержку современных CSS свойств */
+    accent-color: var(--blue-color);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    animation: pageFadeIn 0.05s ease both;
+    
+    /* Для корректной работы backdrop-filter */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ============================================
+   ГАРАНТИРОВАННАЯ ПОДДЕРЖКА BACKDROP-FILTER
+   ============================================ */
+
+/* Универсальное правило для всех элементов с backdrop-filter */
+[style*="backdrop-filter"],
+.header,
+.configs__search-wrapper,
+.guides__container,
+.mtproxy__container {
+    /* Основное свойство */
+    -webkit-backdrop-filter: blur(var(--blur-amount, 14px));
+    backdrop-filter: blur(var(--blur-amount, 14px));
+    
+    /* Для активации GPU */
+    transform: translateZ(0) perspective(1px);
+    will-change: backdrop-filter;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Специальные случаи для разных браузеров */
+@supports (backdrop-filter: blur(1px)) {
+    [style*="backdrop-filter"],
+    .header,
+    .configs__search-wrapper,
+    .guides__container,
+    .mtproxy__container {
+        backdrop-filter: blur(var(--blur-amount, 14px));
+        -webkit-backdrop-filter: blur(var(--blur-amount, 14px));
+    }
+}
+
+/* Fallback для старых браузеров */
+@supports not (backdrop-filter: blur(1px)) {
+    [style*="backdrop-filter"],
+    .header,
+    .configs__search-wrapper,
+    .guides__container,
+    .mtproxy__container {
+        background-color: rgba(30, 30, 46, 0.9);
+    }
+}
+
+/* Для Safari и webkit браузеров */
+@-webkit-keyframes pageFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Высокий Z-index для правильного отображения */
+header, .header {
+    position: relative;
+    z-index: 999;
+}
