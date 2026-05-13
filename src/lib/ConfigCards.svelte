@@ -543,6 +543,7 @@
         background: color-mix(in srgb, var(--surface-color), transparent 60%);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
+        will-change: backdrop-filter;
         border-radius: 20px;
         padding: 20px;
         border: 1px solid rgba(255, 255, 255, 0.08);

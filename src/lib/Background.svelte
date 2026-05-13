@@ -107,6 +107,7 @@
         width: 100%;
         height: 100%;
         filter: blur(80px); 
+        will-change: filter;
     }
 
     .gradient-ball {

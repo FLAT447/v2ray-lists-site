@@ -64,6 +64,7 @@
         background-color: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
+        will-change: backdrop-filter;
         padding-block: 12px;
         font-size: 22px;
         position: sticky;

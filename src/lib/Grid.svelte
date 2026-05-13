@@ -138,6 +138,7 @@
         height: 120px;
         border-radius: 50%;
         filter: blur(40px);
+        will-change: filter;
         opacity: 0;
         transition: opacity 0.5s ease;
         z-index: 0;

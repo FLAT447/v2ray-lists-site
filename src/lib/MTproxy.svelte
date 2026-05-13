@@ -45,6 +45,7 @@
         border: 1px solid rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
+        will-change: backdrop-filter;
         border-radius: 24px;
         padding: 40px;
         position: relative;
