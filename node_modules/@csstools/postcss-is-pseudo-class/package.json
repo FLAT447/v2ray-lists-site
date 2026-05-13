@@ -1,0 +1,58 @@
+{
+	"name": "@csstools/postcss-is-pseudo-class",
+	"description": "A pseudo-class for matching elements in a selector list",
+	"version": "6.0.0",
+	"author": "Jonathan Neal <jonathantneal@hotmail.com>",
+	"license": "MIT-0",
+	"funding": [
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/csstools"
+		},
+		{
+			"type": "opencollective",
+			"url": "https://opencollective.com/csstools"
+		}
+	],
+	"engines": {
+		"node": ">=20.19.0"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"CHANGELOG.md",
+		"LICENSE.md",
+		"README.md",
+		"dist"
+	],
+	"dependencies": {
+		"@csstools/selector-specificity": "^6.0.0",
+		"postcss-selector-parser": "^7.1.1"
+	},
+	"peerDependencies": {
+		"postcss": "^8.4"
+	},
+	"scripts": {},
+	"homepage": "https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-is-pseudo-class#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/csstools/postcss-plugins.git",
+		"directory": "plugins/postcss-is-pseudo-class"
+	},
+	"bugs": "https://github.com/csstools/postcss-plugins/issues",
+	"keywords": [
+		"css",
+		"is",
+		"matches",
+		"polyfill",
+		"postcss",
+		"postcss-plugin",
+		"pseudo",
+		"selector"
+	]
+}

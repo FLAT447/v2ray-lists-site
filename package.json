@@ -10,6 +10,9 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.14",
+    "postcss-preset-env": "^11.2.1",
     "svelte": "^5.55.4",
     "vite": "^8.0.9"
   },
