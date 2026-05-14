@@ -114,6 +114,7 @@
         font-size: 32px;
         font-weight: 800;
         color: var(--text-color);
+
         margin: 0;
         letter-spacing: -0.5px;
         word-break: break-word;
@@ -286,7 +287,6 @@
         }
 
         .mtproxy__title {
-            font-size: 24px;
             word-break: break-word;
         }
 
@@ -326,10 +326,6 @@
 
         .mtproxy__icon-wrapper :global(svg) {
             font-size: 22px;
-        }
-
-        .mtproxy__title {
-            font-size: 20px;
         }
 
         .mtproxy__btn {
