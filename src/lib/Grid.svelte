@@ -193,11 +193,14 @@
         .grid__wrapper {
             padding: 0 8px;
             gap: 14px;
+            max-width: 100%;
         }
 
         .grid__container {
             padding: 24px 18px;
             border-radius: 18px;
+            width: 100%;
+            max-width: none;
         }
 
         .grid__container h3 {
@@ -206,12 +209,69 @@
 
         .grid__container p {
             font-size: 13px;
+            line-height: 1.5;
         }
 
         .header__icon-wrapper {
             width: 42px;
             height: 42px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
+        }
+
+        .header__icon-wrapper :global(svg) {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .grid {
+            padding: 16px 10px;
+        }
+
+        .grid__title-container {
+            margin-bottom: 16px;
+            padding: 0 6px;
+        }
+
+        .grid__title-container h1 {
+            font-size: 24px;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .grid__title-container p {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .grid__wrapper {
+            padding: 0 6px;
+            gap: 12px;
+        }
+
+        .grid__container {
+            padding: 20px 16px;
+            border-radius: 16px;
+        }
+
+        .grid__container h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .grid__container p {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .header__icon-wrapper {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 14px;
+        }
+
+        .header__icon-wrapper :global(svg) {
+            font-size: 16px;
         }
     }
 

@@ -52,7 +52,7 @@
         border-radius: 24px;
         padding: 40px;
         position: relative;
-        overflow: hidden;
+        overflow: visible;
         display: flex;
         align-items: center;
         gap: 30px;
@@ -69,6 +69,7 @@
         top: -150px;
         z-index: 0;
         pointer-events: none;
+        overflow: hidden;
     }
 
     .mtproxy__content {
@@ -198,6 +199,7 @@
             gap: 20px;
             flex-direction: column;
             min-height: auto;
+            overflow: visible;
         }
 
         .mtproxy__accent {
@@ -237,42 +239,58 @@
 
     @media (max-width: 480px) {
         .mtproxy {
-            padding: 20px 12px 40px 12px;
+            padding: 24px 16px 40px 16px;
         }
 
         .mtproxy__container {
-            padding: 20px;
-            border-radius: 16px;
-            gap: 16px;
+            padding: 24px;
+            border-radius: 18px;
+            gap: 18px;
+            overflow: visible;
         }
 
         .mtproxy__header {
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .mtproxy__icon-wrapper {
+            width: 48px;
+            height: 48px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .mtproxy__icon-wrapper :global(svg) {
+            font-size: 24px;
         }
 
         .mtproxy__title {
-            font-size: 22px;
-            width: 100%;
+            font-size: 24px;
+            word-break: break-word;
         }
 
         .mtproxy__description {
-            font-size: 13px;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         .mtproxy__btn {
             width: 100%;
             justify-content: center;
-            padding: 14px 20px;
-            font-size: 13px;
-            gap: 8px;
+            padding: 16px 20px;
+            font-size: 15px;
+            gap: 10px;
+            border-radius: 12px;
+            font-weight: 700;
         }
 
         .mtproxy__accent {
-            width: 250px;
-            height: 250px;
-            right: -80px;
-            top: -80px;
+            width: 280px;
+            height: 280px;
+            right: -90px;
+            top: -90px;
         }
     }
 
@@ -283,6 +301,7 @@
 
         .mtproxy__container {
             padding: 16px;
+            overflow: visible;
         }
 
         .mtproxy__icon-wrapper {
