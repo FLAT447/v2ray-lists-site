@@ -52,7 +52,6 @@
         border-radius: 24px;
         padding: 40px;
         position: relative;
-        overflow: visible;
         display: flex;
         align-items: center;
         gap: 30px;
@@ -69,7 +68,6 @@
         top: -150px;
         z-index: 0;
         pointer-events: none;
-        overflow: hidden;
     }
 
     .mtproxy__content {
@@ -98,13 +96,13 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        box-shadow: 0 8px 24px rgba(112, 59, 176, 0.3);
+        box-shadow: 0 8px 14px color-mix(in srgb, var(--mauve-color), transparent 50%);
         animation: float 3s ease-in-out infinite;
         transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 8px 14px color-mix(in srgb, var(--mauve-color), transparent 50%);
-        &:hover {
-            filter: brightness(1.1);
-        }
+    }
+
+    .mtproxy__icon-wrapper:hover {
+        filter: brightness(1.1);
     }
 
     .mtproxy__icon-wrapper :global(svg) {
@@ -147,6 +145,7 @@
         border: none;
         flex-shrink: 0;
         white-space: nowrap;
+        align-self: flex-start;
     }
 
     .mtproxy__btn:hover {
@@ -161,6 +160,22 @@
     @keyframes float {
         0%, 100% { transform: translateY(5px); }
         50% { transform: translateY(-5px); }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            translate: 0 24px;
+        }
+        to {
+            opacity: 1;
+            translate: 0 0;
+        }
+    }
+
+    .animate-in {
+        animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: var(--delay, 0s);
     }
 
     @media (max-width: 1024px) {
@@ -189,7 +204,7 @@
         }
 
         .mtproxy__btn {
-            padding: 13px;
+            padding: 13px 24px;
             font-size: 14px;
         }
     }
@@ -204,7 +219,6 @@
             gap: 20px;
             flex-direction: column;
             min-height: auto;
-            overflow: visible;
         }
 
         .mtproxy__accent {
@@ -223,7 +237,7 @@
             height: 50px;
         }
 
-        .mtproxy__icon {
+        .mtproxy__icon-wrapper :global(svg) {
             font-size: 24px;
         }
 
@@ -252,7 +266,6 @@
             padding: 24px;
             border-radius: 18px;
             gap: 18px;
-            overflow: visible;
         }
 
         .mtproxy__header {
@@ -304,7 +317,6 @@
 
         .mtproxy__container {
             padding: 16px;
-            overflow: visible;
         }
 
         .mtproxy__icon-wrapper {
