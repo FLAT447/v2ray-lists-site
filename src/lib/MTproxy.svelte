@@ -23,8 +23,8 @@
                 rel="noopener noreferrer"
                 class="mtproxy__btn"
             >
-                <span>Перейти к MTProxy</span>
                 <FontAwesomeIcon icon={faArrowRight} />
+                <span>Перейти к MTProxy</span>
             </a>
         </div>
 
@@ -133,29 +133,29 @@
     .mtproxy__btn {
         background: var(--mauve-color);
         color: white;
-        border-radius: 14px;
-        padding: 16px 28px;
+        border-radius: 12px;
+        padding: 14px 28px;
         font-weight: 700;
         font-size: 15px;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 10px;
         text-decoration: none;
-        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        width: fit-content;
-        white-space: nowrap;
+        transition: filter 0.2s, transform 0.1s;
+        border: none;
         flex-shrink: 0;
+        white-space: nowrap;
     }
 
     .mtproxy__btn:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 32px rgba(112, 59, 176, 0.4);
         filter: brightness(1.1);
+        transform: translateY(-1px);
     }
 
     .mtproxy__btn:active {
-        transform: translateY(-1px);
+        transform: translateY(0);
     }
 
     @keyframes float {
@@ -186,6 +186,11 @@
 
         .mtproxy__description {
             font-size: 15px;
+        }
+
+        .mtproxy__btn {
+            padding: 13px;
+            font-size: 14px;
         }
     }
 
@@ -232,8 +237,9 @@
         }
 
         .mtproxy__btn {
-            padding: 14px 24px;
+            padding: 12px 24px;
             font-size: 14px;
+            gap: 8px;
         }
     }
 
@@ -277,13 +283,10 @@
         }
 
         .mtproxy__btn {
-            width: 100%;
-            justify-content: center;
-            padding: 16px 20px;
-            font-size: 15px;
-            gap: 10px;
-            border-radius: 12px;
-            font-weight: 700;
+            padding: 12px 20px;
+            font-size: 14px;
+            gap: 8px;
+            border-radius: 10px;
         }
 
         .mtproxy__accent {
@@ -318,8 +321,9 @@
         }
 
         .mtproxy__btn {
-            padding: 12px 16px;
+            padding: 10px 16px;
             font-size: 12px;
+            gap: 6px;
         }
     }
 </style>
