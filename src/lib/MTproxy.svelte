@@ -36,6 +36,8 @@
     .mtproxy {
         padding: 40px 20px 60px 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .mtproxy__container {
@@ -55,6 +57,7 @@
         align-items: center;
         gap: 30px;
         min-height: 280px;
+        box-sizing: border-box;
     }
 
     .mtproxy__accent {
@@ -75,12 +78,14 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        min-width: 0;
     }
 
     .mtproxy__header {
         display: flex;
         align-items: center;
         gap: 16px;
+        min-width: 0;
     }
 
     .mtproxy__icon-wrapper {
@@ -112,6 +117,7 @@
         color: var(--text-color);
         margin: 0;
         letter-spacing: -0.5px;
+        word-break: break-word;
     }
 
     .mtproxy__description {
@@ -120,6 +126,7 @@
         color: color-mix(in srgb, var(--text-color), transparent 20%);
         margin: 0;
         max-width: 500px;
+        word-break: break-word;
     }
 
     .mtproxy__btn {
@@ -136,6 +143,8 @@
         text-decoration: none;
         transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         width: fit-content;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .mtproxy__btn:hover {
@@ -151,6 +160,32 @@
     @keyframes float {
         0%, 100% { transform: translateY(5px); }
         50% { transform: translateY(-5px); }
+    }
+
+    @media (max-width: 1024px) {
+        .mtproxy {
+            padding: 35px 20px 50px 20px;
+        }
+
+        .mtproxy__container {
+            padding: 35px;
+            gap: 25px;
+        }
+
+        .mtproxy__accent {
+            width: 350px;
+            height: 350px;
+            right: -120px;
+            top: -120px;
+        }
+
+        .mtproxy__title {
+            font-size: 28px;
+        }
+
+        .mtproxy__description {
+            font-size: 15px;
+        }
     }
 
     @media (max-width: 768px) {
@@ -193,6 +228,11 @@
             font-size: 14px;
             max-width: 100%;
         }
+
+        .mtproxy__btn {
+            padding: 14px 24px;
+            font-size: 14px;
+        }
     }
 
     @media (max-width: 480px) {
@@ -203,15 +243,64 @@
         .mtproxy__container {
             padding: 20px;
             border-radius: 16px;
+            gap: 16px;
+        }
+
+        .mtproxy__header {
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .mtproxy__title {
             font-size: 22px;
+            width: 100%;
+        }
+
+        .mtproxy__description {
+            font-size: 13px;
         }
 
         .mtproxy__btn {
             width: 100%;
             justify-content: center;
+            padding: 14px 20px;
+            font-size: 13px;
+            gap: 8px;
+        }
+
+        .mtproxy__accent {
+            width: 250px;
+            height: 250px;
+            right: -80px;
+            top: -80px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .mtproxy {
+            padding: 16px 10px 30px 10px;
+        }
+
+        .mtproxy__container {
+            padding: 16px;
+        }
+
+        .mtproxy__icon-wrapper {
+            width: 45px;
+            height: 45px;
+        }
+
+        .mtproxy__icon-wrapper :global(svg) {
+            font-size: 22px;
+        }
+
+        .mtproxy__title {
+            font-size: 20px;
+        }
+
+        .mtproxy__btn {
+            padding: 12px 16px;
+            font-size: 12px;
         }
     }
 </style>

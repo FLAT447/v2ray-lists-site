@@ -199,7 +199,8 @@
 
     .contacts__modal {
         width: 350px;
-        background: color-mix(in srgb, var(--surface-color), transparent 20%);
+        /* background: color-mix(in srgb, var(--surface-color), transparent 20%); */
+        background: var(--surface-color);
         border-radius: 24px;
         padding: 20px;
         border: 1px solid color-mix(in srgb, var(--text-color), transparent 90%);
