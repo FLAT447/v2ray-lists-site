@@ -272,7 +272,7 @@
         .mtproxy__header {
             flex-wrap: wrap;
             gap: 12px;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .mtproxy__icon-wrapper {
