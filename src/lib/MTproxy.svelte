@@ -23,8 +23,8 @@
                 rel="noopener noreferrer"
                 class="mtproxy__btn"
             >
-                <FontAwesomeIcon icon={faArrowRight} />
                 <span>Перейти к MTProxy</span>
+                <FontAwesomeIcon icon={faArrowRight} />
             </a>
         </div>
 
@@ -36,8 +36,6 @@
     .mtproxy {
         padding: 40px 20px 60px 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        width: 100%;
-        box-sizing: border-box;
     }
 
     .mtproxy__container {
@@ -52,11 +50,11 @@
         border-radius: 24px;
         padding: 40px;
         position: relative;
+        overflow: hidden;
         display: flex;
         align-items: center;
         gap: 30px;
         min-height: 280px;
-        box-sizing: border-box;
     }
 
     .mtproxy__accent {
@@ -77,14 +75,12 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        min-width: 0;
     }
 
     .mtproxy__header {
         display: flex;
         align-items: center;
         gap: 16px;
-        min-width: 0;
     }
 
     .mtproxy__icon-wrapper {
@@ -96,13 +92,13 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        box-shadow: 0 8px 14px color-mix(in srgb, var(--mauve-color), transparent 50%);
+        box-shadow: 0 8px 24px rgba(112, 59, 176, 0.3);
         animation: float 3s ease-in-out infinite;
         transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .mtproxy__icon-wrapper:hover {
-        filter: brightness(1.1);
+        box-shadow: 0 8px 14px color-mix(in srgb, var(--mauve-color), transparent 50%);
+        &:hover {
+            filter: brightness(1.1);
+        }
     }
 
     .mtproxy__icon-wrapper :global(svg) {
@@ -114,10 +110,8 @@
         font-size: 32px;
         font-weight: 800;
         color: var(--text-color);
-
         margin: 0;
         letter-spacing: -0.5px;
-        word-break: break-word;
     }
 
     .mtproxy__description {
@@ -126,88 +120,37 @@
         color: color-mix(in srgb, var(--text-color), transparent 20%);
         margin: 0;
         max-width: 500px;
-        word-break: break-word;
     }
 
     .mtproxy__btn {
         background: var(--mauve-color);
         color: white;
-        border-radius: 12px;
-        padding: 14px 28px;
+        border-radius: 14px;
+        padding: 16px 28px;
         font-weight: 700;
         font-size: 15px;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
-        justify-content: center;
         gap: 10px;
         text-decoration: none;
-        transition: filter 0.2s, transform 0.1s;
-        border: none;
-        flex-shrink: 0;
-        white-space: nowrap;
-        align-self: flex-start;
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        width: fit-content;
     }
 
     .mtproxy__btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 32px rgba(112, 59, 176, 0.4);
         filter: brightness(1.1);
-        transform: translateY(-1px);
     }
 
     .mtproxy__btn:active {
-        transform: translateY(0);
+        transform: translateY(-1px);
     }
 
     @keyframes float {
         0%, 100% { transform: translateY(5px); }
         50% { transform: translateY(-5px); }
-    }
-
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            translate: 0 24px;
-        }
-        to {
-            opacity: 1;
-            translate: 0 0;
-        }
-    }
-
-    .animate-in {
-        animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-        animation-delay: var(--delay, 0s);
-    }
-
-    @media (max-width: 1024px) {
-        .mtproxy {
-            padding: 35px 20px 50px 20px;
-        }
-
-        .mtproxy__container {
-            padding: 35px;
-            gap: 25px;
-        }
-
-        .mtproxy__accent {
-            width: 350px;
-            height: 350px;
-            right: -120px;
-            top: -120px;
-        }
-
-        .mtproxy__title {
-            font-size: 28px;
-        }
-
-        .mtproxy__description {
-            font-size: 15px;
-        }
-
-        .mtproxy__btn {
-            padding: 13px 24px;
-            font-size: 14px;
-        }
     }
 
     @media (max-width: 768px) {
@@ -238,7 +181,7 @@
             height: 50px;
         }
 
-        .mtproxy__icon-wrapper :global(svg) {
+        .mtproxy__icon {
             font-size: 24px;
         }
 
@@ -250,88 +193,25 @@
             font-size: 14px;
             max-width: 100%;
         }
-
-        .mtproxy__btn {
-            padding: 12px 24px;
-            font-size: 14px;
-            gap: 8px;
-        }
     }
 
     @media (max-width: 480px) {
         .mtproxy {
-            padding: 24px 16px 40px 16px;
+            padding: 20px 12px 40px 12px;
         }
 
         .mtproxy__container {
-            padding: 24px;
-            border-radius: 18px;
-            gap: 18px;
-        }
-
-        .mtproxy__header {
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .mtproxy__icon-wrapper {
-            width: 48px;
-            height: 48px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .mtproxy__icon-wrapper :global(svg) {
-            font-size: 24px;
+            padding: 20px;
+            border-radius: 16px;
         }
 
         .mtproxy__title {
-            word-break: break-word;
-        }
-
-        .mtproxy__description {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .mtproxy__btn {
-            padding: 12px 20px;
-            font-size: 14px;
-            gap: 8px;
-            border-radius: 10px;
-        }
-
-        .mtproxy__accent {
-            width: 280px;
-            height: 280px;
-            right: -90px;
-            top: -90px;
-        }
-    }
-
-    @media (max-width: 360px) {
-        .mtproxy {
-            padding: 16px 10px 30px 10px;
-        }
-
-        .mtproxy__container {
-            padding: 16px;
-        }
-
-        .mtproxy__icon-wrapper {
-            width: 45px;
-            height: 45px;
-        }
-
-        .mtproxy__icon-wrapper :global(svg) {
             font-size: 22px;
         }
 
         .mtproxy__btn {
-            padding: 10px 16px;
-            font-size: 12px;
-            gap: 6px;
+            width: 100%;
+            justify-content: center;
         }
     }
 </style>
