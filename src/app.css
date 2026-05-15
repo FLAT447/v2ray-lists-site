@@ -14,11 +14,7 @@
     --crust-color: #11111b;
     --saphire-color: #74c7ec;
     --mtproxy-wl-color: rgb(40, 139, 185);
-    --sni-color: rgb(112, 59, 176);
-    --recommended-color: rgb(193, 138, 29);
     --mtproxy-bl-color: rgb(183, 100, 49);
-    --control-height: 46px;
-    --black-color: #45475a;
 }
 
 .light-theme {
@@ -36,25 +32,39 @@
     --surface-color: #ccd0da;
     --crust-color: #dce0e8;
     --saphire-color: #209fb5;
-    --mtproxy-wl-color: rgb(10, 85, 120);
+    --mtproxy-wl-color: rgb(53, 152, 199);
     --sni-color: rgb(74, 26, 134);
     --recommended-color: rgb(127, 91, 18);
-    --mtproxy-bl-color: rgb(144, 69, 23);
-}
-
-* {
-    padding: 0;
-    margin: 0;
+    --mtproxy-bl-color: rgb(187, 108, 60);
 }
 
 body {
-    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-container-color);
     color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    animation: pageFadeIn 0.05s ease both;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
-@keyframes pageFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+body.page-loaded {
+    opacity: 1;
 }
+
+.animate-in {
+    animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
