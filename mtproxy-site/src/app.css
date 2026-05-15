@@ -1,0 +1,70 @@
+:root {
+    --bg-container-color: #05060a;
+    --background-color: #1e1e2e;   
+    --blue-color: #89b4fa;          
+    --red-color: #f38ba8;           
+    --green-color: #a6e3a1;
+    --yellow-color: #f9e2af;
+    --peach-color: #fab387;
+    --pink-color: #f5c2e7;
+    --mauve-color: #cba6f7;
+    --teal-color: #94e2d5;
+    --text-color: #cdd6f4;
+    --surface-color: #313244;
+    --crust-color: #11111b;
+    --saphire-color: #74c7ec;
+    --mtproxy-wl-color: rgb(40, 139, 185);
+    --mtproxy-bl-color: rgb(183, 100, 49);
+}
+
+.light-theme {
+    --bg-container-color: #eef2f5;
+    --background-color: #eff1f5;
+    --blue-color: #1e66f5;
+    --red-color: #d20f39;
+    --green-color: #40a02b;
+    --yellow-color: #df8e1d;
+    --peach-color: #fe640b;
+    --pink-color: #ea76cb;
+    --mauve-color: #8839ef;
+    --teal-color: #179299;
+    --text-color: #4c4f69;
+    --surface-color: #ccd0da;
+    --crust-color: #dce0e8;
+    --saphire-color: #209fb5;
+    --mtproxy-wl-color: rgb(53, 152, 199);
+    --sni-color: rgb(74, 26, 134);
+    --recommended-color: rgb(127, 91, 18);
+    --mtproxy-bl-color: rgb(187, 108, 60);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-container-color);
+    color: var(--text-color);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+.animate-in {
+    animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
