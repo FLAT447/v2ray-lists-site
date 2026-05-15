@@ -140,11 +140,12 @@
 
     @media (max-width: 768px) {
         .grid {
-            padding: 20px 12px;
+            padding: 20px 0;
         }
 
         .grid__title-container {
             margin-bottom: 24px;
+            padding: 0 16px;
         }
 
         .grid__title-container h1 {
@@ -159,7 +160,7 @@
             flex-direction: column; 
             align-items: stretch;
             gap: 16px;
-            padding: 0;
+            padding: 0 12px;
         }
 
         .grid__container {
@@ -180,7 +181,11 @@
 
     @media (max-width: 480px) {
         .grid {
-            padding: 16px 10px;
+            padding: 16px 0;
+        }
+
+        .grid__title-container {
+            padding: 0 12px;
         }
 
         .grid__title-container h1 {
@@ -193,7 +198,7 @@
         }
 
         .grid__wrapper {
-            padding: 0;
+            padding: 0 10px;
         }
 
         .grid__container {
