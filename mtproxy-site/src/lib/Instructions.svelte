@@ -15,9 +15,9 @@
                 <h3><FontAwesomeIcon icon={faMobileScreen} style="color: var(--blue-color)" /> На телефоне</h3>
             </div>
             <ul>
-                <li>Нажмите на ссылку в Telegram или вставьте её в <b>Избранное</b>.</li>
-                <li>Кликните по ссылке и нажмите <b>«Включить прокси»</b>.</li>
-                <li>Настройки: <i>Данные и память → Прокси</i>.</li>
+                <li>Перейдите в <b>Настройки</b> Telegram.</li>
+                <li>Пройдите по пути <b>Данные и память > Настройки прокси</b>ю</li>
+                <li>Нажмите <b>Три точки > Импорт из буфера обмена</b>.</li>
             </ul>
         </div>
 
@@ -26,9 +26,9 @@
                 <h3><FontAwesomeIcon icon={faDesktop} style="color: var(--peach-color)" /> На компьютере</h3>
             </div>
             <ul>
-                <li>Скопируйте ссылку и отправьте её себе в чат.</li>
-                <li>Нажмите на неё прямо в приложении Telegram Desktop.</li>
-                <li>Подтвердите подключение в диалоговом окне.</li>
+                <li>Перейдите в <b>Настройки</b> Telegram.</li>
+                <li>Пройдите по пути <b>Продвинутые настройки > Тип соединения</b>.</li>
+                <li>Нажмите <b>Три точки > Добавить прокси из буфера обмена</b></li>
             </ul>
         </div>
     </div>
@@ -38,7 +38,6 @@
     .instructions {
         margin-top: 60px;
         padding: 32px; /* Настройка внутреннего отступа для сходства с картой  */
-        /* Копирование стилей ProxyCard  */
         background: color-mix(in srgb, var(--surface-color), transparent 50%);
         backdrop-filter: blur(12px);
         border: 1px solid color-mix(in srgb, var(--text-color), transparent 90%);
@@ -60,6 +59,4 @@
         font-size: 1.4rem;
         color: var(--blue-color); /* Выделение заголовка акцентным цветом */
     }
-
-    /* Остальные стили сетки и списков сохранены для корректного отображения контента [cite: 68, 71] */
 </style>

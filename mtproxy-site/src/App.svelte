@@ -117,7 +117,7 @@
     .main-container {
         max-width: 1000px;
         margin: 0 auto;
-        padding: 10px 20px;
+        padding: 20px 20px;
         min-height: 80vh;
     }
 
