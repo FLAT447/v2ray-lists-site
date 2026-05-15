@@ -61,6 +61,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.MY_TOKEN }}
-          publish_dir: ./mtproxy/dist # Убедитесь, что путь к сборке MTProxy верный
+          publish_dir: ./mtproxy-site/dist # Убедитесь, что путь к сборке MTProxy верный
           destination_dir: mtproxy # Положит файлы в подпапку /mtproxy на хостинге
           keep_files: true
