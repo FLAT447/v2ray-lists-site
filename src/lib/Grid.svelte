@@ -120,7 +120,7 @@
 
         .grid__container {
             width: 100%;
-            max-width: 380px;
+            max-width: 360px;
             flex: none;
         }
     }
