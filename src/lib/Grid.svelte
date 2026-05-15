@@ -43,11 +43,14 @@
 <style>
     .grid {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        padding: 30px 20px;
+        padding: 30px 12px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     .grid__title-container {
@@ -55,6 +58,8 @@
         margin-bottom: 20px;
         max-width: 800px;
         width: 100%;
+        padding: 0 8px;
+        box-sizing: border-box;
     }
 
     .grid__title-container h1 {
@@ -95,6 +100,8 @@
         gap: 24px;
         max-width: 1300px;
         width: 100%;
+        padding: 0 8px;
+        box-sizing: border-box;
         justify-content: center;
         flex-wrap: nowrap;
     }
@@ -112,16 +119,104 @@
         transition: transform 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
     }
 
+    @media (max-width: 1024px) {
+        .grid__title-container h1 {
+            font-size: 40px;
+        }
+
+        .grid__title-container p {
+            font-size: 16px;
+        }
+
+        .grid__container {
+            padding: 32px 24px;
+            max-width: 320px;
+        }
+
+        .grid__wrapper {
+            gap: 16px;
+        }
+    }
+
     @media (max-width: 768px) {
+        .grid {
+            padding: 20px 12px;
+        }
+
+        .grid__title-container {
+            margin-bottom: 24px;
+        }
+
+        .grid__title-container h1 {
+            font-size: 32px;
+        }
+
+        .grid__title-container p {
+            font-size: 14px;
+        }
+
         .grid__wrapper {
             flex-direction: column; 
-            align-items: center;
+            align-items: stretch;
+            gap: 16px;
+            padding: 0;
         }
 
         .grid__container {
             width: 100%;
-            max-width: 360px;
-            flex: none;
+            max-width: 100%;
+            flex: 1;
+            padding: 28px 20px;
+        }
+
+        .grid__container h3 {
+            font-size: 18px;
+        }
+
+        .grid__container p {
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .grid {
+            padding: 16px 10px;
+        }
+
+        .grid__title-container h1 {
+            font-size: 28px;
+        }
+
+        .grid__title-container p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .grid__wrapper {
+            padding: 0;
+        }
+
+        .grid__container {
+            padding: 24px 16px;
+        }
+
+        .header__icon-wrapper {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 16px;
+        }
+
+        .grid__container :global(svg) {
+            font-size: 18px;
+        }
+
+        .grid__container h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .grid__container p {
+            font-size: 12px;
         }
     }
 
