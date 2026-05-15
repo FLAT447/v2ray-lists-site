@@ -136,6 +136,7 @@
         text-decoration: none;
         transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         width: fit-content;
+        box-sizing: border-box;
     }
 
     .mtproxy__btn:hover {
@@ -212,6 +213,7 @@
         .mtproxy__btn {
             width: 100%;
             justify-content: center;
+            padding: 14px 16px;
         }
     }
 </style>
