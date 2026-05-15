@@ -9,10 +9,11 @@
 
     const accentColor = type === 'wl' ? 'var(--mtproxy-wl-color)' : 'var(--mtproxy-bl-color)';
 
-    async function copyText(text, isRandom) {
+    async function copyToClipboard(text, stateKey) {
+        if (!text) return;
         try {
             await navigator.clipboard.writeText(text);
-            if (isRandom) {
+            if (stateKey === 'random') {
                 copiedRandom = true;
                 setTimeout(() => copiedRandom = false, 2000);
             } else {
@@ -25,12 +26,18 @@
     }
 
     function handleCopyAll() {
-        copyText(list.join('\n'), false);
+        if (list.length === 0) return;
+        // Копируем весь актуальный массив [cite: 379]
+        copyToClipboard(list.join('\n'), 'all');
     }
 
     function handleCopyRandom() {
-        const randomProxies = [...list].sort(() => 0.5 - Math.random()).slice(0, 10);
-        copyText(randomProxies.join('\n'), true);
+        if (list.length === 0) return;
+        // Выбираем случайные 10 из полной копии массива [cite: 380]
+        const randomProxies = [...list]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 10);
+        copyToClipboard(randomProxies.join('\n'), 'random');
     }
 </script>
 
@@ -49,20 +56,26 @@
 
     <p class="card__desc">
         {type === 'wl' 
-            ? 'Прокси, работающие при "Белых Списках".' 
-            : 'Стандартные MTProxy.'}
+            ? 'Проверенные прокси, работающие в "Белых Списках".' 
+            : 'Стандартные рабочие MTProxy.'}
     </p>
 
     <div class="card__count">Доступно: <strong>{list.length}</strong></div>
 
     <div class="card__actions">
-        <!-- Добавлен класс btn--success, если скопировано -->
-        <button class="btn btn--primary {copiedAll ? 'btn--success' : ''}" onclick={handleCopyAll}>
+        <button 
+            class="btn btn--primary {copiedAll ? 'btn--success' : ''}" 
+            onclick={handleCopyAll}
+            disabled={list.length === 0}
+        >
             <FontAwesomeIcon icon={copiedAll ? faCheck : faCopy} />
             {copiedAll ? 'Готово' : 'Весь файл'}
         </button>
-        <!-- Добавлен класс btn--success, если скопировано -->
-        <button class="btn btn--secondary {copiedRandom ? 'btn--success' : ''}" onclick={handleCopyRandom}>
+        <button 
+            class="btn btn--secondary {copiedRandom ? 'btn--success' : ''}" 
+            onclick={handleCopyRandom}
+            disabled={list.length === 0}
+        >
             <FontAwesomeIcon icon={copiedRandom ? faCheck : faShuffle} />
             {copiedRandom ? 'Готово' : '10 случайных'}
         </button>
@@ -70,95 +83,20 @@
 </div>
 
 <style>
-    .card {
-        background: color-mix(in srgb, var(--surface-color), transparent 50%);
-        backdrop-filter: blur(12px);
-        border: 1px solid color-mix(in srgb, var(--text-color), transparent 90%);
-        border-radius: 24px;
-        padding: 24px;
-        transition: transform 0.3s ease, border-color 0.3s;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        border-color: color-mix(in srgb, var(--accent), transparent 50%);
-    }
-
-    .card__header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 16px;
-    }
-
-    .card__icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-    }
-
-    .card__title {
-        margin: 0;
-        font-size: 1.2rem;
-    }
-
-    .card__badge {
-        font-size: 0.7rem;
-        font-weight: 800;
-        padding: 2px 8px;
-        border-radius: 6px;
-        text-transform: uppercase;
-        color: white;
-    }
-
-    .card__desc {
-        font-size: 0.9rem;
-        opacity: 0.7;
-        margin-bottom: 20px;
-        line-height: 1.5;
-    }
-
-    .card__count {
-        font-size: 0.85rem;
-        margin-bottom: 20px;
-    }
-
-    .card__actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    .btn {
-        border: none;
-        padding: 12px;
-        border-radius: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        transition: background-color 0.2s, color 0.2s, border-color 0.2s, filter 0.2s;
-    }
-
+    .card { background: color-mix(in srgb, var(--surface-color), transparent 50%); backdrop-filter: blur(12px); border: 1px solid color-mix(in srgb, var(--text-color), transparent 90%); border-radius: 24px; padding: 24px; transition: transform 0.3s ease, border-color 0.3s; }
+    .card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--accent), transparent 50%); }
+    .card__header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .card__icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .card__title { margin: 0; font-size: 1.2rem; }
+    .card__badge { font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; color: white; }
+    .card__desc { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; line-height: 1.5; }
+    .card__count { font-size: 0.85rem; margin-bottom: 20px; }
+    .card__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn { border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn--primary { background: var(--accent); color: var(--crust-color); }
     .btn--secondary { background: var(--crust-color); color: var(--text-color); border: 1px solid rgba(255,255,255,0.1); }
-    
-    /* Стили для кнопки после копирования */
-    .btn.btn--success {
-        background: var(--green-color) !important; /* Приятный зеленый цвет */
-        color: var(--crust-color) !important;
-        border-color: transparent !important;
-    }
-
-    .btn:hover { filter: brightness(1.2); }
-
-    @media (max-width: 480px) {
-        .card__actions { grid-template-columns: 1fr; }
-    }
+    .btn.btn--success { background: var(--green-color) !important; color: var(--crust-color) !important; border-color: transparent !important; }
+    .btn:hover:not(:disabled) { filter: brightness(1.2); }
+    @media (max-width: 480px) { .card__actions { grid-template-columns: 1fr; } }
 </style>

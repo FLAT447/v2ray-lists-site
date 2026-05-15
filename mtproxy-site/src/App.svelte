@@ -8,30 +8,47 @@
     import { theme } from "./lib/js/theme.svelte.js";
     
     // Импорт иконок для кнопки смены темы
-    import { faSun, faMoon, faBolt } from "@fortawesome/free-solid-svg-icons";
+    import { faSun, faMoon, faBolt, faClock } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { icon } from '@fortawesome/fontawesome-svg-core';
 
     const WL_URL = 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/whitelist.txt';
     const BL_URL = 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/blacklist.txt';
+    const STATS_URL = 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/stats.json';
 
     let whitelist = $state([]);
     let blacklist = $state([]);
+    let stats = $state(null);
     let loading = $state(true);
+
+    // Функция для нормального парсинга списка (убираем пробелы, пустые строки и комментарии)
+    const parseProxyList = (text) => {
+        return text.split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0 && !line.startsWith('#'));
+    };
 
     onMount(async () => {
         // Применяем тему из localStorage при монтировании
         theme.updateBodyClass();
         
         try {
-            const [wlRes, blRes] = await Promise.all([fetch(WL_URL), fetch(BL_URL)]);
+            // Запрашиваем все данные параллельно для скорости
+            const [wlRes, blRes, statsRes] = await Promise.all([
+                fetch(WL_URL), 
+                fetch(BL_URL),
+                fetch(STATS_URL)
+            ]);
+            
             const wlText = await wlRes.text();
             const blText = await blRes.text();
-
-            whitelist = wlText.split('\n').filter(line => line.includes('tg://proxy'));
-            blacklist = blText.split('\n').filter(line => line.includes('tg://proxy'));
+            
+            stats = await statsRes.json();
+            whitelist = parseProxyList(wlText);
+            blacklist = parseProxyList(blText);
+            
         } catch (e) {
-            console.error("Ошибка загрузки:", e);
+            console.error("Ошибка загрузки данных:", e);
         } finally {
             loading = false;
             requestAnimationFrame(() => {
@@ -67,12 +84,14 @@
                 title="WhiteList (WL)" 
                 type="wl" 
                 list={whitelist} 
+                count={stats?.files?.mtproto?.white_count}
                 delay="0.2s" 
             />
             <ProxyCard 
                 title="BlackList (BL)" 
                 type="bl" 
                 list={blacklist} 
+                count={stats?.files?.mtproto?.black_count}
                 delay="0.3s" 
             />
         </div>
@@ -109,15 +128,39 @@
     }
 
     .hero h1 { 
-        font-size: 3.5rem; 
+        font-size: 3.5rem;
         margin-bottom: 10px; 
     }
     
+    .hero p {
+        margin-bottom: 15px;
+        color: var(--text-color);
+        opacity: 0.8;
+    }
+
     .gradient-text {
         background: linear-gradient(60deg, var(--blue-color), var(--saphire-color));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+    }
+
+    .stats-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: color-mix(in srgb, var(--surface-color), transparent 30%);
+        border: 1px solid color-mix(in srgb, var(--blue-color), transparent 70%);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        backdrop-filter: blur(5px);
+    }
+    
+    .stats-badge span {
+        font-weight: bold;
+        color: var(--blue-color);
     }
 
     .proxy-grid {
