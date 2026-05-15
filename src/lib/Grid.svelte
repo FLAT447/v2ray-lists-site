@@ -47,18 +47,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         width: 100%;
         box-sizing: border-box;
-        overflow-x: hidden;
     }
 
     .grid__title-container {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         max-width: 800px;
         width: 100%;
-        padding: 0 8px;
         box-sizing: border-box;
     }
 
@@ -97,13 +94,11 @@
 
     .grid__wrapper {
         display: flex;
+        flex-direction: row;
         gap: 24px;
-        max-width: 1300px;
         width: 100%;
-        padding: 0 8px;
+        max-width: 1300px;
         box-sizing: border-box;
-        justify-content: center;
-        flex-wrap: nowrap;
     }
 
     .grid__container {
@@ -115,37 +110,17 @@
         padding: 40px 30px;
         flex: 1 1 0;
         min-width: 0;
-        max-width: 380px;
+        box-sizing: border-box;
         transition: transform 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease;
-    }
-
-    @media (max-width: 1024px) {
-        .grid__title-container h1 {
-            font-size: 40px;
-        }
-
-        .grid__title-container p {
-            font-size: 16px;
-        }
-
-        .grid__container {
-            padding: 32px 24px;
-            max-width: 320px;
-        }
-
-        .grid__wrapper {
-            gap: 16px;
-        }
     }
 
     @media (max-width: 768px) {
         .grid {
-            padding: 20px 0;
+            padding: 20px 12px;
         }
 
         .grid__title-container {
             margin-bottom: 24px;
-            padding: 0 16px;
         }
 
         .grid__title-container h1 {
@@ -157,48 +132,30 @@
         }
 
         .grid__wrapper {
-            flex-direction: column; 
-            align-items: stretch;
+            flex-direction: column;
             gap: 16px;
-            padding: 0 12px;
         }
 
         .grid__container {
             width: 100%;
-            max-width: 100%;
-            flex: 1;
+            flex: none;
             padding: 28px 20px;
-        }
-
-        .grid__container h3 {
-            font-size: 18px;
-        }
-
-        .grid__container p {
-            font-size: 13px;
         }
     }
 
     @media (max-width: 480px) {
         .grid {
-            padding: 16px 0;
-        }
-
-        .grid__title-container {
-            padding: 0 12px;
+            padding: 16px 8px;
         }
 
         .grid__title-container h1 {
-            font-size: 28px;
+            font-size: 26px;
+            gap: 8px;
         }
 
         .grid__title-container p {
             font-size: 13px;
             line-height: 1.5;
-        }
-
-        .grid__wrapper {
-            padding: 0 10px;
         }
 
         .grid__container {
