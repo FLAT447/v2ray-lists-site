@@ -20,14 +20,122 @@
         faLinux
     } from "@fortawesome/free-brands-svg-icons";
 
-    const platforms = [
+    // Жёсткие ссылки (fallback если API недоступен)
+    const FALLBACK_URLS = {
+        'v2rayNG': 'https://github.com/2dust/v2rayNG/releases/download/2.1.7/v2rayNG_2.1.7-fdroid_universal.apk',
+        'Throne-win10': 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-windows64-installer.exe',
+        'Throne-win7': 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-windowslegacy64.zip',
+        'Throne-linux': 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-linux-amd64.zip',
+        'Hiddify': 'https://github.com/hiddify/hiddify-app/releases/download/latest/Hiddify-MacOS.dmg'
+    };
+
+    // GitHub API endpoints для получения последних релизов
+    const GITHUB_REPOS = {
+        'v2rayNG': { owner: '2dust', repo: 'v2rayNG', asset: 'v2rayNG_.*-fdroid_universal.apk' },
+        'Throne': { owner: 'throneproj', repo: 'Throne', assets: { win10: 'windows64-installer.exe', win7: 'windowslegacy64.zip', linux: 'linux-amd64.zip' } },
+        'Hiddify': { owner: 'hiddify', repo: 'hiddify-app', asset: 'Hiddify-MacOS.dmg' }
+    };
+
+    // Функция получения последнего релиза с GitHub API
+    async function fetchLatestRelease(owner, repo) {
+        try {
+            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, {
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+            
+            if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+            
+            const data = await response.json();
+            return {
+                tag_name: data.tag_name,
+                assets: data.assets || [],
+                published_at: data.published_at
+            };
+        } catch (error) {
+            console.warn(`Failed to fetch release for ${owner}/${repo}:`, error);
+            return null;
+        }
+    }
+
+    // Функция поиска нужного asset по шаблону
+    function findAsset(assets, pattern) {
+        const regex = new RegExp(pattern, 'i');
+        return assets.find(asset => regex.test(asset.name));
+    }
+
+    // Функция обновления ссылок для v2rayNG
+    async function updateV2rayNGUrl() {
+        const release = await fetchLatestRelease('2dust', 'v2rayNG');
+        if (release?.assets) {
+            const asset = findAsset(release.assets, 'fdroid_universal.apk');
+            if (asset?.browser_download_url) {
+                return {
+                    url: asset.browser_download_url,
+                    version: release.tag_name
+                };
+            }
+        }
+        return {
+            url: FALLBACK_URLS['v2rayNG'],
+            version: 'fallback'
+        };
+    }
+
+    // Функция обновления ссылок для Throne
+    async function updateThroneUrls() {
+        const release = await fetchLatestRelease('throneproj', 'Throne');
+        const urls = {
+            win10: FALLBACK_URLS['Throne-win10'],
+            win7: FALLBACK_URLS['Throne-win7'],
+            linux: FALLBACK_URLS['Throne-linux'],
+            version: 'fallback'
+        };
+
+        if (release?.assets) {
+            const win10 = findAsset(release.assets, 'windows64-installer.exe');
+            if (win10?.browser_download_url) urls.win10 = win10.browser_download_url;
+
+            const win7 = findAsset(release.assets, 'windowslegacy64.zip');
+            if (win7?.browser_download_url) urls.win7 = win7.browser_download_url;
+
+            const linux = findAsset(release.assets, 'linux-amd64.zip');
+            if (linux?.browser_download_url) urls.linux = linux.browser_download_url;
+
+            urls.version = release.tag_name;
+        }
+
+        return urls;
+    }
+
+    // Функция обновления ссылок для Hiddify
+    async function updateHiddifyUrl() {
+        const release = await fetchLatestRelease('hiddify', 'hiddify-app');
+        if (release?.assets) {
+            const asset = findAsset(release.assets, 'Hiddify-MacOS.dmg');
+            if (asset?.browser_download_url) {
+                return {
+                    url: asset.browser_download_url,
+                    version: release.tag_name
+                };
+            }
+        }
+        return {
+            url: FALLBACK_URLS['Hiddify'],
+            version: 'fallback'
+        };
+    }
+
+    // Инициализация платформ с обновленными ссылками
+    let platforms = [
         {
             id: 'android',
             icon: faAndroid,
             iconColor: 'var(--green-color)',
             title: 'Android (v2rayNG)',
             downloadUrl:
-                'https://github.com/2dust/v2rayNG/releases/download/2.1.7/v2rayNG_2.1.7-fdroid_universal.apk',
+                FALLBACK_URLS.v2rayNG,
             downloadLabel: 'Скачать v2rayNG 2.1.7',
             steps: [
                 'Скачайте и установите <b>v2rayNG</b>.',
@@ -69,7 +177,7 @@
                 {
                     items: [
                         {
-                            url: 'https://github.com/2dust/v2rayNG/releases/download/2.1.7/v2rayNG_2.1.7-fdroid_universal.apk',
+                            url: FALLBACK_URLS.v2rayNG,
                             label: 'Скачать v2rayNG 2.1.7',
                             icon: faAndroid,
                             variant: 'platform-androidtv'
@@ -113,19 +221,19 @@
                 {
                     items: [
                         {
-                            url: 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-windows64-installer.exe',
+                            url: FALLBACK_URLS["Throne-win10"],
                             label: 'Скачать для Windows 10 / 11',
                             icon: faWindows,
                             variant: 'throne-win10'
                         },
                         {
-                            url: 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-windowslegacy64.zip',
+                            url: FALLBACK_URLS["Throne-win7"],
                             label: 'Скачать для Windows 7 / 8 / 8.1',
                             icon: faWindows,
                             variant: 'throne-win7'
                         },
                         {
-                            url: 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-linux-amd64.zip',
+                            url: FALLBACK_URLS["Throne-linux"],
                             label: 'Скачать для Linux',
                             icon: faLinux,
                             variant: 'throne-linux-x64'
@@ -202,8 +310,7 @@
             icon: faLaptop,
             iconColor: 'var(--mauve-color)',
             title: 'MacOS (Hiddify)',
-            downloadUrl:
-                'https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-MacOS.dmg',
+            downloadUrl: FALLBACK_URLS.Hiddify,
             downloadLabel: 'Скачать Hiddify 4.1.1 (macOS)',
             steps: [
                 'Скачайте и установите <b>Hiddify</b> по ссылке ниже.',
@@ -234,6 +341,7 @@
 
     let openPlatform = $state(null);
     let openProblems = $state({});
+    let urlsLoaded = $state(false);
 
     function togglePlatform(id) {
         openPlatform = openPlatform === id ? null : id;
@@ -244,6 +352,75 @@
     function toggleProblem(platformId, problemIdx) {
         const key = `${platformId}-${problemIdx}`;
         openProblems = { ...openProblems, [key]: !openProblems[key] };
+    }
+
+    // Загрузка актуальных ссылок при инициализации
+    async function loadLatestUrls() {
+        try {
+            const [v2rayNGData, throneData, hiddifyData] = await Promise.all([
+                updateV2rayNGUrl(),
+                updateThroneUrls(),
+                updateHiddifyUrl()
+            ]);
+
+            // Обновление платформ с новыми ссылками
+            platforms = platforms.map(platform => {
+                if (platform.id === 'android') {
+                    return {
+                        ...platform,
+                        downloadUrl: v2rayNGData.url,
+                        downloadLabel: `Скачать v2rayNG ${v2rayNGData.version}`
+                    };
+                } else if (platform.id === 'androidtv' && platform.downloadSections) {
+                    return {
+                        ...platform,
+                        downloadSections: [{
+                            items: [{
+                                ...platform.downloadSections[0].items[0],
+                                url: v2rayNGData.url
+                            }]
+                        }]
+                    };
+                } else if (platform.id === 'windows' && platform.downloadSections) {
+                    return {
+                        ...platform,
+                        downloadSections: [{
+                            items: [
+                                {
+                                    ...platform.downloadSections[0].items[0],
+                                    url: throneData.win10
+                                },
+                                {
+                                    ...platform.downloadSections[0].items[1],
+                                    url: throneData.win7
+                                },
+                                {
+                                    ...platform.downloadSections[0].items[2],
+                                    url: throneData.linux
+                                }
+                            ]
+                        }]
+                    };
+                } else if (platform.id === 'macos') {
+                    return {
+                        ...platform,
+                        downloadUrl: hiddifyData.url,
+                        downloadLabel: `Скачать Hiddify ${hiddifyData.version} (macOS)`
+                    };
+                }
+                return platform;
+            });
+
+            urlsLoaded = true;
+        } catch (error) {
+            console.error('Error loading URLs:', error);
+            urlsLoaded = true; // Все равно устанавливаем флаг, используются fallback-ссылки
+        }
+    }
+
+    // Инициализация при загрузке компонента
+    if (typeof window !== 'undefined') {
+        loadLatestUrls();
     }
 
     /** В ритме Grid / ConfigCards: плавное раскрытие и закрытие */
@@ -538,7 +715,7 @@
     }
 
     .guides__header:hover .guides__header-badge {
-        transform: scale(1.06);
+        transform: scale(1.1);
     }
 
     .guides__header-badge-icon {
@@ -881,7 +1058,7 @@
 
     .guides__faq-item-trigger:hover .guides__faq-item-trigger-icon {
         color: var(--blue-color);
-        transform: scale(1.05);
+        transform: scale(1.3);
     }
 
     .guides__faq-item-question {
