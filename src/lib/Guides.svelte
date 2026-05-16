@@ -70,7 +70,7 @@
                     items: [
                         {
                             url: 'https://github.com/2dust/v2rayNG/releases/download/2.1.7/v2rayNG_2.1.7-fdroid_universal.apk',
-                            label: 'v2rayNG 2.1.7',
+                            label: 'Скачать v2rayNG 2.1.7',
                             icon: faAndroid,
                             variant: 'platform-androidtv'
                         }
