@@ -5,12 +5,12 @@
     import ProxyCard from "./lib/ProxyCard.svelte";
     import Instructions from "./lib/Instructions.svelte";
     import Contacts from './lib/Contacts.svelte';
+    import VPN from './lib/VPN.svelte';
     import { theme } from "./lib/js/theme.svelte.js";
     
     // Импорт иконок для кнопки смены темы
     import { faSun, faMoon, faBolt, faClock } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { icon } from '@fortawesome/fontawesome-svg-core';
 
     const WL_URL = 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/whitelist.txt';
     const BL_URL = 'https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/blacklist.txt';
@@ -97,6 +97,7 @@
         </div>
     {/if}
 
+    <VPN />
     <Instructions />
 </main>
 
