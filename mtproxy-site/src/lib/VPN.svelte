@@ -202,7 +202,7 @@
 
     @media (max-width: 480px) {
         .vpn {
-            padding: 20px 12px 40px 12px;
+            padding: 20px 0 0 0;
         }
 
         .vpn__container {

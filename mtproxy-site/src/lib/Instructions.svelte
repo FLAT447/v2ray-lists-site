@@ -36,7 +36,7 @@
 
 <style>
     .instructions {
-        margin-top: 40px;
+        margin-top: 30px;
         padding: 32px; /* Настройка внутреннего отступа для сходства с картой  */
         background: color-mix(in srgb, var(--surface-color), transparent 50%);
         backdrop-filter: blur(12px);
