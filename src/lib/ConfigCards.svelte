@@ -63,6 +63,7 @@
                 q === '' ||
                 c.id.toString().includes(q) ||
                 c.url.toLowerCase().includes(q);
+      
             const matchFilter =
                 currentFilter === 'all' || c.type === currentFilter;
             return matchSearch && matchFilter;
@@ -188,7 +189,13 @@
                 {@const fileStat = stats.files[conf.id.toString()]}
                 <div class="card" style="--i: {idx}">
                     <div class="card__header">
-                        <span class="card__id"><FontAwesomeIcon icon={faServer} /> #{conf.id}</span>
+                        <span class="card__id">
+                            <FontAwesomeIcon 
+                                icon={faServer}
+                                class="card__id-icon {conf.type ? `card__id-icon--${conf.type}` : ''}"
+                            />
+                            #{conf.id}
+                        </span>
                         {#if conf.type === 'recommended'}
                             <span class="card__badge card__badge--recommended">
                                 <FontAwesomeIcon icon={faStar} /> Рекомендованный
@@ -200,7 +207,6 @@
                         {/if}
                     </div>
 
-                    
                     <div class="card__url-box">
                         <p class="card__url-text">{conf.url}</p>
                     </div>
@@ -245,7 +251,13 @@
                 {@const fileStat = stats.files[conf.id.toString()]}
                 <div class="card card--qr" style="--i: {idx}">
                     <div class="card__header">
-                        <span class="card__id"><FontAwesomeIcon icon={faServer} /> #{conf.id}</span>
+                        <span class="card__id">
+                            <FontAwesomeIcon 
+                                icon={faServer}
+                                class="card__id-icon {conf.type ? `card__id-icon--${conf.type}` : ''}"
+                            />
+                            #{conf.id}
+                        </span>
                         {#if conf.type === 'recommended'}
                             <span class="card__badge card__badge--recommended">
                                 <FontAwesomeIcon icon={faStar} /> РЕК.
@@ -302,11 +314,11 @@
     }
     @keyframes slideUp {
         from { 
-            opacity: 0; 
+            opacity: 0;
             translate: 0 20px; 
         }
         to { 
-            opacity: 1; 
+            opacity: 1;
             translate: 0 0; 
         }
     }
@@ -339,12 +351,12 @@
 
     @keyframes qrPop {
         from { 
-            opacity: 0; 
+            opacity: 0;
             scale: 0.92; 
             translate: 0 12px; 
         }
         to { 
-            opacity: 1; 
+            opacity: 1;
             scale: 1; 
             translate: 0 0; 
         }
@@ -577,6 +589,33 @@
         font-size: 22px;
         font-weight: 700;
         color: var(--text-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Стилизация контейнера/фона иконки сервера */
+    :global(.card__id-icon) {
+        transition: color 0.5s ease, background-color 0.5s ease;
+        color: var(--blue-color);
+        background-color: color-mix(in srgb, var(--blue-color), transparent 85%);
+        padding: 10px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+    }
+
+    :global(.card__id-icon--recommended) {
+        color: var(--yellow-color) !important;
+        background-color: color-mix(in srgb, var(--yellow-color), transparent 85%) !important;
+    }
+
+    :global(.card__id-icon--sni) {
+        color: var(--mauve-color) !important;
+        background-color: color-mix(in srgb, var(--mauve-color), transparent 85%) !important;
     }
 
     .card__badge {
@@ -642,6 +681,24 @@
         color: var(--text-color);
     }
 
+    @keyframes shimmer-in {
+        0% {
+            background-position: -50% 0;
+        }
+        100% {
+            background-position: 100% 0;
+        }
+    }
+
+    @keyframes shimmer-out {
+        0% {
+            background-position: 100% 0;
+        }
+        100% {
+            background-position: -50% 0;
+        }
+    }
+
     .card__btn {
         background: var(--blue-color);
         color: var(--crust-color);
@@ -655,17 +712,37 @@
         justify-content: center;
         gap: 8px;
         padding: 12px;
-        transition: filter 0.2s, transform 0.1s;
         width: 100%;
+        position: relative;
+        overflow: hidden;
+        transition: background-color 0.5s ease;
     }
 
-    .card__btn:hover:not(:disabled) {
-        filter: brightness(1.1);
-        transform: translateY(-1px);
+    .card__btn::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            30deg,
+            transparent 0%,
+            transparent 40%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 60%,
+            transparent 100%
+        );
+        background-size: 200% 200%;
+        pointer-events: none;
     }
 
-    .card__btn:active:not(:disabled) {
-        transform: translateY(0);
+    .card__btn:hover:not(:disabled)::before {
+        animation: shimmer-in 0.5s ease-in-out forwards;
+    }
+
+    .card__btn:not(:hover)::before {
+        animation: shimmer-out 0.5s ease-in-out forwards;
     }
 
     .card__btn:disabled {
@@ -674,11 +751,11 @@
     }
 
     .card__btn--copied {
-        background: var(--green-color);
+        background-color: var(--green-color);
     }
 
     .card__btn--error {
-        background: var(--red-color);
+        background-color: var(--red-color);
     }
 
     .card__qr {

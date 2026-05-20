@@ -22,10 +22,10 @@
 
     // Жёсткие ссылки (fallback если API недоступен)
     const FALLBACK_URLS = {
-        'v2rayNG': 'https://github.com/2dust/v2rayNG/releases/download/2.1.7/v2rayNG_2.1.7-fdroid_universal.apk',
-        'Throne-win10': 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-windows64-installer.exe',
-        'Throne-win7': 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-windowslegacy64.zip',
-        'Throne-linux': 'https://github.com/throneproj/Throne/releases/download/1.1.2/Throne-1.1.2-linux-amd64.zip',
+        'v2rayNG': 'https://github.com/2dust/v2rayNG/releases/download/2.1.8/v2rayNG_2.1.8-fdroid_universal.apk',
+        'Throne-win10': 'https://github.com/throneproj/Throne/releases/download/1.1.3/Throne-1.1.3-windows64-installer.exe',
+        'Throne-win7': 'https://github.com/throneproj/Throne/releases/download/1.1.3/Throne-1.1.3-windowslegacy64.zip',
+        'Throne-linux': 'https://github.com/throneproj/Throne/releases/download/1.1.3/Throne-1.1.3-linux-amd64.zip',
         'Hiddify': 'https://github.com/hiddify/hiddify-app/releases/download/latest/Hiddify-MacOS.dmg'
     };
 

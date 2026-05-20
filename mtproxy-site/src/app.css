@@ -1,5 +1,6 @@
 :root {
-    --bg-container-color: #05060a;
+    --bg-container-color: #05060a;    
+    --black-color: #45475a;
     --background-color: #1e1e2e;   
     --blue-color: #89b4fa;          
     --red-color: #f38ba8;           
@@ -38,6 +39,15 @@
     --mtproxy-bl-color: rgb(187, 108, 60);
 }
 
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -47,6 +57,7 @@ body {
     overflow-x: hidden;
     opacity: 0;
     transition: opacity 0.6s ease;
+    line-height: 1.5;
 }
 
 body.page-loaded {
@@ -68,3 +79,27 @@ body.page-loaded {
     }
 }
 
+/* Очистка дефолтных стилей для списков */
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Очистка дефолтных стилей для ссылок */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Очистка дефолтных стилей для кнопок */
+button {
+    font-family: inherit;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}

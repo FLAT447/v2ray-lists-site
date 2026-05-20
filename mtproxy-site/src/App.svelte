@@ -6,6 +6,7 @@
     import Instructions from "./lib/Instructions.svelte";
     import Contacts from './lib/Contacts.svelte';
     import VPN from './lib/VPN.svelte';
+    import Header from './lib/Header.svelte';
     import { theme } from "./lib/js/theme.svelte.js";
     
     // Импорт иконок для кнопки смены темы
@@ -60,16 +61,7 @@
 
 <Background />
 
-<div class="theme-controls">
-    <button 
-        class="theme-btn" 
-        onclick={() => theme.toggle()} 
-        aria-label="Переключить тему"
-    >
-        <FontAwesomeIcon icon={theme.current === 'light' ? faMoon : faSun} />
-    </button>
-</div>
-
+<Header />
 <main class="main-container">
     <section class="hero animate-in" style="--delay: 0.1s">
         <h1><FontAwesomeIcon icon={faBolt} style="color: var(--blue-color);"/> V2Ray <span class="gradient-text">Lists</span></h1>
