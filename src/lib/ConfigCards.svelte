@@ -569,6 +569,24 @@
     .card:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+        
+        :global(.card__id-icon--sni) {
+            transform: scale(1.25) rotate(15deg);
+            box-shadow: 0 0 35px rgba(203, 166, 247, 0.9), 0 0 60px rgba(203, 166, 247, 0.6), inset 0 0 20px rgba(203, 166, 247, 0.5) !important;
+            background-color: color-mix(in srgb, var(--mauve-color), transparent 60%) !important;
+        }
+
+        :global(.card__id-icon) {
+            transform: scale(1.25) rotate(15deg);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 50px rgba(59, 130, 246, 0.5), inset 0 0 15px rgba(59, 130, 246, 0.4);
+            background-color: color-mix(in srgb, var(--blue-color), transparent 70%);
+        }
+
+        :global(.card__id-icon--recommended) {
+            transform: scale(1.25) rotate(15deg);
+            box-shadow: 0 0 35px rgba(250, 204, 21, 0.9), 0 0 60px rgba(250, 204, 21, 0.6), inset 0 0 20px rgba(250, 204, 21, 0.5) !important;
+            background-color: color-mix(in srgb, var(--yellow-color), transparent 60%) !important;
+        }
     }
 
     .card--qr {
@@ -596,7 +614,7 @@
 
     /* Стилизация контейнера/фона иконки сервера */
     :global(.card__id-icon) {
-        transition: color 0.5s ease, background-color 0.5s ease;
+        transition: color 0.8s ease, background-color 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.8s ease;
         color: var(--blue-color);
         background-color: color-mix(in srgb, var(--blue-color), transparent 85%);
         padding: 10px;
@@ -606,6 +624,7 @@
         justify-content: center;
         width: 20px;
         height: 20px;
+        cursor: pointer;
     }
 
     :global(.card__id-icon--recommended) {

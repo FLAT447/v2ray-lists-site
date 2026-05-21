@@ -161,17 +161,11 @@
         font-weight: 700;
         color: var(--text-color);
         transition: color 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+        background: var(--background-color);
         &:hover {
             filter: drop-shadow(10px 10px 10px var(--surface-color)) brightness(1.1);
+            transform: translateY(-2px);
         }
-    }
-
-    .header__list-github p {
-        transition: 0.3s ease-in-out;
-    }
-
-    .header__list-github:hover p {
-        transform: translateY(-1px);
     }
 
     .header__list-github :global(svg) {
@@ -180,7 +174,6 @@
 
     .header__list-github:hover :global(svg) {
         transform: rotateZ(20deg) scale(1.2);
-        filter: drop-shadow(5px 5px 10px var(--surface-color)) brightness(1.1);
     }
 
     .header__theme-toggle {

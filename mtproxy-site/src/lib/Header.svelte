@@ -5,13 +5,11 @@
     import { theme } from "./js/theme.svelte";
 
     let isAnimating = $state(false);
-
     function handleToggle() {
         if (isAnimating) return;
         isAnimating = true;
         
         theme.toggle();
-
         setTimeout(() => {
             isAnimating = false;
         }, 500);
@@ -25,6 +23,7 @@
                 <img class="header__image" src="./favicon.png" alt="logo" width="30px">
                 <p>V2Ray <span style="background: linear-gradient(60deg, var(--blue-color), var(--saphire-color)); background-clip: text; -webkit-background-clip: text; color: transparent;">Lists</span></p>
             </a>
+            
             <ul class="header__list">
                 <li class="header__list-item">
                     <a href="https://youtube.com/@flatyt447" target="_blank"><FontAwesomeIcon icon={faYoutube} style="color: var(--red-color)" /></a>
@@ -35,7 +34,10 @@
                 <li class="header__list-item">
                     <a href="https://tiktok.com/@flflat447" target="_blank"><FontAwesomeIcon icon={faTiktok} style="color: var(--black-color)" /></a>
                 </li>
-                <li><div class="header__divinder"></div></li>
+                <li class="header__list-item">
+                    <div class="header__divinder"></div>
+                </li>
+     
                 <li class="header__list-item">
                     <a class="header__list-github" href="https://github.com/FLAT447/v2ray-lists" target="_blank">
                         <FontAwesomeIcon icon={faGithub} style="font-size: 22px;" />
@@ -60,7 +62,7 @@
 
 <style>
     .header {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: rgba(255, 255, 255, 0.05);
         -webkit-backdrop-filter: blur(30px);
         backdrop-filter: blur(30px);
@@ -92,13 +94,6 @@
         width: 100%;
     }
 
-    .header__divinder {
-        background: rgba(255, 255, 255, 0.3);
-        width: 1px;
-        height: 22px; 
-        margin: 0 6px;
-    }
-
     .header__nav {
         display: flex;
         justify-content: space-between;
@@ -119,11 +114,11 @@
         text-decoration: none;
         color: var(--text-color);
         white-space: nowrap;
-        
-        &:hover {
-            cursor: pointer;
-            filter: drop-shadow(5px 15px 7px var(--surface-color)) brightness(1.1);
-        }
+    }
+    
+    .header__title:hover {
+        cursor: pointer;
+        filter: drop-shadow(5px 15px 7px var(--surface-color)) brightness(1.1);
     }
 
     .header__title:hover .header__image {
@@ -144,18 +139,26 @@
 
     .header__list {
         display: flex;
-        align-items: center;
+        align-items: center; /* Центрирует элементы по вертикали и фиксирует общую высоту */
         gap: 16px;
         list-style: none;
         margin: 0;
         padding: 0;
-        flex-wrap: wrap;
     }
 
     .header__list-item {
         list-style: none;
         margin: 0;
         padding: 0;
+        display: flex;
+        align-items: center; /* Центрирует иконки и кнопки внутри li */
+    }
+
+    .header__divinder {
+        background: rgba(255, 255, 255, 0.3);
+        width: 1px;
+        height: 22px;
+        margin: 0 6px;
     }
 
     .header__list-item :global(svg) {
@@ -177,29 +180,28 @@
     .header__list-github {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 6px;
         border-radius: 8px;
-        padding: 4px 8px;
-        font-size: 20px;
+        padding: 4px; /* Сбалансированный внутренний отступ */
+        font-size: 18px; /* Оптимальный размер, чтобы кнопка не распирала высоту */
         font-weight: 700;
         color: var(--text-color);
         transition: color 0.3s ease, filter 0.3s ease, transform 0.3s ease;
         text-decoration: none;
         white-space: nowrap;
-        
-        &:hover {
-            filter: drop-shadow(10px 10px 10px var(--surface-color)) brightness(1.1);
-        }
+        background: var(--background-color);
     }
-
+    
     .header__list-github p {
-        transition: 0.3s ease-in-out;
         margin: 0;
         padding: 0;
+        line-height: 1; /* Убирает лишнюю невидимую высоту текстового блока */
     }
 
-    .header__list-github:hover p {
-        transform: translateY(-1px);
+    .header__list-github:hover {
+        filter: drop-shadow(10px 10px 10px var(--surface-color)) brightness(1.1);
+        transform: translateY(-2px);
     }
 
     .header__list-github :global(svg) {
@@ -215,7 +217,7 @@
         background: none;
         border: none;
         cursor: pointer;
-        padding: 5px;
+        padding: 0; /* Убираем лишние паддинги кнопки */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -227,8 +229,8 @@
         align-items: center;
         justify-content: center;
         font-size: 22px;
-        width: 32px; 
-        height: 28px;
+        width: 32px;
+        height: 32px; /* Фиксированная высота вровень с кнопкой GitHub */
     }
 
     .header__theme-toggle :global(svg) {
@@ -249,25 +251,43 @@
         100% { transform: rotate(360deg) scale(1); }
     }
 
+    /* --- Адаптивность --- */
     @media (max-width: 768px) {
         .header {
-            padding: 12px 15px;
+            padding: 10px 15px;
         }
 
-        .header__list-github p { 
-            display: none; 
+        .header__title {
+            font-size: 18px;
         }
-        
+
         .header__title p { 
-            display: none; 
+            display: none;
         }
 
         .header__list {
             gap: 12px;
         }
 
-        .header__title {
-            font-size: 18px;
+        .header__list-github {
+            padding: 6px; /* Превращается в квадратную аккуратную иконку */
+        }
+
+        .header__list-github p { 
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header__list {
+            gap: 8px;
+        }
+        /* Скрываем соцсети на самых маленьких экранах, освобождая место для GitHub и темы */
+        .header__list-item:nth-child(-n+3) {
+            display: none;
+        }
+        .header__divinder {
+            display: none;
         }
     }
 </style>

@@ -417,4 +417,180 @@
     .contacts__toggle:hover {
         transform: scale(1.09);
     }
+
+    /* Адаптивность для мобильных устройств */
+    @media (max-width: 768px) {
+        .contacts {
+            bottom: 16px;
+            right: 16px;
+            gap: 12px;
+        }
+
+        .contacts__modal {
+            width: min(100vw - 32px, 350px);
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 16px;
+            border-radius: 20px;
+        }
+
+        .contacts__title {
+            font-size: 1rem;
+        }
+
+        .contacts__subtitle {
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .contacts__item {
+            padding: 10px 14px;
+            border-radius: 14px;
+            gap: 8px;
+        }
+
+        .contacts__item:active {
+            background-color: rgba(128, 128, 128, 0.2);
+            transform: scale(0.98);
+        }
+
+        .contacts__icon-circle {
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .contacts__item-title {
+            font-size: 0.9rem;
+        }
+
+        .contacts__item-desc {
+            font-size: 0.7rem;
+        }
+
+        .contacts__toggle {
+            width: 56px;
+            height: 56px;
+            font-size: 22px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .contacts__toggle:active {
+            transform: scale(0.95);
+        }
+
+        .contacts__chevron {
+            font-size: 0.7rem;
+        }
+
+        .contacts__back-label {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .contacts {
+            bottom: 12px;
+            right: 12px;
+        }
+
+        .contacts__modal {
+            width: calc(100vw - 24px);
+            border-radius: 18px;
+            padding: 14px;
+        }
+
+        .contacts__header {
+            margin-bottom: 4px;
+        }
+
+        .contacts__title {
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .contacts__subtitle {
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+
+        .contacts__body {
+            gap: 6px;
+        }
+
+        .contacts__item {
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .contacts__item-content {
+            gap: 10px;
+        }
+
+        .contacts__icon-circle {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .contacts__item-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .contacts__item-desc {
+            font-size: 0.65rem;
+        }
+
+        .contacts__toggle {
+            width: 52px;
+            height: 52px;
+            font-size: 20px;
+            bottom: 10px;
+            right: 10px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .contacts__title {
+            font-size: 0.9rem;
+        }
+
+        .contacts__subtitle {
+            font-size: 0.75rem;
+        }
+
+        .contacts__icon-circle {
+            width: 30px;
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .contacts__toggle {
+            width: 48px;
+            height: 48px;
+            font-size: 18px;
+        }
+    }
+
+    /* Отключение анимации наведения на сенсорных устройствах */
+    @media (hover: none) and (pointer: coarse) {
+        .contacts__item:hover {
+            background-color: rgba(128, 128, 128, 0.1);
+            transform: none;
+            border-color: rgba(128, 128, 128, 0.1);
+        }
+
+        .contacts__item:hover .contacts__icon-circle {
+            transform: none;
+        }
+
+        .contacts__toggle:hover {
+            transform: scale(1);
+        }
+    }
 </style>

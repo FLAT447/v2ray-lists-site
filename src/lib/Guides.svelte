@@ -136,7 +136,7 @@
             title: 'Android (v2rayNG)',
             downloadUrl:
                 FALLBACK_URLS.v2rayNG,
-            downloadLabel: 'Скачать v2rayNG 2.1.7',
+            downloadLabel: 'Скачать v2rayNG',
             steps: [
                 'Скачайте и установите <b>v2rayNG</b>.',
                 'Скопируйте в буфер обмена ссылку на конфиг из списка выше.',
@@ -178,8 +178,8 @@
                     items: [
                         {
                             url: FALLBACK_URLS.v2rayNG,
-                            label: 'Скачать v2rayNG 2.1.7',
-                            icon: faAndroid,
+                            label: 'Скачать v2rayNG',
+                            icon: faDownload,
                             variant: 'platform-androidtv'
                         }
                     ]
@@ -311,7 +311,7 @@
             iconColor: 'var(--mauve-color)',
             title: 'MacOS (Hiddify)',
             downloadUrl: FALLBACK_URLS.Hiddify,
-            downloadLabel: 'Скачать Hiddify 4.1.1 (macOS)',
+            downloadLabel: 'Скачать Hiddify (macOS)',
             steps: [
                 'Скачайте и установите <b>Hiddify</b> по ссылке ниже.',
                 'Нажмите <b>«Новый профиль»</b>.',
