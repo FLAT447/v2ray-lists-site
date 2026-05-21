@@ -512,21 +512,22 @@
     }
 
     .configs__filter--all.configs__filter--active {
-        background: color-mix(in srgb, var(--blue-color), transparent 70%);
+        /* background: color-mix(in srgb, var(--blue-color), transparent 70%); */
+        background: var(--blue-color);
         border-color: var(--blue-color);
-        color: var(--blue-color);
+        color: var(--mtproxy-wl-color);
     }
 
     .configs__filter--recommended.configs__filter--active {
-        background: color-mix(in srgb, var(--yellow-color), transparent 70%);
+        background: var(--yellow-color);
         border-color: var(--yellow-color);
-        color: var(--yellow-color);
+        color: var(--recommended-color);
     }
 
     .configs__filter--sni.configs__filter--active {
-        background: color-mix(in srgb, var(--mauve-color), transparent 70%);
+        background: var(--mauve-color);
         border-color: var(--mauve-color);
-        color: var(--mauve-color);
+        color: var(--sni-color);
     }
 
     .configs__grid {
