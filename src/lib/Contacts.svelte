@@ -279,10 +279,10 @@
         border-color: color-mix(in srgb, var(--green-color), transparent 30%);
     }
 
-    .contacts__ripple-ring:nth-child(2) {
+    .contacts__ripple-ring:nth-child(1) {
         animation-delay: -0.6s;
     }
-    .contacts__ripple-ring:nth-child(3) {
+    .contacts__ripple-ring:nth-child(1) {
         animation-delay: -1.2s;
     }
 

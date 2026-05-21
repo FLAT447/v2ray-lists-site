@@ -219,7 +219,7 @@
         justify-content: center;
         border-radius: 12px;
         margin-bottom: 24px;
-        transition: transform 0.5s ease;
+        transition: transform 0.5s, box-shadow 0.4s;
     }
 
     .grid__container :global(svg) {
@@ -227,15 +227,18 @@
     }
 
     .grid__container.blue:hover {
-        box-shadow: 0 16px 25px color-mix(in srgb, var(--blue-color), transparent 60%);
+        box-shadow: 0 16px 25px var(--blue-color);
+        /* box-shadow: 0 16px 25px color-mix(in srgb, var(--blue-color), transparent 60%); */
     }
 
     .grid__container.purple:hover {
-        box-shadow: 0 16px 25px color-mix(in srgb, var(--mauve-color), transparent 60%);
+        box-shadow: 0 16px 25px var(--mauve-color);
+        /* box-shadow: 0 16px 25px color-mix(in srgb, var(--mauve-color), transparent 60%); */
     }
 
     .grid__container.orange:hover {
-        box-shadow: 0 16px 25px color-mix(in srgb, var(--peach-color), transparent 60%);
+        box-shadow: 0 16px 25px var(--peach-color);
+        /* box-shadow: 0 16px 25px color-mix(in srgb, var(--peach-color), transparent 60%); */
     }
 
     .blue .header__icon-wrapper { 
@@ -245,7 +248,7 @@
 
     .purple .header__icon-wrapper { 
         background-color: color-mix(in srgb, var(--mauve-color), transparent 80%);
-        color: var(--mauve-color);       
+        color: var(--mauve-color);     
     }
 
     .orange .header__icon-wrapper { 
@@ -254,7 +257,19 @@
     }
 
     .grid__container:hover .header__icon-wrapper {
-        transform: scale(1.2) rotate(-5deg);
+        transform: scale(1.25) rotate(15deg);
+    }
+
+    .grid__container.blue:hover .header__icon-wrapper {
+        box-shadow: 0 0 30px rgba(137, 180, 250, 0.8), 0 0 50px rgba(137, 180, 250, 0.5), inset 0 0 15px rgba(137, 180, 250, 0.4);
+    }
+
+    .grid__container.purple:hover .header__icon-wrapper {
+        box-shadow: 0 0 35px rgba(203, 166, 247, 0.9), 0 0 60px rgba(203, 166, 247, 0.6), inset 0 0 20px rgba(203, 166, 247, 0.5);
+    }
+
+    .grid__container.orange:hover .header__icon-wrapper {
+        box-shadow: 0 0 35px rgba(250, 179, 135, 0.9), 0 0 60px rgba(250, 179, 135, 0.714), inset 0 0 20px rgba(250, 179, 135, 0.5);    
     }
 
     .grid__container h3 {
