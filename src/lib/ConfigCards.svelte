@@ -535,7 +535,7 @@
         gap: 22px;
         max-width: 1300px;
         margin: 0 auto 60px auto;
-        padding: 0 20px;
+        padding: 0 10px;
     }
 
     .configs__grid--qr {
@@ -569,7 +569,7 @@
     .card:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-        
+
         :global(.card__id-icon--sni) {
             transform: scale(1.25) rotate(15deg);
             box-shadow: 0 0 35px rgba(203, 166, 247, 0.9), 0 0 60px rgba(203, 166, 247, 0.6), inset 0 0 20px rgba(203, 166, 247, 0.5) !important;
@@ -624,7 +624,6 @@
         justify-content: center;
         width: 20px;
         height: 20px;
-        cursor: pointer;
     }
 
     :global(.card__id-icon--recommended) {
