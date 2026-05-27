@@ -5,12 +5,17 @@
         faFileImport, 
         faBolt
      } from "@fortawesome/free-solid-svg-icons"; 
+     import { i18n } from "./js/i18n.svelte";
 </script>
 
 <div class="grid">
     <div class="grid__title-container animate-in" style="--delay: 0.15s">
-        <h1><FontAwesomeIcon icon={faBolt} /> V2Ray Lists</h1> 
-        <p>Бесплатные конфигурации <strong>Hysteria2</strong>, <strong>ShadowSocks</strong>, <strong>TUIC</strong>, <strong>VLESS</strong>, <strong>VMess</strong>, <strong>Trojan</strong>, <strong>Reality</strong><br>Обновления каждый час</p>
+        <h1><FontAwesomeIcon icon={faBolt} /> {i18n.t('grid.title')}</h1> 
+        <p>
+            {i18n.t('grid.desc_1')}
+            <strong>Hysteria2</strong>, <strong>ShadowSocks</strong>, <strong>TUIC</strong>, <strong>VLESS</strong>, <strong>VMess</strong>, <strong>Trojan</strong>, <strong>Reality</strong><br>
+            {i18n.t('grid.desc_2')}
+        </p>
     </div>
 
     <div class="grid__wrapper">
@@ -18,24 +23,24 @@
             <div class="header__icon-wrapper">
                 <FontAwesomeIcon icon={faCopy} /> 
             </div>
-            <h3>1. Скопируйте</h3> 
-            <p>Выберите ссылку из списка ниже и скопируйте её в один клик.</p> 
+            <h3>{i18n.t('grid.step1_title')}</h3> 
+            <p>{i18n.t('grid.step1_desc')}</p> 
         </div>
 
         <div class="grid__container purple animate-in" style="--delay: 0.38s">
             <div class="header__icon-wrapper">
                 <FontAwesomeIcon icon={faFileImport} /> 
             </div>
-            <h3>2. Импортируйте</h3> 
-            <p>Вставьте ссылку в ваш VPN-клиент (v2rayNG, Throne и др.).</p>
+            <h3>{i18n.t('grid.step2_title')}</h3> 
+            <p>{i18n.t('grid.step2_desc')}</p>
         </div>
 
         <div class="grid__container orange animate-in" style="--delay: 0.48s">
             <div class="header__icon-wrapper">
                 <FontAwesomeIcon icon={faBolt} />
             </div>
-            <h3>3. Подключитесь</h3>
-            <p>Найдите сервер с минимальным пингом и жмите <span class="highlight">Start</span>.</p>
+            <h3>{i18n.t('grid.step3_title')}</h3>
+            <p>{i18n.t('grid.step3_desc_1')} <span class="highlight">{i18n.t('grid.step3_desc_2')}</span>.</p>
         </div>
     </div>
 </div>

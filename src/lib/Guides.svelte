@@ -19,6 +19,7 @@
         faWindows,
         faLinux
     } from "@fortawesome/free-brands-svg-icons";
+    import { i18n } from "./js/i18n.svelte";
 
     // Жёсткие ссылки (fallback если API недоступен)
     const FALLBACK_URLS = {
@@ -133,52 +134,40 @@
             id: 'android',
             icon: faAndroid,
             iconColor: 'var(--green-color)',
-            title: 'Android (v2rayNG)',
+            title: i18n.t('guides.android.title'),
             downloadUrl:
                 FALLBACK_URLS.v2rayNG,
-            downloadLabel: 'Скачать v2rayNG',
+            downloadLabel: i18n.t('guides.android.download'),
             steps: [
-                'Скачайте и установите <b>v2rayNG</b>.',
-                'Скопируйте в буфер обмена ссылку на конфиг из списка выше.',
-                'Откройте <b>v2rayNG</b>: справа сверху нажмите <b>+</b> → <b>Импорт из буфера обмена</b>.',
-                'Справа сверху откройте меню <b>три точки</b> → <b>Проверить задержку профилей</b>. После проверки в том же меню выберите <b>Сортировать по результатам теста</b>.',
-                'Выберите сервер с наименьшим пингом и нажмите <b>▶</b> (подключить) в правом нижнем углу.'
+                i18n.t('guides.android.step1'),
+                i18n.t('guides.android.step2'),
+                i18n.t('guides.android.step3'),
+                i18n.t('guides.android.step4'),
+                i18n.t('guides.android.step5')
             ],
             problems: [
-                {
-                    title: 'Нет интернета при подключении',
-                    answer: 'Убедитесь, что включён VPN-режим в настройках. Попробуйте выбрать другой сервер с меньшим пингом.'
-                },
-                {
-                    title: 'Конфиги не появились',
-                    answer: 'Убедитесь, что URL скопирован полностью. Попробуйте вставить его вручную через «Добавить профиль» → «Тип: Subscription».'
-                },
-                {
-                    title: 'Ошибка "Handshake timeout"',
-                    answer: 'Сервер временно недоступен. Выберите другой сервер из списка или повторите проверку задержки.'
-                },
-                {
-                    title: 'Ошибка "Closed pipe"',
-                    answer: 'Перезапустите приложение и попробуйте подключиться снова. Если не помогает — смените конфиг.'
-                }
-            ],
+                { title: i18n.t('guides.android.prob1_title'), answer: i18n.t('guides.android.prob1_ans') },
+                { title: i18n.t('guides.android.prob2_title'), answer: i18n.t('guides.android.prob2_ans') },
+                { title: i18n.t('guides.android.prob3_title'), answer: i18n.t('guides.android.prob3_ans') },
+                { title: i18n.t('guides.android.prob4_title'), answer: i18n.t('guides.android.prob4_ans') }
+            ], 
             updateSteps: [
-                'Нажмите на <b>иконку трёх полосок</b> в <b>левом верхнем углу</b>.',
-                'Выберите вкладку <b>«Группы»</b>.',
-                'Нажмите на <b>иконку кружка со стрелкой</b> в <b>правом верхнем углу</b>.'
+                i18n.t('guides.android.upd1'),
+                i18n.t('guides.android.upd2'),
+                i18n.t('guides.android.upd3')
             ]
         },
         {
             id: 'androidtv',
             icon: faAndroid,
             iconColor: 'var(--teal-color)',
-            title: 'Android TV (v2rayNG)',
+            title: i18n.t('guides.atv.title'),
             downloadSections: [
                 {
                     items: [
                         {
                             url: FALLBACK_URLS.v2rayNG,
-                            label: 'Скачать v2rayNG',
+                            label: i18n.t('guides.android.download'),
                             icon: faDownload,
                             variant: 'platform-androidtv'
                         }
@@ -186,55 +175,46 @@
                 }
             ],
             steps: [
-                'Установите <b>v2rayNG</b> и зайдите в него',
-                'Скачайте один из QR-кодов из списка выше',
-                'В <b>v2rayNG</b> нажмите <b>+</b> справа сверху → <b>Импорт из QR-кода</b>, затем выберите картинку (иконка фото в правом верхнем углу).',
-                'Меню <b>три точки</b> справа сверху → <b>Проверить задержку профилей</b>, затем в том же меню — <b>Сортировать по результатам теста</b>.',
-                'Выберите сервер с наименьшим пингом и нажмите <b>▶</b> в правом нижнем углу.'
-            ],
+                i18n.t('guides.atv.step1'),
+                i18n.t('guides.atv.step2'),
+                i18n.t('guides.atv.step3'),
+                i18n.t('guides.atv.step4'),
+                i18n.t('guides.atv.step5')
+            ],  
             problems: [
-                {
-                    title: 'Приложение не устанавливается',
-                    answer: 'Включите установку из неизвестных источников в настройках безопасности Android TV.'
-                },
-                {
-                    title: 'Не работает пульт в приложении',
-                    answer: 'Используйте физическую мышь или управление через ADB для навигации в приложении.'
-                },
-                {
-                    title: 'QR не сканируется',
-                    answer: 'Убедитесь, что на экране ТВ изображение QR крупное и не смазано. Попробуйте другой файл из папки или импорт по ссылке с другого устройства.'
-                }
+                { title: i18n.t('guides.atv.prob1_title'), answer: i18n.t('guides.atv.prob1_ans') },
+                { title: i18n.t('guides.atv.prob2_title'), answer: i18n.t('guides.atv.prob2_ans') },
+                { title: i18n.t('guides.atv.prob3_title'), answer: i18n.t('guides.atv.prob3_ans') }
             ],
             updateSteps: [
-                'Нажмите на <b>иконку трёх полосок</b> в <b>левом верхнем углу</b>.',
-                'Выберите вкладку <b>«Группы»</b>.',
-                'Нажмите на <b>иконку кружка со стрелкой</b> в <b>правом верхнем углу</b>.'
+                i18n.t('guides.android.upd1'),
+                i18n.t('guides.android.upd2'),
+                i18n.t('guides.android.upd3')
             ]
         },
         {
             id: 'windows',
             icon: faComputer,
             iconColor: 'var(--blue-color)',
-            title: 'Windows / Linux (Throne)',
+            title: i18n.t('guides.win.title'),
             downloadSections: [
                 {
                     items: [
                         {
                             url: FALLBACK_URLS["Throne-win10"],
-                            label: 'Скачать для Windows 10 / 11',
+                            label: i18n.t('guides.win.dl_win10'),
                             icon: faWindows,
                             variant: 'throne-win10'
                         },
                         {
                             url: FALLBACK_URLS["Throne-win7"],
-                            label: 'Скачать для Windows 7 / 8 / 8.1',
+                            label: i18n.t('guides.win.dl_win7'),
                             icon: faWindows,
                             variant: 'throne-win7'
                         },
                         {
                             url: FALLBACK_URLS["Throne-linux"],
-                            label: 'Скачать для Linux',
+                            label: i18n.t('guides.win.dl_linux'),
                             icon: faLinux,
                             variant: 'throne-linux-x64'
                         }
@@ -242,99 +222,78 @@
                 }
             ],
             steps: [
-                'Скачайте <b>Throne</b> для своей системы по ссылкам ниже.',
-                'Скопируйте в буфер обмена ссылку на конфиг из списка выше.',
-                'В Throne: <b>Профили</b> → <b>Добавить профиль из буфера обмена</b>.',
-                'Выделите все конфиги (<b>Ctrl+A</b>). В меню <b>Профили</b> выберите <b>Тест задержки (пинга) выбранного профиля</b> и дождитесь окончания (во вкладке <b>Логи</b> появится <b>«Тест задержек (пинга) завершён!»</b>).',
-                'Нажмите на заголовок колонки <b>«Задержка (пинг)»</b> для сортировки.',
-                'В верхней части окна включите <b>«Режим TUN»</b> (галочка).',
-                'Выберите конфиг с наименьшей задержкой: <b>ЛКМ</b> по строке → в меню — <b>Запустить</b>.'
+                i18n.t('guides.win.step1'),
+                i18n.t('guides.win.step2'),
+                i18n.t('guides.win.step3'),
+                i18n.t('guides.win.step4'),
+                i18n.t('guides.win.step5'),
+                i18n.t('guides.win.step6'),
+                i18n.t('guides.win.step7')
             ],
             warningBlock: {
-                title: 'Ошибка MSVCP / VCRUNTIME?',
-                text: 'Если программа не запускается, удалите старые версии Visual C++ и установите пакет:',
+                title: i18n.t('guides.win.warn_title'),
+                text: i18n.t('guides.win.warn_text'),
                 downloadUrl: 'https://aka.ms/vs/17/release/vc_redist.x64.exe',
-                downloadLabel: 'Скачать Visual C++ Runtimes',
-                note: 'Распакуйте и запустите install_bat.all от имени администратора.'
+                downloadLabel: i18n.t('guides.win.warn_dl'),
+                note: i18n.t('guides.win.warn_note')
             },
             problems: [
-                {
-                    title: 'Антивирус блокирует приложение',
-                    answer: 'Добавьте Throne в исключения антивируса. Это ложное срабатывание — VPN-клиенты часто блокируются антивирусами.'
-                },
-                {
-                    title: 'Нет доступа в интернет после подключения',
-                    answer: 'Убедитесь, что включён «Режим TUN» в верхней части окна Throne. Попробуйте запустить приложение от имени администратора.'
-                },
-                {
-                    title: 'Ошибка "Handshake timeout"',
-                    answer: 'Сервер временно недоступен. Выберите другой профиль из списка.'
-                }
+                { title: i18n.t('guides.win.prob1_title'), answer: i18n.t('guides.win.prob1_ans') },
+                { title: i18n.t('guides.win.prob2_title'), answer: i18n.t('guides.win.prob2_ans') },
+                { title: i18n.t('guides.win.prob3_title'), answer: i18n.t('guides.win.prob3_ans') }
             ],
             updateSteps: [
-                'Нажмите кнопку <b>«Настройки»</b>.',
-                'Выберите <b>«Группы»</b>.',
-                'Нажмите <b>«Обновить все подписки»</b>.'
+                i18n.t('guides.win.upd1'),
+                i18n.t('guides.win.upd2'),
+                i18n.t('guides.win.upd3')
             ]
         },
         {
             id: 'ios',
             icon: faApple,
             iconColor: 'var(--text-color)',
-            title: 'iOS / iPadOS (Streisand)',
+            title: i18n.t('guides.ios.title'),
             downloadUrl: 'https://apps.apple.com/us/app/streisand/id6450534064',
-            downloadLabel: 'Скачать Streisand (App Store)',
+            downloadLabel: i18n.t('guides.ios.download'),
             steps: [
-                'Установите <b>Streisand</b> из App Store.',
-                'Скопируйте в буфер обмена ссылку на конфиг из списка выше.',
-                'Откройте Streisand и нажмите <b>+</b> → <b>Import from Clipboard</b> (добавить из буфера).',
-                'Зажмите добавленную подписку и выберите <b>Latency</b> (задержка).',
-                'Выберите сервер с наименьшей задержкой и нажмите <b>Включить</b> вверху экрана.'
+                i18n.t('guides.ios.step1'),
+                i18n.t('guides.ios.step2'),
+                i18n.t('guides.ios.step3'),
+                i18n.t('guides.ios.step4'),
+                i18n.t('guides.ios.step5')
             ],
             problems: [
-                {
-                    title: 'Streisand недоступен в моём регионе',
-                    answer: 'Смените регион App Store на США или другой поддерживаемый регион через настройки Apple ID.'
-                },
-                {
-                    title: 'Конфиги не загружаются',
-                    answer: 'Убедитесь, что ссылка скопирована полностью без лишних пробелов. Попробуйте удалить подписку и добавить снова из буфера.'
-                }
+                { title: i18n.t('guides.ios.prob1_title'), answer: i18n.t('guides.ios.prob1_ans') },
+                { title: i18n.t('guides.ios.prob2_title'), answer: i18n.t('guides.ios.prob2_ans') }
             ],
             updateSteps: [
-                'Зажмите подписку и выберите <b>Update</b> (обновить).'
+                i18n.t('guides.ios.upd1')
             ]
         },
         {
             id: 'macos',
             icon: faLaptop,
             iconColor: 'var(--mauve-color)',
-            title: 'MacOS (Hiddify)',
+            title: i18n.t('guides.mac.title'),
             downloadUrl: FALLBACK_URLS.Hiddify,
-            downloadLabel: 'Скачать Hiddify (macOS)',
+            downloadLabel: i18n.t('guides.mac.download'),
             steps: [
-                'Скачайте и установите <b>Hiddify</b> по ссылке ниже.',
-                'Нажмите <b>«Новый профиль»</b>.',
-                'Скопируйте в буфер обмена ссылку на конфиг из списка выше.',
-                'Нажмите <b>«Добавить из буфера обмена»</b>.',
-                'Откройте <b>«Настройки»</b> и установите <b>«Вариант маршрутизации»</b> на <b>«Индонезия»</b>.',
-                'В левом верхнем меню нажмите на иконку настроек и выберите <b>«VPN сервис»</b>.',
-                'Включите <b>VPN</b>, нажав на иконку по центру.',
-                'Чтобы сменить сервер: включите <b>VPN</b> и перейдите на вкладку <b>«Прокси»</b>.'
+                i18n.t('guides.mac.step1'),
+                i18n.t('guides.mac.step2'),
+                i18n.t('guides.mac.step3'),
+                i18n.t('guides.mac.step4'),
+                i18n.t('guides.mac.step5'),
+                i18n.t('guides.mac.step6'),
+                i18n.t('guides.mac.step7'),
+                i18n.t('guides.mac.step8')
             ],
             problems: [
-                {
-                    title: 'macOS блокирует запуск приложения',
-                    answer: 'Перейдите в Системные настройки → Конфиденциальность и безопасность → разрешите запуск Hiddify.'
-                },
-                {
-                    title: 'VPN-профиль не устанавливается',
-                    answer: 'Разрешите запрос на установку VPN-конфигурации, нажав «Разрешить» в появившемся диалоге macOS.'
-                }
+                { title: i18n.t('guides.mac.prob1_title'), answer: i18n.t('guides.mac.prob1_ans') },
+                { title: i18n.t('guides.mac.prob2_title'), answer: i18n.t('guides.mac.prob2_ans') }
             ],
             updateSteps: [
-                'Откройте <b>Hiddify</b> и выберите нужный профиль.',
-                'Нажмите <b>слева от названия профиля на иконку обновления</b>.'
+                i18n.t('guides.mac.upd1'),
+                i18n.t('guides.mac.upd2')
             ]
         }
     ];
@@ -342,6 +301,7 @@
     let openPlatform = $state(null);
     let openProblems = $state({});
     let urlsLoaded = $state(false);
+    let currentData = $derived(platforms.find(p => p.id === activePlatform));
 
     function togglePlatform(id) {
         openPlatform = openPlatform === id ? null : id;
@@ -448,7 +408,7 @@
 
 <section class="guides animate-in" style="--delay: 0.65s">
     <h2 class="guides__title">
-        <FontAwesomeIcon icon={faBook} /> Гайды по использованию
+        <FontAwesomeIcon icon={faBook} /> {i18n.t('guides.title')}
     </h2>
 
     <div class="guides__list">
@@ -476,47 +436,37 @@
                 </button>
 
                 {#if isOpen}
-                    <div
-                        class="guides__content"
-                        in:slide={guidePanelSlide}
-                        out:slide={guidePanelSlideOut}
-                    >
-
-                        <!-- Download buttons -->
-                        {#if platform.downloadSections}
-                            <div class="guides__download-layout">
-                                {#each platform.downloadSections as section}
-                                    <div class="guides__download-layout-group">
-                                        <div class="guides__download-layout-title">{section.title}</div>
-                                        <div class="guides__download-layout-links">
-                                            {#each section.items as dl}
-                                                <a
-                                                    class="guides__download guides__download--multi guides__download--{dl.variant}"
-                                                    href={dl.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                >
-                                                    <FontAwesomeIcon icon={dl.icon} />
-                                                    {dl.label}
-                                                </a>
-                                            {/each}
-                                        </div>
-                                    </div>
-                                {/each}
-                            </div>
-                        {:else}
-                            <a
-                                class="guides__download guides__download--platform-{platform.id}"
-                                href={platform.downloadUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                    <div class="guides__content">
+                        {#if platform.downloadLabel}
+                            <a class="guides__download guides__download--platform-{platform.id}"
+                               href={platform.downloadUrl}
+                               target="_blank"
+                               rel="noopener noreferrer"
                             >
                                 <FontAwesomeIcon icon={faDownload} />
                                 {platform.downloadLabel}
                             </a>
                         {/if}
 
-                        <!-- Steps -->
+                        {#if platform.downloadSections}
+                            <div class="guides__download-layout">
+                                {#each platform.downloadSections as section}
+                                    <div class="guides__download-layout-links">
+                                        {#each section.items as item}
+                                            <a class="guides__download guides__download--multi guides__download--{item.variant}" 
+                                               href={item.url} 
+                                               target="_blank" 
+                                               rel="noopener noreferrer"
+                                            >
+                                                <FontAwesomeIcon icon={item.icon} />
+                                                {item.label}
+                                            </a>
+                                        {/each}
+                                    </div>
+                                    {/each}
+                            </div>
+                        {/if}
+
                         <ol class="guides__step-list">
                             {#each platform.steps as step}
                                 <li class="guides__step-list-item">
@@ -525,7 +475,6 @@
                             {/each}
                         </ol>
 
-                        <!-- Warning block (e.g. MSVCP error) -->
                         {#if platform.warningBlock}
                             <div class="guides__warning">
                                 <div class="guides__warning-title">
@@ -548,7 +497,6 @@
                             </div>
                         {/if}
 
-                        <!-- Problems -->
                         <div class="guides__faq-title">
                             <FontAwesomeIcon icon={faTriangleExclamation} />
                             Решение проблем
@@ -587,21 +535,21 @@
                             {/each}
                         </div>
 
-                        <!-- Update hint -->
-                        <div class="guides__refresh">
-                            <div class="guides__refresh-title">
-                                <span class="guides__refresh-icon">
-                                    <FontAwesomeIcon icon={faRotate} />
-                                </span>
-                                Как обновить конфиги?
+                        {#if platform.updateSteps}
+                            <div class="guides__refresh">
+                                <div class="guides__refresh-title">
+                                    <span class="guides__refresh-icon">
+                                        <FontAwesomeIcon icon={faRotate} />
+                                    </span>
+                                    Как обновить конфиги?
+                                </div>
+                                <ol class="guides__refresh-steps">
+                                    {#each platform.updateSteps as step}
+                                        <li>{@html step}</li>
+                                    {/each}
+                                </ol>
                             </div>
-                            <ol class="guides__refresh-steps">
-                                {#each platform.updateSteps as step}
-                                    <li>{@html step}</li>
-                                {/each}
-                            </ol>
-                        </div>
-
+                        {/if}
                     </div>
                 {/if}
             </div>

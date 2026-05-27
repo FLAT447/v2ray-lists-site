@@ -8,6 +8,8 @@
         faQrcode, faMagnifyingGlass, faCircleXmark,
         faClock, faFileLines, faServer
     } from "@fortawesome/free-solid-svg-icons";
+    import { i18n } from './js/i18n.svelte';
+    import { config } from '@fortawesome/fontawesome-svg-core';
 
     const RECOMMENDED = new Set([1, 6, 22, 23, 24, 25]);
     const SNI = new Set([26]);
@@ -125,7 +127,7 @@
                 onclick={() => switchView('list')}
             >
                 <FontAwesomeIcon icon={faList} />
-                <span class="configs__tab-text">Списки</span>
+                <span class="configs__tab-text">{i18n.t('config.tab_lists')}</span>
             </button>
             <button
                 class="configs__tab"
@@ -133,7 +135,7 @@
                 onclick={() => switchView('qr')}
             >
                 <FontAwesomeIcon icon={faQrcode} />
-                <span class="configs__tab-text">QR-коды</span>
+                <span class="configs__tab-text">{i18n.t('config.tab_qr')}</span>
             </button>
         </div>
 
@@ -142,7 +144,7 @@
             <input
                 class="configs__search-input"
                 type="text"
-                placeholder="Поиск по ID или URL..."
+                placeholder={i18n.t('config.search_placeholder')}
                 bind:value={searchQuery}
             />
             {#if searchQuery}
@@ -157,14 +159,14 @@
                 class="configs__filter configs__filter--all"
                 class:configs__filter--active={currentFilter === 'all'}
                 onclick={() => currentFilter = 'all'}
-            >Все</button>
+            >{i18n.t('config.filter_all')}</button>
             <button
                 class="configs__filter configs__filter--recommended"
                 class:configs__filter--active={currentFilter === 'recommended'}
                 onclick={() => currentFilter = 'recommended'}
             >
                 <FontAwesomeIcon icon={faStar} />
-                Рекомендованные
+                {i18n.t('config.filter_recommended')}
             </button>
             <button
                 class="configs__filter configs__filter--sni"
@@ -172,14 +174,14 @@
                 onclick={() => currentFilter = 'sni'}
             >
                 <FontAwesomeIcon icon={faBolt} />
-                Обход SNI/CIDR
+                {i18n.t('config.filter_sni')}
             </button>
         </div>
 
     </div>
 
     {#if filtered.length === 0}
-        <div class="configs__empty">🔍 Ничего не найдено</div>
+        <div class="configs__empty">{i18n.t('config.empty_search')}</div>
 
     {:else if currentView === 'list'}
         <div class="configs__view" class:configs__view--visible={viewVisible}>
@@ -198,11 +200,11 @@
                         </span>
                         {#if conf.type === 'recommended'}
                             <span class="card__badge card__badge--recommended">
-                                <FontAwesomeIcon icon={faStar} /> Рекомендованный
+                                <FontAwesomeIcon icon={faStar} /> {i18n.t('config.badge_recommended')}
                             </span>
                         {:else if conf.type === 'sni'}
                             <span class="card__badge card__badge--sni">
-                                <FontAwesomeIcon icon={faBolt} /> Обход SNI/CIDR
+                                <FontAwesomeIcon icon={faBolt} /> {i18n.t('config.badge_sni')}
                             </span>
                         {/if}
                     </div>
@@ -214,7 +216,7 @@
                     <div class="card__stats-row">
                         <div class="card__stat">
                             <FontAwesomeIcon icon={faFileLines} />
-                            <span>{fileStat?.count ?? '—'} конф.</span>
+                            <span>{fileStat?.count ?? '—'} {i18n.t('config.stat_configs')}</span>
                         </div>
                         <div class="card__stat">
                             <FontAwesomeIcon icon={faClock} />
@@ -230,13 +232,13 @@
                         disabled={state === 'loading'}
                     >
                         {#if state === 'loading'}
-                            <FontAwesomeIcon icon={faSpinner} spin /> Загрузка...
+                            <FontAwesomeIcon icon={faSpinner} spin /> {i18n.t('config.btn_loading')}
                         {:else if state === 'copied'}
-                            <FontAwesomeIcon icon={faCheck} /> Скопировано
+                            <FontAwesomeIcon icon={faCheck} /> {i18n.t('config.btn_copied')}
                         {:else if state === 'error'}
-                            <FontAwesomeIcon icon={faXmark} /> Ошибка
+                            <FontAwesomeIcon icon={faXmark} /> {i18n.t('config.btn_error')}
                         {:else}
-                            <FontAwesomeIcon icon={faCopy} /> Копировать ссылку
+                            <FontAwesomeIcon icon={faCopy} /> {i18n.t('config.btn_copy')}
                         {/if}
                     </button>
                 </div>
@@ -260,11 +262,11 @@
                         </span>
                         {#if conf.type === 'recommended'}
                             <span class="card__badge card__badge--recommended">
-                                <FontAwesomeIcon icon={faStar} /> РЕК.
+                                <FontAwesomeIcon icon={faStar} /> {i18n.t('config.badge_recommended_short')}
                             </span>
                         {:else if conf.type === 'sni'}
                             <span class="card__badge card__badge--sni">
-                                <FontAwesomeIcon icon={faBolt} /> SNI
+                                <FontAwesomeIcon icon={faBolt} /> {i18n.t('config.badge_sni_short')}
                             </span>
                         {/if}
                     </div>
@@ -283,7 +285,7 @@
                         onclick={() => downloadQR(conf.id)}
                         disabled={!qrDataUrls[conf.id]}
                     >
-                        <FontAwesomeIcon icon={faDownload} /> Скачать
+                        <FontAwesomeIcon icon={faDownload} /> {i18n.t('config.btn_download')}
                     </button>
                 </div>
             {/each}

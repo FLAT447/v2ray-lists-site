@@ -1,12 +1,13 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faHeart } from "@fortawesome/free-solid-svg-icons";
+    import { i18n } from "./js/i18n.svelte";
 </script>
 
 <footer class="footer animate-in" style="--delay: 0.6s">
     <div class="footer__wrapper">
         <div class="footer__made-by">
-            Сделано c
+            {i18n.t('footer.made_with')}
             <span class="footer__heart">
                 <FontAwesomeIcon icon={faHeart} />
             </span>
@@ -20,7 +21,7 @@
         </div>
 
         <div class="footer__tech">
-            <span class="footer__tech-text">Написано на</span>
+            <span class="footer__tech-text">{i18n.t('footer.written_on')}</span>
             <div class="footer__badge">
                 <img
                     src="./svelte.svg"
@@ -28,7 +29,7 @@
                     class="footer__icon"
                 />
             </div>
-            <span class="footer__tech-text">с использованием</span>
+            <span class="footer__tech-text">{i18n.t('footer.using')}</span>
             <div class="footer__badge">
                 <img 
                     src="./vite.svg" 
@@ -39,7 +40,7 @@
         </div>
 
         <div class="footer__source">
-            <span class="footer__tech-text">Исходный код сайта:</span>
+            <span class="footer__tech-text">{i18n.t('footer.source_code')}</span>
             <a
                 href="https://github.com/FLAT447/v2ray-lists-site"
                 target="_blank"

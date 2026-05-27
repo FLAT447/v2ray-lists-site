@@ -1,6 +1,7 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faShield, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+    import { i18n } from "./js/i18n.svelte";
 </script>
 
 <section class="mtproxy">
@@ -10,11 +11,11 @@
                 <div class="mtproxy__icon-wrapper">
                     <FontAwesomeIcon icon={faShield} class="mtproxy__icon" />
                 </div>
-                <h2 class="mtproxy__title">MTProxy</h2>
+                <h2 class="mtproxy__title">{i18n.t('mtproxy.title')}</h2>
             </div>
             
             <p class="mtproxy__description">
-                Проект также включает поддержку MTProxy. Это бесплатные конфигурации прокси для <span style="color: var(--blue-color);"><strong>Telegram</strong></span> на основе протокла <span style="color: var(--blue-color);"><strong>MTProto</strong></span>
+                {i18n.t('mtproxy.desc_1')} <span style="color: var(--blue-color);"><strong>Telegram</strong></span> {i18n.t('mtproxy.desc_2')} <span style="color: var(--blue-color);"><strong>MTProto</strong></span>
             </p>
 
             <a 
@@ -23,7 +24,7 @@
                 rel="noopener noreferrer"
                 class="mtproxy__btn"
             >
-                <span>Перейти к MTProxy</span>
+                <span>{i18n.t('mtproxy.btn')}</span>
                 <FontAwesomeIcon icon={faArrowRight} />
             </a>
         </div>

@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { theme } from "./lib/js/theme.svelte.js";
+    import { i18n } from './lib/js/i18n.svelte.js';
     import Header from "./lib/Header.svelte";
     import Background from "./lib/Background.svelte";
     import Grid from './lib/Grid.svelte';
@@ -12,6 +13,7 @@
 
     onMount(() => {
         theme.updateBodyClass();
+        i18n.init();
         // плавная загрузка через body — не создаёт stacking context
         requestAnimationFrame(() => {
             document.body.classList.add('page-loaded');
