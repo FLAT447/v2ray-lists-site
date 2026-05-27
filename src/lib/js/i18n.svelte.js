@@ -610,7 +610,8 @@ export const i18n = {
         }
     },
     t(key) {
-        return translations[currentLocale]?.[key] || key;
+        const lang = this.locale; 
+        return translations[lang]?.[key] || key;    
     },
     init() {
         if (typeof localStorage !== 'undefined') {

@@ -30,113 +30,33 @@
         'Hiddify': 'https://github.com/hiddify/hiddify-app/releases/download/latest/Hiddify-MacOS.dmg'
     };
 
-    // GitHub API endpoints для получения последних релизов
+    // Данные для запросов к API GitHub
     const GITHUB_REPOS = {
         'v2rayNG': { owner: '2dust', repo: 'v2rayNG', asset: 'v2rayNG_.*-fdroid_universal.apk' },
         'Throne': { owner: 'throneproj', repo: 'Throne', assets: { win10: 'windows64-installer.exe', win7: 'windowslegacy64.zip', linux: 'linux-amd64.zip' } },
         'Hiddify': { owner: 'hiddify', repo: 'hiddify-app', asset: 'Hiddify-MacOS.dmg' }
     };
 
-    // Функция получения последнего релиза с GitHub API
-    async function fetchLatestRelease(owner, repo) {
-        try {
-            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, {
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json'
-                }
-            });
-            
-            if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-            
-            const data = await response.json();
-            return {
-                tag_name: data.tag_name,
-                assets: data.assets || [],
-                published_at: data.published_at
-            };
-        } catch (error) {
-            console.warn(`Failed to fetch release for ${owner}/${repo}:`, error);
-            return null;
-        }
-    }
+    // Изолированное реактивное состояние для хранения динамических ссылок с GitHub
+    let githubData = $state({
+        v2rayNG: { url: FALLBACK_URLS.v2rayNG, version: '' },
+        throne: { win10: FALLBACK_URLS['Throne-win10'], win7: FALLBACK_URLS['Throne-win7'], linux: FALLBACK_URLS['Throne-linux'], version: '' },
+        hiddify: { url: FALLBACK_URLS.Hiddify, version: '' }
+    });
 
-    // Функция поиска нужного asset по шаблону
-    function findAsset(assets, pattern) {
-        const regex = new RegExp(pattern, 'i');
-        return assets.find(asset => regex.test(asset.name));
-    }
+    // Вспомогательные состояния для интерфейса аккордеонов
+    let openPlatform = $state(null);
+    let openProblems = $state({});
+    let urlsLoaded = $state(false);
 
-    // Функция обновления ссылок для v2rayNG
-    async function updateV2rayNGUrl() {
-        const release = await fetchLatestRelease('2dust', 'v2rayNG');
-        if (release?.assets) {
-            const asset = findAsset(release.assets, 'fdroid_universal.apk');
-            if (asset?.browser_download_url) {
-                return {
-                    url: asset.browser_download_url,
-                    version: release.tag_name
-                };
-            }
-        }
-        return {
-            url: FALLBACK_URLS['v2rayNG'],
-            version: 'fallback'
-        };
-    }
-
-    // Функция обновления ссылок для Throne
-    async function updateThroneUrls() {
-        const release = await fetchLatestRelease('throneproj', 'Throne');
-        const urls = {
-            win10: FALLBACK_URLS['Throne-win10'],
-            win7: FALLBACK_URLS['Throne-win7'],
-            linux: FALLBACK_URLS['Throne-linux'],
-            version: 'fallback'
-        };
-
-        if (release?.assets) {
-            const win10 = findAsset(release.assets, 'windows64-installer.exe');
-            if (win10?.browser_download_url) urls.win10 = win10.browser_download_url;
-
-            const win7 = findAsset(release.assets, 'windowslegacy64.zip');
-            if (win7?.browser_download_url) urls.win7 = win7.browser_download_url;
-
-            const linux = findAsset(release.assets, 'linux-amd64.zip');
-            if (linux?.browser_download_url) urls.linux = linux.browser_download_url;
-
-            urls.version = release.tag_name;
-        }
-
-        return urls;
-    }
-
-    // Функция обновления ссылок для Hiddify
-    async function updateHiddifyUrl() {
-        const release = await fetchLatestRelease('hiddify', 'hiddify-app');
-        if (release?.assets) {
-            const asset = findAsset(release.assets, 'Hiddify-MacOS.dmg');
-            if (asset?.browser_download_url) {
-                return {
-                    url: asset.browser_download_url,
-                    version: release.tag_name
-                };
-            }
-        }
-        return {
-            url: FALLBACK_URLS['Hiddify'],
-            version: 'fallback'
-        };
-    }
-
-    // Инициализация платформ с обновленными ссылками
-    let platforms = [
+    // Вычисляемый массив данных, который автоматически пересобирается при изменении локали i18n
+    let platforms = $derived([
         {
             id: 'android',
             icon: faAndroid,
             iconColor: 'var(--green-color)',
             title: i18n.t('guides.android.title'),
-            downloadUrl:
-                FALLBACK_URLS.v2rayNG,
+            downloadUrl: githubData.v2rayNG.url,
             downloadLabel: i18n.t('guides.android.download'),
             steps: [
                 i18n.t('guides.android.step1'),
@@ -166,7 +86,7 @@
                 {
                     items: [
                         {
-                            url: FALLBACK_URLS.v2rayNG,
+                            url: githubData.v2rayNG.url,
                             label: i18n.t('guides.android.download'),
                             icon: faDownload,
                             variant: 'platform-androidtv'
@@ -201,19 +121,19 @@
                 {
                     items: [
                         {
-                            url: FALLBACK_URLS["Throne-win10"],
+                            url: githubData.throne.win10,
                             label: i18n.t('guides.win.dl_win10'),
                             icon: faWindows,
                             variant: 'throne-win10'
                         },
                         {
-                            url: FALLBACK_URLS["Throne-win7"],
+                            url: githubData.throne.win7,
                             label: i18n.t('guides.win.dl_win7'),
                             icon: faWindows,
                             variant: 'throne-win7'
                         },
                         {
-                            url: FALLBACK_URLS["Throne-linux"],
+                            url: githubData.throne.linux,
                             label: i18n.t('guides.win.dl_linux'),
                             icon: faLinux,
                             variant: 'throne-linux-x64'
@@ -275,7 +195,7 @@
             icon: faLaptop,
             iconColor: 'var(--mauve-color)',
             title: i18n.t('guides.mac.title'),
-            downloadUrl: FALLBACK_URLS.Hiddify,
+            downloadUrl: githubData.hiddify.url,
             downloadLabel: i18n.t('guides.mac.download'),
             steps: [
                 i18n.t('guides.mac.step1'),
@@ -296,16 +216,10 @@
                 i18n.t('guides.mac.upd2')
             ]
         }
-    ];
-
-    let openPlatform = $state(null);
-    let openProblems = $state({});
-    let urlsLoaded = $state(false);
-    let currentData = $derived(platforms.find(p => p.id === activePlatform));
+    ]);
 
     function togglePlatform(id) {
         openPlatform = openPlatform === id ? null : id;
-        // reset inner accordions when closing
         if (openPlatform !== id) openProblems = {};
     }
 
@@ -314,96 +228,83 @@
         openProblems = { ...openProblems, [key]: !openProblems[key] };
     }
 
-    // Загрузка актуальных ссылок при инициализации
+    // Запрос к GitHub API
+    async function fetchLatestRelease(owner, repo) {
+        try {
+            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, {
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+            if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+            const data = await response.json();
+            return {
+                tag_name: data.tag_name,
+                assets: data.assets || [],
+                published_at: data.published_at
+            };
+        } catch (error) {
+            console.warn(`Failed to fetch release for ${owner}/${repo}:`, error);
+            return null;
+        }
+    }
+
+    function findAsset(assets, pattern) {
+        const regex = new RegExp(pattern, 'i');
+        return assets.find(asset => regex.test(asset.name));
+    }
+
+    // Динамическая загрузка ссылок
     async function loadLatestUrls() {
         try {
-            const [v2rayNGData, throneData, hiddifyData] = await Promise.all([
-                updateV2rayNGUrl(),
-                updateThroneUrls(),
-                updateHiddifyUrl()
+            const [v2rayRelease, throneRelease, hiddifyRelease] = await Promise.all([
+                fetchLatestRelease('2dust', 'v2rayNG'),
+                fetchLatestRelease('throneproj', 'Throne'),
+                fetchLatestRelease('hiddify', 'hiddify-app')
             ]);
 
-            // Обновление платформ с новыми ссылками
-            platforms = platforms.map(platform => {
-                if (platform.id === 'android') {
-                    return {
-                        ...platform,
-                        downloadUrl: v2rayNGData.url,
-                        downloadLabel: `Скачать v2rayNG ${v2rayNGData.version}`
-                    };
-                } else if (platform.id === 'androidtv' && platform.downloadSections) {
-                    return {
-                        ...platform,
-                        downloadSections: [{
-                            items: [{
-                                ...platform.downloadSections[0].items[0],
-                                url: v2rayNGData.url
-                            }]
-                        }]
-                    };
-                } else if (platform.id === 'windows' && platform.downloadSections) {
-                    return {
-                        ...platform,
-                        downloadSections: [{
-                            items: [
-                                {
-                                    ...platform.downloadSections[0].items[0],
-                                    url: throneData.win10
-                                },
-                                {
-                                    ...platform.downloadSections[0].items[1],
-                                    url: throneData.win7
-                                },
-                                {
-                                    ...platform.downloadSections[0].items[2],
-                                    url: throneData.linux
-                                }
-                            ]
-                        }]
-                    };
-                } else if (platform.id === 'macos') {
-                    return {
-                        ...platform,
-                        downloadUrl: hiddifyData.url,
-                        downloadLabel: `Скачать Hiddify ${hiddifyData.version} (macOS)`
-                    };
+            // Обновление v2rayNG
+            if (v2rayRelease?.assets) {
+                const asset = findAsset(v2rayRelease.assets, 'fdroid_universal.apk');
+                if (asset?.browser_download_url) {
+                    githubData.v2rayNG.url = asset.browser_download_url;
+                    githubData.v2rayNG.version = v2rayRelease.tag_name;
                 }
-                return platform;
-            });
+            }
+
+            // Обновление Throne
+            if (throneRelease?.assets) {
+                const win10 = findAsset(throneRelease.assets, 'windows64-installer.exe');
+                if (win10?.browser_download_url) githubData.throne.win10 = win10.browser_download_url;
+
+                const win7 = findAsset(throneRelease.assets, 'windowslegacy64.zip');
+                if (win7?.browser_download_url) githubData.throne.win7 = win7.browser_download_url;
+
+                const linux = findAsset(throneRelease.assets, 'linux-amd64.zip');
+                if (linux?.browser_download_url) githubData.throne.linux = linux.browser_download_url;
+                
+                githubData.throne.version = throneRelease.tag_name;
+            }
+
+            // Обновление Hiddify
+            if (hiddifyRelease?.assets) {
+                const asset = findAsset(hiddifyRelease.assets, 'Hiddify-MacOS.dmg');
+                if (asset?.browser_download_url) {
+                    githubData.hiddify.url = asset.browser_download_url;
+                    githubData.hiddify.version = hiddifyRelease.tag_name;
+                }
+            }
 
             urlsLoaded = true;
         } catch (error) {
             console.error('Error loading URLs:', error);
-            urlsLoaded = true; // Все равно устанавливаем флаг, используются fallback-ссылки
+            urlsLoaded = true;
         }
     }
 
-    // Инициализация при загрузке компонента
     if (typeof window !== 'undefined') {
         loadLatestUrls();
     }
-
-    /** В ритме Grid / ConfigCards: плавное раскрытие и закрытие */
-    const guidePanelSlide = {
-        duration: 520,
-        easing: quintOut,
-        axis: "y",
-    };
-    const guidePanelSlideOut = {
-        duration: 420,
-        easing: quintOut,
-        axis: "y",
-    };
-    const guideProblemSlide = {
-        duration: 440,
-        easing: quintOut,
-        axis: "y",
-    };
-    const guideProblemSlideOut = {
-        duration: 360,
-        easing: quintOut,
-        axis: "y",
-    };
 </script>
 
 <section class="guides animate-in" style="--delay: 0.65s">
@@ -499,7 +400,7 @@
 
                         <div class="guides__faq-title">
                             <FontAwesomeIcon icon={faTriangleExclamation} />
-                            Решение проблем
+                            {i18n.t('guides.problems_title')}
                         </div>
 
                         <div class="guides__faq-list">
@@ -523,11 +424,9 @@
                                         </span>
                                     </button>
                                     {#if problemOpen}
-                                        <div
-                                            class="guides__faq-item-answer"
-                                            in:slide={guideProblemSlide}
-                                            out:slide={guideProblemSlideOut}
-                                        >
+                                    <div class="guides__faq-item-answer" 
+                                    in:slide={{ duration: 200, easing: quintOut }} 
+                                    out:slide={{ duration: 200, easing: quintOut }}>
                                             {problem.answer}
                                         </div>
                                     {/if}
@@ -541,7 +440,7 @@
                                     <span class="guides__refresh-icon">
                                         <FontAwesomeIcon icon={faRotate} />
                                     </span>
-                                    Как обновить конфиги?
+                                    {i18n.t('guides.update_title')}
                                 </div>
                                 <ol class="guides__refresh-steps">
                                     {#each platform.updateSteps as step}
