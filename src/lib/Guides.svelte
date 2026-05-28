@@ -337,8 +337,8 @@
                 </button>
 
                 {#if isOpen}
-                    <div class="guides__content">
-                        {#if platform.downloadLabel}
+                    <div class="guides__content" transition:slide={{easing: quintOut, duration: 250}}>
+                        {#if platform.downloadLabel} 
                             <a class="guides__download guides__download--platform-{platform.id}"
                                href={platform.downloadUrl}
                                target="_blank"
