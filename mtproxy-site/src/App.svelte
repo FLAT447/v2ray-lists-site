@@ -7,6 +7,7 @@
     import Contacts from './lib/Contacts.svelte';
     import VPN from './lib/VPN.svelte';
     import Header from './lib/Header.svelte';
+    import { i18n } from './lib/js/i18n.svelte';
     import { theme } from "./lib/js/theme.svelte.js";
     
     // Импорт иконок для кнопки смены темы
@@ -32,6 +33,7 @@
     onMount(async () => {
         // Применяем тему из localStorage при монтировании
         theme.updateBodyClass();
+        i18n.init();
         
         try {
             // Запрашиваем все данные параллельно для скорости
@@ -65,11 +67,11 @@
 <main class="main-container">
     <section class="hero animate-in" style="--delay: 0.1s">
         <h1><FontAwesomeIcon icon={faBolt} style="color: var(--blue-color);"/> V2Ray <span class="gradient-text">Lists</span></h1>
-        <p>Бесплатные прокси для Telegram. Обновляются автоматически.</p>
+        <p>{i18n.t('app.hero_subtitle')}</p>
     </section>
 
     {#if loading}
-        <div class="loader">Загрузка базы прокси...</div>
+        <div class="loader">{i18n.t('app.loader')}</div>
     {:else}
         <div class="proxy-grid">
             <ProxyCard 

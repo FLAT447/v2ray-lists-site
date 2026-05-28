@@ -1,6 +1,7 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faCopy, faShuffle, faServer, faCheck } from "@fortawesome/free-solid-svg-icons";
+    import { i18n } from "./js/i18n.svelte";
 
     let { title, type, list = [], delay = "0s" } = $props();
 
@@ -49,18 +50,18 @@
         <div>
             <h3 class="card__title">{title}</h3>
             <span class="card__badge" style="background: {accentColor}">
-                {type === 'wl' ? 'WhiteList' : 'Обычный'}
+                {type === 'wl' ? i18n.t('proxy.badge_whitelist') : i18n.t('proxy.badge_normal')}
             </span>
         </div>
     </div>
 
     <p class="card__desc">
         {type === 'wl' 
-            ? 'Прокси, работающие при "Белых Списках".' 
-            : 'Стандартные рабочие MTProxy.'}
+            ? i18n.t('proxy.desc_whitelist') 
+            : i18n.t('proxy.desc_normal')}
     </p>
 
-    <div class="card__count">Доступно: <strong>{list.length}</strong></div>
+    <div class="card__count">{i18n.t('proxy.available')} <strong>{list.length}</strong></div>
 
     <div class="card__actions">
         <button 
@@ -69,7 +70,7 @@
             disabled={list.length === 0}
         >
             <FontAwesomeIcon icon={copiedAll ? faCheck : faCopy} />
-            {copiedAll ? 'Готово' : 'Весь файл'}
+            {copiedAll ? i18n.t('proxy.btn_success') : i18n.t('proxy.btn_all')}
         </button>
         <button 
             class="btn btn--secondary {copiedRandom ? 'btn--success' : ''}" 
@@ -77,7 +78,7 @@
             disabled={list.length === 0}
         >
             <FontAwesomeIcon icon={copiedRandom ? faCheck : faShuffle} />
-            {copiedRandom ? 'Готово' : '10 случайных'}
+            {copiedRandom ? i18n.t('proxy.btn_success') : i18n.t('proxy.btn_random')}
         </button>
     </div>
 </div>

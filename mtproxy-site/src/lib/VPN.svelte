@@ -1,6 +1,7 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faEarth, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+    import { i18n } from "./js/i18n.svelte";
 </script>
 
 <section class="vpn">
@@ -10,11 +11,11 @@
                 <div class="vpn__icon-wrapper">
                     <FontAwesomeIcon icon={faEarth} class="vpn__icon" />
                 </div>
-                <h2 class="vpn__title">VPN</h2>
+                <h2 class="vpn__title">{i18n.t('vpn.title')}</h2>
             </div>
             
             <p class="vpn__description">
-                Проект также включает поддержку бесплатных VPN конфигураций.
+                {i18n.t('vpn.description')}
             </p>
 
             <a 
@@ -23,7 +24,7 @@
                 rel="noopener noreferrer"
                 class="vpn__btn"
             >
-                <span>Перейти к VPN</span>
+                <span>{i18n.t('vpn.button')}</span>
                 <FontAwesomeIcon icon={faArrowRight} />
             </a>
         </div>
@@ -160,7 +161,7 @@
 
     @media (max-width: 768px) {
         .vpn {
-            padding: 30px 0 0 0;
+            padding: 0 0 0 0;
         }
 
         .vpn__container {
@@ -202,7 +203,7 @@
 
     @media (max-width: 480px) {
         .vpn {
-            padding: 20px 0 0 0;
+            padding: 0 0 0 0;
         }
 
         .vpn__container {

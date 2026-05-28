@@ -9,6 +9,7 @@
         faArrowLeft,
     } from "@fortawesome/free-solid-svg-icons";
     import { faTelegram, faVk } from "@fortawesome/free-brands-svg-icons";
+    import { i18n } from "./js/i18n.svelte";
 
     let view = $state("closed");
     let screen = $state("main");
@@ -48,12 +49,12 @@
             role="presentation"
         >
             <div class="contacts__header">
-                <h3 class="contacts__title">Поддержка</h3>
+                <h3 class="contacts__title">{i18n.t('contacts.title')}</h3>
                 <p class="contacts__subtitle">
                     {#if screen === "main"}
-                        Выберите удобный способ связи.
+                        {i18n.t('contacts.subtitle_main')}
                     {:else}
-                        Выберите удобный способ связаться с автором.
+                        {i18n.t('contacts.subtitle_pm')}
                     {/if}
                 </p>
             </div>
@@ -73,10 +74,10 @@
                             </div>
                             <div class="contacts__item-text">
                                 <h4 class="contacts__item-title">
-                                    Чат проекта
+                                    {i18n.t('contacts.chat_title')}
                                 </h4>
                                 <p class="contacts__item-desc">
-                                    Написать в общий чат.
+                                    {i18n.t('contacts.chat_desc')}
                                 </p>
                             </div>
                         </div>
@@ -91,10 +92,10 @@
                             </div>
                             <div class="contacts__item-text">
                                 <h4 class="contacts__item-title">
-                                    Личные сообщения
+                                    {i18n.t('contacts.pm_title')}
                                 </h4>
                                 <p class="contacts__item-desc">
-                                    Связаться с автором напрямую.
+                                    {i18n.t('contacts.pm_desc')}
                                 </p>
                             </div>
                         </div>
@@ -110,7 +111,7 @@
                     >
                         <div class="contacts__item-content">
                             <FontAwesomeIcon icon={faArrowLeft} />
-                            <span class="contacts__back-label">Назад</span>
+                            <span class="contacts__back-label">{i18n.t('contacts.back')}</span>
                         </div>
                     </button>
 
@@ -126,9 +127,9 @@
                                 <FontAwesomeIcon icon={faTelegram} />
                             </div>
                             <div class="contacts__item-text">
-                                <h4 class="contacts__item-title">Telegram</h4>
+                                <h4 class="contacts__item-title">{i18n.t('contacts.tg_title')}</h4>
                                 <p class="contacts__item-desc">
-                                    Личные сообщения в TG.
+                                    {i18n.t('contacts.tg_desc')}
                                 </p>
                             </div>
                         </div>
@@ -146,9 +147,9 @@
                                 <FontAwesomeIcon icon={faVk} />
                             </div>
                             <div class="contacts__item-text">
-                                <h4 class="contacts__item-title">VK</h4>
+                                <h4 class="contacts__item-title">{i18n.t('contacts.vk_title')}</h4>
                                 <p class="contacts__item-desc">
-                                    Личные сообщения в ВК.
+                                    {i18n.t('contacts.vk_desc')}
                                 </p>
                             </div>
                         </div>
@@ -279,10 +280,10 @@
         border-color: color-mix(in srgb, var(--green-color), transparent 30%);
     }
 
-    .contacts__ripple-ring:nth-child(2) {
+    .contacts__ripple-ring:nth-child(1) {
         animation-delay: -0.6s;
     }
-    .contacts__ripple-ring:nth-child(3) {
+    .contacts__ripple-ring:nth-child(1) {
         animation-delay: -1.2s;
     }
 

@@ -1,34 +1,35 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faMobileScreen, faDesktop, faBook } from "@fortawesome/free-solid-svg-icons";
+    import { i18n } from "./js/i18n.svelte";
 </script>
 
 <section class="instructions animate-in" style="--delay: 0.4s">
     <div class="instructions__title">
         <FontAwesomeIcon icon={faBook} />
-        <h2>Как подключить?</h2>
+        <h2>{i18n.t('instructions.title')}</h2>
     </div>
 
     <div class="instructions__grid">
         <div class="guide">
             <div class="guide__header">
-                <h3><FontAwesomeIcon icon={faMobileScreen} style="color: var(--blue-color)" /> На телефоне</h3>
+                <h3><FontAwesomeIcon icon={faMobileScreen} style="color: var(--blue-color)" /> {i18n.t('instructions.phone_title')}</h3>
             </div>
             <ul>
-                <li>Перейдите в <b>Настройки</b> Telegram.</li>
-                <li>Пройдите по пути <b>Данные и память > Настройки прокси</b>.</li>
-                <li>Нажмите <b>Три точки > Импорт из буфера обмена</b>.</li>
+                <li>1. {@html i18n.t('instructions.phone_step1')}</li>
+                <li>2. {@html i18n.t('instructions.phone_step2')}</li>
+                <li>3. {@html i18n.t('instructions.phone_step3')}</li>
             </ul>
         </div>
 
         <div class="guide">
             <div class="guide__header">
-                <h3><FontAwesomeIcon icon={faDesktop} style="color: var(--peach-color)" /> На компьютере</h3>
+                <h3><FontAwesomeIcon icon={faDesktop} style="color: var(--peach-color)" /> {i18n.t('instructions.pc_title')}</h3>
             </div>
             <ul>
-                <li>Перейдите в <b>Настройки</b> Telegram.</li>
-                <li>Пройдите по пути <b>Продвинутые настройки > Тип соединения</b>.</li>
-                <li>Нажмите <b>Три точки > Добавить прокси из буфера обмена</b></li>
+                <li>1. {@html i18n.t('instructions.pc_step1')}</li>
+                <li>2. {@html i18n.t('instructions.pc_step2')}</li>
+                <li>3. {@html i18n.t('instructions.pc_step3')}</li>
             </ul>
         </div>
     </div>
