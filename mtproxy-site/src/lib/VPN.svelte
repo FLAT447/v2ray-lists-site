@@ -206,7 +206,7 @@
         }
 
         .vpn__container {
-            padding: 5px;
+            padding: 20px;
             border-radius: 16px;
         }
 
