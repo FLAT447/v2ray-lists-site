@@ -25,7 +25,6 @@
         isAnimating = true;
         
         theme.toggle();
-
         setTimeout(() => {
             isAnimating = false;
         }, 500);
@@ -59,17 +58,20 @@
                 <img class="header__image" src="https://cdn.jsdelivr.net/gh/FLAT447/v2ray-lists-site@gh-pages/favicon.png" alt="logo" width="30px">
                 <p>V2Ray <span style="background: linear-gradient(60deg, var(--blue-color), var(--saphire-color)); background-clip: text; -webkit-background-clip: text; color: transparent;">Lists</span></p>
             </a>
+   
             <ul class="header__list">
                 <li class="header__list-item">
-                    <a href="https://youtube.com/@flatyt447" target="_blank"><FontAwesomeIcon icon={faYoutube} style="color: var(--red-color)" /></a>
+                    <a href="https://youtube.com/@flatyt447" target="_blank" aria-label="YouTube"><FontAwesomeIcon icon={faYoutube} style="color: var(--red-color)" /></a>
                 </li>
                 <li class="header__list-item">
-                    <a href="https://t.me/flat447" target="_blank"><FontAwesomeIcon icon={faTelegram} style="color: var(--blue-color)" /></a>
+                    <a href="https://t.me/flat447" target="_blank" aria-label="Telegram"><FontAwesomeIcon icon={faTelegram} style="color: var(--blue-color)" /></a>
                 </li>
                 <li class="header__list-item">
-                    <a href="https://tiktok.com/@flflat447" target="_blank"><FontAwesomeIcon icon={faTiktok} style="color: var(--black-color)" /></a>
+                    <a href="https://tiktok.com/@flflat447" target="_blank" aria-label="TikTok"><FontAwesomeIcon icon={faTiktok} style="color: var(--black-color)" /></a>
                 </li>
+             
                 <li><div class="header__divinder"></div></li>
+                
                 <li class="header__list-item">
                     <a class="header__list-github" href="https://github.com/FLAT447/v2ray-lists" target="_blank">
                         <FontAwesomeIcon icon={faGithub} style="font-size: 22px;" />
@@ -136,6 +138,7 @@
         backdrop-filter: blur(30px);
         will-change: backdrop-filter;
         padding-block: 12px;
+        padding-inline: 20px; /* Защитные отступы по бокам для десктопа */
         font-size: 22px;
         position: sticky;
         top: 0;
@@ -157,7 +160,7 @@
     }
 
     .header__wrapper {
-        max-height: 60px;
+        width: 100%;
         margin-inline: auto;
     }
 
@@ -165,7 +168,11 @@
         background: rgba(255, 255, 255, 0.2);
         width: 1px;
         height: 22px; 
-        margin: 0 6px;
+        margin: 0 4px;
+    }
+
+    :global(html[data-theme="light"]) .header__divinder {
+        background: rgba(0, 0, 0, 0.15);
     }
 
     .header__nav {
@@ -174,10 +181,12 @@
         align-items: center;
         max-width: 1300px;
         margin: auto;
+        gap: 16px; /* Не даёт логотипу и списку слипаться */
     }
 
     .header__image {
         transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        flex-shrink: 0;
     }
 
     .header__title {
@@ -185,6 +194,7 @@
         align-items: center;
         font-size: 22px;
         gap: 12px;
+        flex-shrink: 0; /* Логотип не должен сжиматься */
         transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         &:hover {
             cursor: pointer;
@@ -210,9 +220,18 @@
         display: flex;
         align-items: center;
         gap: 12px;
+        padding: 0;
+        margin: 0;
     }
 
     /* Анимации иконок соцсетей */
+    .header__list-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
     .header__list-item :global(svg) {
         transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.5s ease, filter 0.5s ease;
     }
@@ -233,7 +252,7 @@
         color: var(--text-color);
         transition: color 0.5s ease, filter 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.5s ease;
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         &:hover {
             background: rgba(255, 255, 255, 0.08);
             filter: drop-shadow(0 8px 16px var(--surface-color)) brightness(1.1);
@@ -252,8 +271,7 @@
     }
 
     .custom-select__trigger {
-        background: var(--background-color);
-        opacity: 0.9;
+        background: rgba(255, 255, 255, 0.03);
         color: var(--text-color);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
@@ -412,10 +430,42 @@
         text-decoration: none;
     }
 
+    /* --- Адаптивность под мобильные устройства --- */
     @media (max-width: 768px) {
-        .header__list-github p { display: none; }
-        .header__title p { display: none; }
-        .header { padding: 12px 15px; }
-        .custom-select__trigger { font-size: 14px; padding: 4px 8px; }
+        .header { 
+            padding: 10px 12px; /* Чуть уменьшаем вертикальные и горизонтальные отступы самого хедера */
+        }
+        
+        .header__title p { 
+            display: none; 
+        }
+        
+        .header__list-github p { 
+            display: none; 
+        }
+        
+        .header__list-github {
+            padding: 6px; /* Делаем кнопку GitHub компактной круглой/квадратной иконкой */
+        }
+
+        .header__list {
+            gap: 8px; /* Сужаем расстояние между элементами, чтобы всё влезло на экраны шириной от 320px */
+        }
+
+        .custom-select__trigger { 
+            font-size: 14px; 
+            padding: 5px 8px; 
+            gap: 4px;
+        }
+    }
+
+    /* Дополнительный брейкпоинт для ультра-маленьких экранов (до 360px) */
+    @media (max-width: 360px) {
+        .header__list {
+            gap: 6px;
+        }
+        .header__divinder {
+            margin: 0 2px;
+        }
     }
 </style>
