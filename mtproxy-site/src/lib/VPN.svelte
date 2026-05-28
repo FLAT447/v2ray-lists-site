@@ -161,18 +161,17 @@
 
     @media (max-width: 768px) {
         .vpn {
-            padding: 0 0 0 0;
+            padding: 30px 0 0 0;
         }
 
         .vpn__container {
             padding: 30px;
             gap: 20px;
-            flex-direction: column;
             min-height: auto;
         }
 
         .vpn__accent {
-            width: 300px;
+            width: 500px;
             height: 300px;
             right: -100px;
             top: -100px;
@@ -203,11 +202,11 @@
 
     @media (max-width: 480px) {
         .vpn {
-            padding: 0 0 0 0;
+            padding: 20px 0 0 0;
         }
 
         .vpn__container {
-            padding: 20px;
+            padding: 5px;
             border-radius: 16px;
         }
 
