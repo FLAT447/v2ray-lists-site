@@ -28,6 +28,8 @@ export const translations = {
         "contacts.back": "Назад",
         "contacts.tg_desc": "Личные сообщения в TG.",
         "contacts.vk_desc": "Личные сообщения в ВК.",
+        "contacts.vk_title": "VK",
+        "conatcts.tg_title": "Telegram",
 
         // Instructions Component
         "instructions.title": "Как подключить?",
@@ -80,6 +82,8 @@ export const translations = {
         "contacts.back": "Назад",
         "contacts.tg_desc": "Особисті повідомлення в TG.",
         "contacts.vk_desc": "Особисті повідомлення у ВК.",
+        "contacts.vk_title": "VK",
+        "conatcts.tg_title": "Telegram",
 
         // Instructions Component
         "instructions.title": "Як підключити?",
@@ -132,6 +136,8 @@ export const translations = {
         "contacts.back": "Назад",
         "contacts.tg_desc": "Асабістыя паведамленні ў TG.",
         "contacts.vk_desc": "Асабістыя паведамленні ў ВК.",
+        "contacts.vk_title": "VK",
+        "conatcts.tg_title": "Telegram",
 
         // Instructions Component
         "instructions.title": "Як падключыць?",
@@ -184,7 +190,9 @@ export const translations = {
         "contacts.back": "Back",
         "contacts.tg_desc": "Direct messages in TG.",
         "contacts.vk_desc": "Direct messages in VK.",
-
+        "contacts.vk_title": "VK",
+        "conatcts.tg_title": "Telegram",
+        
         // Instructions Component
         "instructions.title": "How to connect?",
         "instructions.phone_title": "On Phone",
