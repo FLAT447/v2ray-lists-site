@@ -16,7 +16,8 @@ export default defineConfig({
         theme_color: '#05060a',
         background_color: '#1e1e2e', 
         display: 'standalone',
-        start_url: '.',
+        start_url: '/v2ray-lists-site/mtproxy/',
+        scope: '/v2ray-lists-site/mtproxy/',
         icons: [
           {
             src: 'pwa-192x192.png',

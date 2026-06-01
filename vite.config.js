@@ -17,6 +17,7 @@ export default defineConfig({
         background_color: '#1e1e2e',
         display: 'standalone',
         start_url: '/v2ray-lists-site/',
+        scope: '/v2ray-lists-site/',
         icons: [
           {
             src: 'pwa-192x192.png',
