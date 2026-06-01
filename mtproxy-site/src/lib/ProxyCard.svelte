@@ -1,15 +1,14 @@
 <script>
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import { faCopy, faShuffle, faServer, faCheck } from "@fortawesome/free-solid-svg-icons";
-    import { i18n } from "./js/i18n.svelte";
+    import { faCopy, faShuffle, faServer, faCheck, faClock } from "@fortawesome/free-solid-svg-icons";
+    import { i18n } from "./js/i18n.svelte"; // если путь до i18n отличается, например '../lib/js/i18n.svelte', поправьте под ваш проект
 
-    let { title, type, list = [], delay = "0s" } = $props();
-
+    // Принимаем count и updatedTime из App.svelte
+    let { title, type, list = [], count = 0, delay = "0s", updatedTime = "" } = $props();
     let copiedAll = $state(false);
     let copiedRandom = $state(false);
 
     const accentColor = type === 'wl' ? 'var(--mtproxy-wl-color)' : 'var(--mtproxy-bl-color)';
-
     async function copyToClipboard(text, stateKey) {
         if (!text) return;
         try {
@@ -28,13 +27,11 @@
 
     function handleCopyAll() {
         if (list.length === 0) return;
-        // Копируем весь актуальный массив [cite: 379]
         copyToClipboard(list.join('\n'), 'all');
     }
 
     function handleCopyRandom() {
         if (list.length === 0) return;
-        // Выбираем случайные 10 из полной копии массива [cite: 380]
         const randomProxies = [...list]
             .sort(() => 0.5 - Math.random())
             .slice(0, 10);
@@ -61,7 +58,17 @@
             : i18n.t('proxy.desc_normal')}
     </p>
 
-    <div class="card__count">{i18n.t('proxy.available')} <strong>{list.length}</strong></div>
+    <div class="card__meta">
+        <div class="card__meta-item">
+            {i18n.t('proxy.available')} <strong>{count ?? list.length}</strong>
+        </div>
+        {#if updatedTime}
+            <div class="card__meta-item card__time">
+                <FontAwesomeIcon icon={faClock} />
+                <span>{updatedTime}</span>
+            </div>
+        {/if}
+    </div>
 
     <div class="card__actions">
         <button 
@@ -91,13 +98,30 @@
     .card__title { margin: 0; font-size: 1.2rem; }
     .card__badge { font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; color: white; }
     .card__desc { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; line-height: 1.5; }
-    .card__count { font-size: 0.85rem; margin-bottom: 20px; }
+    
+    /* Стили горизонтальной строки (Счетчик и Время рядышком) */
+    .card__meta { 
+        display: flex; 
+        align-items: center; 
+        gap: 20px; 
+        font-size: 0.85rem; 
+        margin-bottom: 20px; 
+    }
+    .card__meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px; 
+    }
+    .card__time {
+        font-variant-numeric: tabular-nums;
+    }
+
     .card__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .btn { border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
+    .btn { border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.4s; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn--primary { background: var(--accent); color: var(--crust-color); }
     .btn--secondary { background: var(--crust-color); color: var(--text-color); border: 1px solid rgba(255,255,255,0.1); }
     .btn.btn--success { background: var(--green-color) !important; color: var(--crust-color) !important; border-color: transparent !important; }
-    .btn:hover:not(:disabled) { filter: brightness(1.2); }
+    .btn:hover:not(:disabled) { filter: brightness(1.2); transform: translateY(-5px); }
     @media (max-width: 480px) { .card__actions { grid-template-columns: 1fr; } }
 </style>

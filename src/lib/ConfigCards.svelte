@@ -9,34 +9,51 @@
         faClock, faFileLines, faServer
     } from "@fortawesome/free-solid-svg-icons";
     import { i18n } from './js/i18n.svelte';
-    import { config } from '@fortawesome/fontawesome-svg-core';
 
-    const RECOMMENDED = new Set([1, 6, 22, 23, 24, 25]);
-    const SNI = new Set([26]);
+    const baseConfigs = [
+        { id: 'black_full', name: 'BLACK FULL', type: 'recommended', statKey: 'black' },
+        { id: 'black_lte', name: 'BLACK LTE', type: 'recommended', statKey: 'black_lte' },
+        { id: 'white_lite', name: 'WHITE LITE', type: 'sni', statKey: 'white_lite' },
+        { id: 'white_full', name: 'WHITE FULL', type: 'sni', statKey: 'white_full' }
+    ];
 
-    function getType(id) {
-        if (RECOMMENDED.has(id)) return 'recommended';
-        if (SNI.has(id)) return 'sni';
-        return '';
+    function getUrl(id, format) {
+        const base = 'https://github.com/FLAT447/v2ray-lists/raw/refs/heads/main';
+        const names = {
+            white_lite: 'WHITE_LITE',
+            black_lte: 'BLACK_LTE',
+            white_full: 'WHITE_FULL',
+            black_full: 'BLACK_FULL'
+        };
+        const name = names[id];
+        
+        if (format === 'clash') return `${base}/CLASH/${name}.yaml`;
+        if (format === 'base64') return `${base}/BASE64/${name}.txt`;
+        return `${base}/${name}.txt`;
     }
-
-    function getUrl(id) {
-        return `https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/githubmirror/${id}.txt`;
-    }
-
-    const configs = Array.from({ length: 26 }, (_, i) => {
-        const id = i + 1;
-        return { id, url: getUrl(id), type: getType(id) };
-    });
 
     let currentView = $state('list');
     let currentFilter = $state('all');
     let searchQuery = $state('');
     let copyStates = $state({});
     let qrDataUrls = $state({});
-    let stats = $state({ files: {} });
-
+    let stats = $state({ configs: {} });
     let viewVisible = $state(true);
+
+    let formats = $state({
+        white_lite: 'txt',
+        black_lte: 'txt',
+        white_full: 'txt',
+        black_full: 'txt'
+    });
+
+    const configs = $derived(
+        baseConfigs.map(c => ({
+            ...c,
+            format: formats[c.id],
+            url: getUrl(c.id, formats[c.id])
+        }))
+    );
 
     function switchView(view) {
         if (view === currentView) return;
@@ -63,7 +80,7 @@
             const q = searchQuery.trim().toLowerCase();
             const matchSearch =
                 q === '' ||
-                c.id.toString().includes(q) ||
+                c.name.toLowerCase().includes(q) ||
                 c.url.toLowerCase().includes(q);
       
             const matchFilter =
@@ -80,8 +97,8 @@
                     margin: 1,
                     color: { dark: '#000000', light: '#ffffff' }
                 });
-                const id = configs.find(c => c.url === u)?.id;
-                if (id) qrDataUrls[id] = node.toDataURL('image/png');
+                const found = configs.find(c => c.url === u);
+                if (found) qrDataUrls[found.id] = node.toDataURL('image/png');
             } catch (e) {
                 console.error('QR render error:', e);
             }
@@ -98,7 +115,7 @@
         const dataUrl = qrDataUrls[id];
         if (!dataUrl) return;
         const link = document.createElement('a');
-        link.download = `v2ray-qr-${id}.png`;
+        link.download = `v2ray-qr-${id}-${formats[id]}.png`;
         link.href = dataUrl;
         link.click();
     }
@@ -188,7 +205,7 @@
         <div class="configs__grid">
             {#each filtered as conf, idx (conf.id)}
                 {@const state = copyStates[conf.id] ?? 'idle'}
-                {@const fileStat = stats.files[conf.id.toString()]}
+                {@const fileStat = stats.configs[conf.statKey]}
                 <div class="card" style="--i: {idx}">
                     <div class="card__header">
                         <span class="card__id">
@@ -196,17 +213,26 @@
                                 icon={faServer}
                                 class="card__id-icon {conf.type ? `card__id-icon--${conf.type}` : ''}"
                             />
-                            #{conf.id}
+                            {conf.name}
                         </span>
-                        {#if conf.type === 'recommended'}
-                            <span class="card__badge card__badge--recommended">
-                                <FontAwesomeIcon icon={faStar} /> {i18n.t('config.badge_recommended')}
-                            </span>
-                        {:else if conf.type === 'sni'}
-                            <span class="card__badge card__badge--sni">
-                                <FontAwesomeIcon icon={faBolt} /> {i18n.t('config.badge_sni')}
-                            </span>
-                        {/if}
+                    </div>
+
+                    <div class="card__formats">
+                        <button 
+                            class="card__format-btn" 
+                            class:card__format-btn--active={formats[conf.id] === 'txt'} 
+                            onclick={() => formats[conf.id] = 'txt'}
+                        >TXT</button>
+                        <button 
+                            class="card__format-btn" 
+                            class:card__format-btn--active={formats[conf.id] === 'clash'} 
+                            onclick={() => formats[conf.id] = 'clash'}
+                        >Clash</button>
+                        <button 
+                            class="card__format-btn" 
+                            class:card__format-btn--active={formats[conf.id] === 'base64'} 
+                            onclick={() => formats[conf.id] = 'base64'}
+                        >BASE64</button>
                     </div>
 
                     <div class="card__url-box">
@@ -220,7 +246,7 @@
                         </div>
                         <div class="card__stat">
                             <FontAwesomeIcon icon={faClock} />
-                            <span>{fileStat?.updated?.split()[0] ?? '—'}</span>
+                            <span>{fileStat?.updated ?? '—'}</span>
                         </div>
                     </div>
 
@@ -250,7 +276,7 @@
         <div class="configs__view" class:configs__view--visible={viewVisible}>
         <div class="configs__grid configs__grid--qr">
             {#each filtered as conf, idx (conf.id)}
-                {@const fileStat = stats.files[conf.id.toString()]}
+                {@const fileStat = stats.configs[conf.statKey]}
                 <div class="card card--qr" style="--i: {idx}">
                     <div class="card__header">
                         <span class="card__id">
@@ -258,17 +284,26 @@
                                 icon={faServer}
                                 class="card__id-icon {conf.type ? `card__id-icon--${conf.type}` : ''}"
                             />
-                            #{conf.id}
+                            {conf.name}
                         </span>
-                        {#if conf.type === 'recommended'}
-                            <span class="card__badge card__badge--recommended">
-                                <FontAwesomeIcon icon={faStar} /> {i18n.t('config.badge_recommended_short')}
-                            </span>
-                        {:else if conf.type === 'sni'}
-                            <span class="card__badge card__badge--sni">
-                                <FontAwesomeIcon icon={faBolt} /> {i18n.t('config.badge_sni_short')}
-                            </span>
-                        {/if}
+                    </div>
+
+                    <div class="card__formats" style="width: 100%; box-sizing: border-box;">
+                        <button 
+                            class="card__format-btn" 
+                            class:card__format-btn--active={formats[conf.id] === 'txt'} 
+                            onclick={() => formats[conf.id] = 'txt'}
+                        >TXT</button>
+                        <button 
+                            class="card__format-btn" 
+                            class:card__format-btn--active={formats[conf.id] === 'clash'} 
+                            onclick={() => formats[conf.id] = 'clash'}
+                        >Clash</button>
+                        <button 
+                            class="card__format-btn" 
+                            class:card__format-btn--active={formats[conf.id] === 'base64'} 
+                            onclick={() => formats[conf.id] = 'base64'}
+                        >B64</button>
                     </div>
 
                     <div class="card__qr">
@@ -305,24 +340,12 @@
     }
 
     @keyframes configsAppear {
-        from {
-            opacity: 0;
-            translate: 0 40px;
-        }
-        to {
-            opacity: 1;
-            translate: 0 0;
-        }
+        from { opacity: 0; translate: 0 40px; }
+        to { opacity: 1; translate: 0 0; }
     }
     @keyframes slideUp {
-        from { 
-            opacity: 0;
-            translate: 0 20px; 
-        }
-        to { 
-            opacity: 1;
-            translate: 0 0; 
-        }
+        from { opacity: 0; translate: 0 20px; }
+        to { opacity: 1; translate: 0 0; }
     }
 
     .animate-in {
@@ -352,16 +375,8 @@
     }
 
     @keyframes qrPop {
-        from { 
-            opacity: 0;
-            scale: 0.92; 
-            translate: 0 12px; 
-        }
-        to { 
-            opacity: 1;
-            scale: 1; 
-            translate: 0 0; 
-        }
+        from { opacity: 0; scale: 0.92; translate: 0 12px; }
+        to { opacity: 1; scale: 1; translate: 0 0; }
     }
     .configs__controls {
         max-width: 1300px;
@@ -405,156 +420,55 @@
         white-space: nowrap;
     }
 
-    .configs__tab:hover {
-        opacity: 0.8;
-    }
+    .configs__tab:hover { opacity: 0.8; }
+    .configs__tab--active { background: var(--surface-color); opacity: 1; color: var(--blue-color); }
+    .configs__tab-text { display: inline; }
 
-    .configs__tab--active {
-        background: var(--surface-color);
-        opacity: 1;
-        color: var(--blue-color);
-    }
+    .configs__search { position: relative; flex: 1; min-width: 260px; height: var(--control-height); }
+    .configs__search :global(.configs__search-icon) { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); opacity: 0.4; pointer-events: none; font-size: 14px; }
+    .configs__search-input { width: 100%; height: 100%; box-sizing: border-box; padding: 0 44px 0 42px; background: color-mix(in srgb, var(--crust-color), transparent 20%); border: 1px solid var(--surface-color); border-radius: 14px; color: var(--text-color); outline: none; font-size: 14px; font-family: inherit; transition: border-color 0.2s, background 0.2s; }
+    .configs__search-input::placeholder { color: var(--text-color); opacity: 0.35; }
+    .configs__search-input:focus { border-color: var(--blue-color); background: color-mix(in srgb, var(--crust-color), transparent 5%); }
+    .configs__search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: var(--text-color); opacity: 0.4; cursor: pointer; padding: 4px; display: flex; align-items: center; transition: opacity 0.2s; font-size: 15px; }
+    .configs__search-clear:hover { opacity: 0.9; }
 
-    .configs__tab-text {
-        display: inline;
-    }
+    .configs__filters { display: flex; gap: 8px; height: var(--control-height); flex-shrink: 0; align-items: center; }
+    .configs__filter { height: 100%; box-sizing: border-box; padding: 0 18px; border-radius: 14px; border: 1px solid var(--surface-color); cursor: pointer; font-weight: 600; font-size: 14px; font-family: inherit; display: flex; align-items: center; gap: 7px; white-space: nowrap; transition: background 0.2s, color 0.2s, border-color 0.2s, filter 0.2s; background: color-mix(in srgb, var(--surface-color), transparent 40%); color: color-mix(in srgb, var(--text-color), transparent 20%); }
+    .configs__filter:hover { filter: brightness(1.1); }
+    .configs__filter--all.configs__filter--active { background: var(--blue-color); border-color: var(--blue-color); color: var(--mtproxy-wl-color); }
+    .configs__filter--recommended.configs__filter--active { background: var(--yellow-color); border-color: var(--yellow-color); color: var(--recommended-color); }
+    .configs__filter--sni.configs__filter--active { background: var(--mauve-color); border-color: var(--mauve-color); color: var(--sni-color); }
 
-    .configs__search {
-        position: relative;
+    .configs__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; max-width: 1300px; margin: 0 auto 60px auto; padding: 0 10px; }
+    .configs__grid--qr { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }
+    .configs__empty { text-align: center; padding: 60px 20px; opacity: 0.55; font-size: 18px; color: var(--text-color); }
+
+    .card__formats {
+        display: flex;
+        background: var(--crust-color);
+        padding: 3px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        gap: 2px;
+    }
+    .card__format-btn {
         flex: 1;
-        min-width: 260px;
-        height: var(--control-height);
-    }
-
-    .configs__search :global(.configs__search-icon) {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        opacity: 0.4;
-        pointer-events: none;
-        font-size: 14px;
-    }
-
-    .configs__search-input {
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        padding: 0 44px 0 42px;
-        background: color-mix(in srgb, var(--crust-color), transparent 20%);
-        border: 1px solid var(--surface-color);
-        border-radius: 14px;
-        color: var(--text-color);
-        outline: none;
-        font-size: 14px;
-        font-family: inherit;
-        transition: border-color 0.2s, background 0.2s;
-    }
-
-    .configs__search-input::placeholder {
-        color: var(--text-color);
-        opacity: 0.35;
-    }
-
-    .configs__search-input:focus {
-        border-color: var(--blue-color);
-        background: color-mix(in srgb, var(--crust-color), transparent 5%);
-    }
-
-    .configs__search-clear {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
         background: transparent;
         border: none;
         color: var(--text-color);
-        opacity: 0.4;
-        cursor: pointer;
-        padding: 4px;
-        display: flex;
-        align-items: center;
-        transition: opacity 0.2s;
-        font-size: 15px;
-    }
-
-    .configs__search-clear:hover {
-        opacity: 0.9;
-    }
-
-    .configs__filters {
-        display: flex;
-        gap: 8px;
-        height: var(--control-height);
-        flex-shrink: 0;
-        align-items: center;
-    }
-
-    .configs__filter {
-        height: 100%;
-        box-sizing: border-box;
-        padding: 0 18px;
-        border-radius: 14px;
-        border: 1px solid var(--surface-color);
-        cursor: pointer;
+        padding: 6px 0;
+        font-size: 12px;
         font-weight: 600;
-        font-size: 14px;
-        font-family: inherit;
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        white-space: nowrap;
-        transition: background 0.2s, color 0.2s, border-color 0.2s, filter 0.2s;
-        background: color-mix(in srgb, var(--surface-color), transparent 40%);
-        color: color-mix(in srgb, var(--text-color), transparent 20%);
+        cursor: pointer;
+        border-radius: 7px;
+        opacity: 0.5;
+        transition: background 0.2s, opacity 0.2s, color 0.2s;
     }
-
-    .configs__filter:hover {
-        filter: brightness(1.1);
-    }
-
-    .configs__filter--all.configs__filter--active {
-        /* background: color-mix(in srgb, var(--blue-color), transparent 70%); */
-        background: var(--blue-color);
-        border-color: var(--blue-color);
-        color: var(--mtproxy-wl-color);
-    }
-
-    .configs__filter--recommended.configs__filter--active {
-        background: var(--yellow-color);
-        border-color: var(--yellow-color);
-        color: var(--recommended-color);
-    }
-
-    .configs__filter--sni.configs__filter--active {
-        background: var(--mauve-color);
-        border-color: var(--mauve-color);
-        color: var(--sni-color);
-    }
-
-    .configs__grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 22px;
-        max-width: 1300px;
-        margin: 0 auto 60px auto;
-        padding: 0 10px;
-    }
-
-    .configs__grid--qr {
-        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-        gap: 18px;
-    }
-
-    .configs__empty {
-        text-align: center;
-        padding: 60px 20px;
-        opacity: 0.55;
-        font-size: 18px;
-        color: var(--text-color);
-    }
+    .card__format-btn:hover { opacity: 0.8; }
+    .card__format-btn--active { background: var(--surface-color); color: var(--blue-color); opacity: 1; }
 
     .card {
+        position: relative; /* Добавлено для абсолютного позиционирования бейджа */
         background: color-mix(in srgb, var(--surface-color), transparent 60%);
         -webkit-backdrop-filter: blur(14px);
         backdrop-filter: blur(14px);
@@ -572,42 +486,23 @@
     .card:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-
-        :global(.card__id-icon--sni) {
-            transform: scale(1.25) rotate(15deg);
-            box-shadow: 0 0 35px rgba(203, 166, 247, 0.9), 0 0 60px rgba(203, 166, 247, 0.6), inset 0 0 20px rgba(203, 166, 247, 0.5) !important;
-            background-color: color-mix(in srgb, var(--mauve-color), transparent 60%) !important;
-        }
-
-        :global(.card__id-icon) {
-            transform: scale(1.25) rotate(15deg);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 50px rgba(59, 130, 246, 0.5), inset 0 0 15px rgba(59, 130, 246, 0.4);
-            background-color: color-mix(in srgb, var(--blue-color), transparent 70%);
-        }
-
-        :global(.card__id-icon--recommended) {
-            transform: scale(1.25) rotate(15deg);
-            box-shadow: 0 0 35px rgba(250, 204, 21, 0.9), 0 0 60px rgba(250, 204, 21, 0.6), inset 0 0 20px rgba(250, 204, 21, 0.5) !important;
-            background-color: color-mix(in srgb, var(--yellow-color), transparent 60%) !important;
-        }
     }
+    .card:hover :global(.card__id-icon--sni) { transform: scale(1.25) rotate(15deg); box-shadow: 0 0 35px rgba(203, 166, 247, 0.9), 0 0 60px rgba(203, 166, 247, 0.6), inset 0 0 20px rgba(203, 166, 247, 0.5) !important; background-color: color-mix(in srgb, var(--mauve-color), transparent 60%) !important; }
+    .card:hover :global(.card__id-icon) { transform: scale(1.25) rotate(15deg); box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 50px rgba(59, 130, 246, 0.5), inset 0 0 15px rgba(59, 130, 246, 0.4); background-color: color-mix(in srgb, var(--blue-color), transparent 70%); }
+    .card:hover :global(.card__id-icon--recommended) { transform: scale(1.25) rotate(15deg); box-shadow: 0 0 35px rgba(250, 204, 21, 0.9), 0 0 60px rgba(250, 204, 21, 0.6), inset 0 0 20px rgba(250, 204, 21, 0.5) !important; background-color: color-mix(in srgb, var(--yellow-color), transparent 60%) !important; }
 
-    .card--qr {
-        align-items: center;
-        text-align: center;
-    }
-
+    .card--qr { align-items: center; text-align: center; }
+    
     .card__header {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 8px;
+        flex-direction: column; /* Элементы теперь выстраиваются друг под друга */
+        align-items: flex-start; /* Выравнивание по левому краю */
+        gap: 6px; /* Небольшой аккуратный отступ между именем и бейджем */
         width: 100%;
     }
-
+    
     .card__id {
-        font-size: 22px;
+        font-size: 22px; /* Возвращаем красивый крупный размер */
         font-weight: 700;
         color: var(--text-color);
         display: flex;
@@ -615,238 +510,45 @@
         gap: 8px;
     }
 
-    /* Стилизация контейнера/фона иконки сервера */
-    :global(.card__id-icon) {
-        transition: color 0.8s ease, background-color 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.8s ease;
-        color: var(--blue-color);
-        background-color: color-mix(in srgb, var(--blue-color), transparent 85%);
-        padding: 10px;
-        border-radius: 10px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-    }
+    :global(.card__id-icon) { transition: color 0.8s ease, background-color 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.8s ease; color: var(--blue-color); background-color: color-mix(in srgb, var(--blue-color), transparent 85%); padding: 10px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; }
+    :global(.card__id-icon--recommended) { color: var(--yellow-color) !important; background-color: color-mix(in srgb, var(--yellow-color), transparent 85%) !important; }
+    :global(.card__id-icon--sni) { color: var(--mauve-color) !important; background-color: color-mix(in srgb, var(--mauve-color), transparent 85%) !important; }
 
-    :global(.card__id-icon--recommended) {
-        color: var(--yellow-color) !important;
-        background-color: color-mix(in srgb, var(--yellow-color), transparent 85%) !important;
-    }
+    .card__stats-row { display: flex; gap: 15px; font-size: 13px; opacity: 0.8; color: var(--text-color); }
+    .card__stat { display: flex; align-items: center; gap: 6px; }
+    .card__stats-mini { display: flex; gap: 12px; font-size: 12px; opacity: 0.6; margin-bottom: 4px; }
 
-    :global(.card__id-icon--sni) {
-        color: var(--mauve-color) !important;
-        background-color: color-mix(in srgb, var(--mauve-color), transparent 85%) !important;
-    }
+    .card__url-box { background: var(--crust-color); border-radius: 12px; padding: 12px; flex: 1; width: 100%; box-sizing: border-box; overflow: hidden; }
+    .card__url-text { font-family: monospace; font-size: 11.5px; word-break: break-all; opacity: 0.75; line-height: 1.5; color: var(--text-color); }
 
-    .card__badge {
-        font-size: 10px;
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+    @keyframes shimmer-in { 0% { background-position: -50% 0; } 100% { background-position: 100% 0; } }
+    @keyframes shimmer-out { 0% { background-position: 100% 0; } 100% { background-position: -50% 0; } }
 
-    .card__badge--recommended {
-        background: var(--yellow-color);
-        color: var(--recommended-color);
-    }
+    .card__btn { background: var(--blue-color); color: var(--crust-color); border: none; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; width: 100%; position: relative; overflow: hidden; transition: background-color 0.5s ease; }
+    .card__btn::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(30deg, transparent 0%, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%, transparent 100%); background-size: 200% 200%; pointer-events: none; }
+    .card__btn:hover:not(:disabled)::before { animation: shimmer-in 0.5s ease-in-out forwards; }
+    .card__btn:not(:hover)::before { animation: shimmer-out 0.5s ease-in-out forwards; }
+    .card__btn:disabled { opacity: 0.7; cursor: not-allowed; }
+    .card__btn--copied { background-color: var(--green-color); }
+    .card__btn--error { background-color: var(--red-color); }
 
-    .card__badge--sni {
-        background: var(--mauve-color);
-        color: var(--sni-color);
-    }
-
-    .card__stats-row {
-        display: flex;
-        gap: 15px;
-        font-size: 13px;
-        opacity: 0.8;
-        color: var(--text-color);
-    }
-
-    .card__stat {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .card__stats-mini {
-        display: flex;
-        gap: 12px;
-        font-size: 12px;
-        opacity: 0.6;
-        margin-bottom: 4px;
-    }
-
-    .card__url-box {
-        background: var(--crust-color);
-        border-radius: 12px;
-        padding: 12px;
-        flex: 1;
-        width: 100%;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
-
-    .card__url-text {
-        font-family: monospace;
-        font-size: 11.5px;
-        word-break: break-all;
-        opacity: 0.75;
-        line-height: 1.5;
-        color: var(--text-color);
-    }
-
-    @keyframes shimmer-in {
-        0% {
-            background-position: -50% 0;
-        }
-        100% {
-            background-position: 100% 0;
-        }
-    }
-
-    @keyframes shimmer-out {
-        0% {
-            background-position: 100% 0;
-        }
-        100% {
-            background-position: -50% 0;
-        }
-    }
-
-    .card__btn {
-        background: var(--blue-color);
-        color: var(--crust-color);
-        border: none;
-        border-radius: 12px;
-        font-weight: 700;
-        font-size: 14px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 12px;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        transition: background-color 0.5s ease;
-    }
-
-    .card__btn::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(
-            30deg,
-            transparent 0%,
-            transparent 40%,
-            rgba(255, 255, 255, 0.3) 50%,
-            transparent 60%,
-            transparent 100%
-        );
-        background-size: 200% 200%;
-        pointer-events: none;
-    }
-
-    .card__btn:hover:not(:disabled)::before {
-        animation: shimmer-in 0.5s ease-in-out forwards;
-    }
-
-    .card__btn:not(:hover)::before {
-        animation: shimmer-out 0.5s ease-in-out forwards;
-    }
-
-    .card__btn:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-
-    .card__btn--copied {
-        background-color: var(--green-color);
-    }
-
-    .card__btn--error {
-        background-color: var(--red-color);
-    }
-
-    .card__qr {
-        background: #fff;
-        padding: 10px;
-        border-radius: 14px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-        margin-bottom: 5px;
-    }
-
-    .card__qr-canvas {
-        display: block;
-        width: 150px;
-        height: 150px;
-    }
+    .card__qr { background: #fff; padding: 10px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12); margin-bottom: 5px; }
+    .card__qr-canvas { display: block; width: 150px; height: 150px; }
 
     @media (max-width: 768px) {
-        .configs__controls {
-            gap: 10px;
-            padding: 0 15px;
-        }
-
-        .configs__search {
-            min-width: auto;
-            width: 100%;
-            order: 3;
-        }
-
-        .configs__filters {
-            width: 100%;
-            overflow-x: auto;
-            padding-bottom: 5px;
-            scrollbar-width: none;
-            order: 2;
-        }
-
-        .configs__filters::-webkit-scrollbar {
-            display: none;
-        }
-
-        .configs__tabs {
-            width: 100%;
-            order: 1;
-        }
-
-        .configs__tab {
-            flex: 1;
-            justify-content: center;
-        }
-
-        .configs__grid {
-            padding: 0 15px;
-        }
+        .configs__controls { gap: 10px; padding: 0 15px; }
+        .configs__search { min-width: auto; width: 100%; order: 3; }
+        .configs__filters { width: 100%; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; order: 2; }
+        .configs__filters::-webkit-scrollbar { display: none; }
+        .configs__tabs { width: 100%; order: 1; }
+        .configs__tab { flex: 1; justify-content: center; }
+        .configs__grid { padding: 0 15px; }
     }
 
     @media (max-width: 480px) {
-        .configs__grid--qr {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .configs__tab-text {
-            display: none;
-        }
-
-        .configs__filter {
-            padding: 0 12px;
-            font-size: 12px;
-        }
+        .configs__grid--qr { grid-template-columns: repeat(2, 1fr); }
+        .configs__tab-text { display: none; }
+        .configs__filter { padding: 0 12px; font-size: 12px; }
+        .card__header { padding-right: 0; margin-bottom: 25px; } /* Сбрасываем на мобильных, так как абсолютный бейдж переносится выше */
     }
 </style>

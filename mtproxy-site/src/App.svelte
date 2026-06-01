@@ -73,12 +73,13 @@
     {#if loading}
         <div class="loader">{i18n.t('app.loader')}</div>
     {:else}
-        <div class="proxy-grid">
+<div class="proxy-grid">
             <ProxyCard 
                 title="WhiteList (WL)" 
                 type="wl" 
                 list={whitelist} 
                 count={stats?.files?.mtproto?.white_count}
+                updatedTime={stats?.files?.mtproto?.updated} 
                 delay="0.2s" 
             />
             <ProxyCard 
@@ -86,6 +87,7 @@
                 type="bl" 
                 list={blacklist} 
                 count={stats?.files?.mtproto?.black_count}
+                updatedTime={stats?.files?.mtproto?.updated} 
                 delay="0.3s" 
             />
         </div>
