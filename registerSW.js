@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/v2ray-lists-site/sw.js', { scope: '/v2ray-lists-site/' })})}
