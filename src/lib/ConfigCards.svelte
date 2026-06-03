@@ -546,7 +546,7 @@
     }
 
     @media (max-width: 480px) {
-        .configs__grid--qr { grid-template-columns: repeat(2, 1fr); flex-direction: row; }
+        .configs__grid--qr { grid-template-columns: repeat(1, 1fr); }
         .configs__tab-text { display: none; }
         .configs__filter { padding: 0 12px; font-size: 12px; }
         .card__header { padding-right: 0; margin-bottom: 25px; } /* Сбрасываем на мобильных, так как абсолютный бейдж переносится выше */
