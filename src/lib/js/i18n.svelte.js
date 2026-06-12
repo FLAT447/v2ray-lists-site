@@ -34,7 +34,14 @@ export const translations = {
         "config.btn_copy": "Копировать ссылку",
         "config.btn_download": "Скачать",
 
-        // MTproxy
+        "projects.title": "Другие мои проекты",
+        "projects.subtitle": "Инструменты для обхода региональных ограничений, офлайн-работы и разблокировки зарубежных сервисов.",
+        "projects.all_btn": "Все проекты",
+        "projects.github_link": "GitHub",
+        "projects.dns_benchmark.name": "DNS Benchmark",
+        "projects.dns_benchmark.desc": "Android-приложение для тестирования и сравнения скорости DNS-резолверов.",
+    
+    // MTproxy
         "mtproxy.title": "MTProxy",
         "mtproxy.desc_1": "Проект также включает поддержку MTProxy. Это бесплатные конфигурации прокси для ",
         "mtproxy.desc_2": " на основе протокла ",
@@ -189,6 +196,13 @@ export const translations = {
         "config.btn_copy": "Copy link",
         "config.btn_download": "Download",
 
+        "projects.title": "Other Projects",
+        "projects.subtitle": "Tools for bypassing regional restrictions, offline use, and unlocking foreign services.",
+        "projects.all_btn": "All projects",
+        "projects.github_link": "GitHub",
+        "projects.dns_benchmark.name": "DNS Benchmark",
+        "projects.dns_benchmark.desc": "An Android app for testing and comparing the speed of DNS resolvers.",
+
         "mtproxy.title": "MTProxy",
         "mtproxy.desc_1": "The project also includes MTProxy support. These are free proxy configurations for ",
         "mtproxy.desc_2": " based on the protocol ",
@@ -335,6 +349,13 @@ export const translations = {
         "config.btn_copy": "Скопіювати посилання",
         "config.btn_download": "Завантажити",
 
+        "projects.title": "Інші мої проєкти",
+        "projects.subtitle": "Інструменти для обходу регіональних обмежень, офлайн-роботи та розблокування зарубіжних сервісів.",
+        "projects.all_btn": "Усі проєкти",
+        "projects.github_link": "GitHub",
+        "projects.dns_benchmark.name": "DNS Benchmark",
+        "projects.dns_benchmark.desc": "Android-застосунок для тестування та порівняння швидкості DNS-резолверів.",
+
         "mtproxy.title": "MTProxy",
         "mtproxy.desc_1": "Проєкт також включає підтримку MTProxy. Це безкоштовні конфігурації проксі для ",
         "mtproxy.desc_2": " на основі протоколу ",
@@ -480,6 +501,13 @@ export const translations = {
         "config.btn_error": "Памылка",
         "config.btn_copy": "Скапіяваць спасылку",
         "config.btn_download": "Спампаваць",
+
+        "projects.title": "Іншыя мае праекты",
+        "projects.subtitle": "Інструменты для абыходу рэгіянальных абмежаванняў, афлайн-працы і разблакіроўкі замежных сэрвісаў.",
+        "projects.all_btn": "Усе праекты",
+        "projects.github_link": "GitHub",
+        "projects.dns_benchmark.name": "DNS Benchmark",
+        "projects.dns_benchmark.desc": "Android-праграма для тэставання і парaўнання хуткасці DNS-рэзолвераў.",
 
         "mtproxy.title": "MTProxy",
         "mtproxy.desc_1": "Праект таксама ўключае падтрымку MTProxy. Гэта бясплатныя канфігурацыі проксі для ",

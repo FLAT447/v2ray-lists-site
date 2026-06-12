@@ -64,7 +64,7 @@
                     <a
                         href="https://t.me/flat447_chat"
                         target="_blank"
-                        class="contacts__item"
+                        class="contacts__item contacts__item-telegram-chat"
                     >
                         <div class="contacts__item-content">
                             <div
@@ -83,7 +83,7 @@
                         </div>
                     </a>
 
-                    <button onclick={goToPM} class="contacts__item">
+                    <button onclick={goToPM} class="contacts__item contacts__item-pm">
                         <div class="contacts__item-content">
                             <div
                                 class="contacts__icon-circle contacts__icon-circle--pm"
@@ -118,7 +118,7 @@
                     <a
                         href="https://t.me/flflat"
                         target="_blank"
-                        class="contacts__item"
+                        class="contacts__item contacts__item-telegram"
                     >
                         <div class="contacts__item-content">
                             <div
@@ -138,7 +138,7 @@
                     <a
                         href="https://vk.com/alexey20082012"
                         target="_blank"
-                        class="contacts__item"
+                        class="contacts__item contacts__item-vk"
                     >
                         <div class="contacts__item-content">
                             <div
@@ -329,6 +329,26 @@
         border-color: var(--blue-color);
     }
 
+    .contacts__item-telegram:hover {
+        background: color-mix(in srgb, var(--saphire-color), transparent 75%);
+        border-color: var(--saphire-color);
+    }
+
+    .contacts__item-vk:hover {
+        background: color-mix(in srgb, var(--blue-color), transparent 75%);
+        border-color: var(--blue-color);
+    }
+
+    .contacts__item-telegram-chat:hover {
+        background: color-mix(in srgb, var(--saphire-color), transparent 75%);
+        border-color: var(--saphire-color);   
+    }
+
+    .contacts__item-pm:hover {
+        background: color-mix(in srgb, var(--green-color), transparent 75%);
+        border-color: var(--green-color);
+    }
+
     .contacts__item:hover .contacts__icon-circle {
         transform: rotate(-10deg);
     }
@@ -337,6 +357,10 @@
         background-color: transparent;
         border-color: transparent;
         justify-content: flex-start;
+        &:hover {
+            background: color-mix(in srgb, var(--background-color), transparent 75%);
+            border-color: var(--background-color);
+        }
     }
 
     .contacts__item-content {

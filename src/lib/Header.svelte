@@ -60,16 +60,18 @@
             </a>
    
             <ul class="header__list">
-                <li class="header__list-item">
-                    <a href="https://youtube.com/@flatyt447" target="_blank" aria-label="YouTube"><FontAwesomeIcon icon={faYoutube} style="color: var(--red-color)" /></a>
-                </li>
-                <li class="header__list-item">
-                    <a href="https://t.me/flat447" target="_blank" aria-label="Telegram"><FontAwesomeIcon icon={faTelegram} style="color: var(--blue-color)" /></a>
-                </li>
-                <li class="header__list-item">
-                    <a href="https://tiktok.com/@flflat447" target="_blank" aria-label="TikTok"><FontAwesomeIcon icon={faTiktok} style="color: var(--black-color)" /></a>
-                </li>
-             
+                <ul class="header__list-social-links">
+                    <li class="header__list-item">
+                        <a href="https://youtube.com/@flatyt447" target="_blank" aria-label="YouTube"><FontAwesomeIcon icon={faYoutube} style="color: var(--red-color)" /></a>
+                    </li>
+                    <li class="header__list-item">
+                        <a href="https://t.me/flat447" target="_blank" aria-label="Telegram"><FontAwesomeIcon icon={faTelegram} style="color: var(--blue-color)" /></a>
+                    </li>
+                    <li class="header__list-item">
+                        <a href="https://tiktok.com/@flflat447" target="_blank" aria-label="TikTok"><FontAwesomeIcon icon={faTiktok} style="color: var(--black-color)" /></a>
+                    </li>
+                </ul>
+                    
                 <li><div class="header__divinder"></div></li>
                 
                 <li class="header__list-item">
@@ -238,7 +240,7 @@
 
     .header__list-item:hover :global(svg) {
         transform: rotateZ(15deg) scale(1.25);
-        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        filter: drop-shadow(0 8px 16px var(--surface-color)) brightness(1.1);
     }
 
     .header__list-github {
@@ -275,7 +277,7 @@
         color: var(--text-color);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 16px;
         font-weight: 700;
         cursor: pointer;
@@ -392,11 +394,17 @@
         background: none;
         border: none;
         cursor: pointer;
-        padding: 5px;
+        padding: 3px 5px;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: 0.5s ease;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        &:hover {
+            filter: drop-shadow(0 8px 16px var(--surface-color)) brightness(1.1);
+        }
     }
 
     .header__theme-container {
@@ -409,16 +417,30 @@
     }
 
     .header__theme-toggle:hover :global(svg) {
-        transform: rotate(-20deg) scale(1.25);
+        transform: rotate(-20deg) scale(1.2);
     }
 
     .is-spinning {
         animation: spin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    .header__list-social-links {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        display: flex;
+        gap: 7px;
+        padding: 4px 6px;
+    }
+
+    .header__list-social-links .header__list-item:hover :global(svg) {
+        transform: rotateZ(15deg) scale(1.16);
+        filter: drop-shadow(0 8px 16px var(--surface-color)) brightness(1.1);
+    }
+
     @keyframes spin {
         0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.25); }
+        50% { transform: rotate(180deg) scale(1.2); }
         100% { transform: rotate(360deg) scale(1); }
     }
 
@@ -454,7 +476,7 @@
 
         .custom-select__trigger { 
             font-size: 14px; 
-            padding: 5px 8px; 
+            padding: 9px 8px; 
             gap: 4px;
         }
     }

@@ -10,6 +10,7 @@
     import ConfigCards from './lib/ConfigCards.svelte';
     import Guides from './lib/Guides.svelte';
     import MTproxy from './lib/MTproxy.svelte';
+    import Projects from './lib/Projects.svelte';
 
     onMount(() => {
         theme.updateBodyClass();
@@ -25,6 +26,7 @@
 <Header />
 <Grid />
 <ConfigCards />
+<Projects />
 <MTproxy />
 <Guides />
 <Footer />
