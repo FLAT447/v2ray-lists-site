@@ -54,7 +54,7 @@
 <header class="header">
     <div class="header__wrapper">
         <nav class="header__nav">
-            <a href="https://flat447.github.io/v2ray-lists-site" class="header__title">
+            <a href="https://flat447.github.io/v2ray-lists-site/" class="header__title">
                 <img class="header__image" src="https://cdn.jsdelivr.net/gh/FLAT447/v2ray-lists-site@gh-pages/favicon.png" alt="logo" width="30px">
                 <p>V2Ray <span style="background: linear-gradient(60deg, var(--blue-color), var(--saphire-color)); background-clip: text; -webkit-background-clip: text; color: transparent;">Lists</span></p>
             </a>
