@@ -67,6 +67,17 @@ export const translations = {
         "footer.using": "с использованием",
         "footer.source_code": "Исходный код сайта:",
 
+        // Support Modal
+        "support.button_text": "Поддержать автора",
+        "support.button_title": "Поддержать развитие проекта",
+        "support.title": "Поддержать автора",
+        "support.description": "Если вам нравится проект и вы хотите помочь его развитию, вы можете поддержать автора одним из следующих способов. Спасибо за поддержку! ❤️",
+        "support.action_open": "Открыть",
+        "support.action_copy": "Копировать",
+        "support.copied_success": "адрес скопирован",
+        "support.copy_error": "Не удалось скопировать адрес",
+        "support.thanks": "Ваша поддержка помогает улучшать проект и создавать новые инструменты!",
+
         // Guides
         "guides.title": "Гайды по использованию",
         "guides.problems_title": "Решение проблем",
@@ -226,6 +237,16 @@ export const translations = {
         "footer.using": "using",
         "footer.source_code": "Website source code:",
 
+        "support.button_text": "Support Author",
+        "support.button_title": "Support project development",
+        "support.title": "Support the Author",
+        "support.description": "If you like the project and want to help with its development, you can support the author in one of the following ways. Thank you for your support! ❤️",
+        "support.action_open": "Open",
+        "support.action_copy": "Copy",
+        "support.copied_success": "address copied",
+        "support.copy_error": "Failed to copy address",
+        "support.thanks": "Your support helps improve the project and create new tools!",
+
         "guides.title": "Usage Guides",
         "guides.problems_title": "Troubleshooting",
         "guides.update_title": "How to update configs?",
@@ -379,6 +400,16 @@ export const translations = {
         "footer.using": "з використанням",
         "footer.source_code": "Вихідний код сайту:",
 
+        "support.button_text": "Підтримати автора",
+        "support.button_title": "Підтримати розвиток проєкту",
+        "support.title": "Підтримати автора",
+        "support.description": "Якщо вам подобається проєкт і ви хочете допомогти його розвитку, ви можете підтримати автора одним із наступних способів. Дякуємо за підтримку! ❤️",
+        "support.action_open": "Відкрити",
+        "support.action_copy": "Скопіювати",
+        "support.copied_success": "адресу скопійовано",
+        "support.copy_error": "Не вдалося скопіювати адресу",
+        "support.thanks": "Ваша підтримка допомагає покращувати проєкт і створювати нові інструменти!",
+
         "guides.title": "Гайди з використання",
         "guides.problems_title": "Вирішення проблем",
         "guides.update_title": "Як оновити конфіги?",
@@ -531,6 +562,16 @@ export const translations = {
         "footer.written_on": "Напісана на",
         "footer.using": "з выкарыстаннем",
         "footer.source_code": "Зыходны код сайта:",
+
+        "support.button_text": "Падтрымаць аўтара",
+        "support.button_title": "Падтрымаць развіццё праекта",
+        "support.title": "Падтрымаць аўтара",
+        "support.description": "Калі вам падабаецца праект і вы хочаце дапамагчы яго развіццю, вы можаце падтрымаць аўтара адным з наступных спосабаў. Дзякуй за падтрымку! ❤️",
+        "support.action_open": "Адкрыць",
+        "support.action_copy": "Скапіяваць",
+        "support.copied_success": "адрас скапіяваны",
+        "support.copy_error": "Не ўдалося скапіяваць адрас",
+        "support.thanks": "Ваша падтрымка дапамагае паляпшаць праект і ствараць новыя інструменты!",
 
         "guides.title": "Гайды па выкарыстанні",
         "guides.problems_title": "Вырашэнне праблем",

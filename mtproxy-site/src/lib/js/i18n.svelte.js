@@ -6,7 +6,7 @@ export const translations = {
 
         // ProxyCard Component
         "proxy.badge_whitelist": "WhiteList",
-        "proxy.badge_normal": "Обычный",
+        "proxy.badge_normal": "BlackList",
         "proxy.desc_whitelist": "Прокси, работающие при \"Белых Списках\".",
         "proxy.desc_normal": "Стандартные рабочие MTProxy.",
         "proxy.available": "Доступно:",
@@ -46,6 +46,17 @@ export const translations = {
         "vpn.title": "VPN",
         "vpn.description": "Проект также включает поддержку бесплатных VPN конфигураций.",
         "vpn.button": "Перейти к VPN",
+        
+        // Support Modal
+        "support.button_text": "Поддержать автора",
+        "support.button_title": "Поддержать развитие проекта",
+        "support.title": "Поддержать автора",
+        "support.description": "Если вам нравится проект и вы хотите помочь его развитию, вы можете поддержать автора одним из следующих способов. Спасибо за поддержку! ❤️",
+        "support.action_open": "Открыть",
+        "support.action_copy": "Копировать",
+        "support.copied_success": "адрес скопирован",
+        "support.copy_error": "Не удалось скопировать адрес",
+        "support.thanks": "Ваша поддержка помогает улучшать проект и создавать новые инструменты!",
 
         // Footer Component
         "footer.made_by": "Сделано c",
@@ -60,7 +71,7 @@ export const translations = {
 
         // ProxyCard Component
         "proxy.badge_whitelist": "WhiteList",
-        "proxy.badge_normal": "Звичайний",
+        "proxy.badge_normal": "BlackList",
         "proxy.desc_whitelist": "Проксі, що працюють при \"Білих Списках\".",
         "proxy.desc_normal": "Стандартні робочі MTProxy.",
         "proxy.available": "Доступно:",
@@ -101,6 +112,16 @@ export const translations = {
         "vpn.description": "Проєкт також включає підтримку безкоштовних VPN конфігурацій.",
         "vpn.button": "Перейти до VPN",
 
+        "support.button_text": "Підтримати автора",
+        "support.button_title": "Підтримати розвиток проєкту",
+        "support.title": "Підтримати автора",
+        "support.description": "Якщо вам подобається проєкт і ви хочете допомогти його розвитку, ви можете підтримати автора одним із наступних способів. Дякуємо за підтримку! ❤️",
+        "support.action_open": "Відкрити",
+        "support.action_copy": "Скопіювати",
+        "support.copied_success": "адресу скопійовано",
+        "support.copy_error": "Не вдалося скопіювати адресу",
+        "support.thanks": "Ваша підтримка допомагає покращувати проєкт і створювати нові інструменти!",
+
         // Footer Component
         "footer.made_by": "Зроблено з",
         "footer.written_on": "Написано на",
@@ -114,7 +135,7 @@ export const translations = {
 
         // ProxyCard Component
         "proxy.badge_whitelist": "WhiteList",
-        "proxy.badge_normal": "Звычайны",
+        "proxy.badge_normal": "BlackList",
         "proxy.desc_whitelist": "Проксі, якія працуюць пры \"Белых Спісах\".",
         "proxy.desc_normal": "Стандартныя працоўныя MTProxy.",
         "proxy.available": "Даступна:",
@@ -155,6 +176,16 @@ export const translations = {
         "vpn.description": "Праект таксама ўключае падтрымку бясплатных VPN канфігурацый.",
         "vpn.button": "Перайсці да VPN",
 
+        "support.button_text": "Падтрымаць аўтара",
+        "support.button_title": "Падтрымаць развіццё праекта",
+        "support.title": "Падтрымаць аўтара",
+        "support.description": "Калі вам падабаецца праект і вы хочаце дапамагчы яго развіццю, вы можаце падтрымаць аўтара адным з наступных спосабаў. Дзякуй за падтрымку! ❤️",
+        "support.action_open": "Адкрыць",
+        "support.action_copy": "Скапіяваць",
+        "support.copied_success": "адрас скапіяваны",
+        "support.copy_error": "Не ўдалося скапіяваць адрас",
+        "support.thanks": "Ваша падтрымка дапамагае паляпшаць праект і ствараць новыя інструменты!",
+
         // Footer Component
         "footer.made_by": "Зроблена з",
         "footer.written_on": "Напісана на",
@@ -168,7 +199,7 @@ export const translations = {
 
         // ProxyCard Component
         "proxy.badge_whitelist": "WhiteList",
-        "proxy.badge_normal": "Standard",
+        "proxy.badge_normal": "BlackList",
         "proxy.desc_whitelist": "Proxies that work with \"WhiteLists\".",
         "proxy.desc_normal": "Standard working MTProxies.",
         "proxy.available": "Available:",
@@ -208,6 +239,16 @@ export const translations = {
         "vpn.title": "VPN",
         "vpn.description": "The project also includes support for free VPN configurations.",
         "vpn.button": "Go to VPN",
+
+        "support.button_text": "Support Author",
+        "support.button_title": "Support project development",
+        "support.title": "Support the Author",
+        "support.description": "If you like the project and want to help with its development, you can support the author in one of the following ways. Thank you for your support! ❤️",
+        "support.action_open": "Open",
+        "support.action_copy": "Copy",
+        "support.copied_success": "address copied",
+        "support.copy_error": "Failed to copy address",
+        "support.thanks": "Your support helps improve the project and create new tools!",
 
         // Footer Component
         "footer.made_by": "Made with",

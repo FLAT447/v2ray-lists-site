@@ -2,6 +2,7 @@
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faHeart } from "@fortawesome/free-solid-svg-icons";
     import { i18n } from "./js/i18n.svelte";
+    import SupportModal from "./SupportModal.svelte";
 </script>
 
 <footer class="footer animate-in" style="--delay: 0.6s">
@@ -18,6 +19,10 @@
                     class="footer__author-link">FLAT447</a
                 >
             </span>
+        </div>
+
+        <div class="footer__support-section">
+            <SupportModal />
         </div>
 
         <div class="footer__tech">
@@ -108,6 +113,12 @@
         filter: brightness(1.2);
     }
 
+    /* Секция поддержки */
+    .footer__support-section {
+        display: flex;
+        justify-content: center;
+    }
+
     .footer__tech {
         display: flex;
         align-items: center;
@@ -164,21 +175,18 @@
         filter: brightness(1.2);
     }
 
-    /* --- БЛОК АНИМАЦИИ ПРИ ЗАГРУЗКЕ --- */
+    /*
+     * Анимация появления использует только opacity — без transform.
+     * transform создаёт новый stacking context, который ломает position: fixed
+     * у дочерних элементов (в частности, у модального окна SupportModal).
+     */
     :global(.animate-in) {
-        animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s)
-            both;
+        animation: fadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both;
     }
 
-    @keyframes fadeUp {
-        from {
-            opacity: 0;
-            transform: translateY(24px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
     }
 
     @media (max-width: 768px) {
@@ -187,6 +195,9 @@
         }
         .footer__tech {
             gap: 8px;
+        }
+        .footer__made-by {
+            font-size: 1.1rem;
         }
     }
 </style>
