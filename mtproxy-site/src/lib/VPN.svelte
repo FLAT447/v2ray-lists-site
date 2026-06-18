@@ -58,7 +58,8 @@
         min-height: 280px;
         transition: 0.3s ease;
         &:hover {
-            border-color: color-mix(in srgb, var(--mauve-color), transparent 50%)  
+            border-color: color-mix(in srgb, var(--mauve-color), transparent 50%);
+            transform: translateY(-5px);
         }
     }
 
