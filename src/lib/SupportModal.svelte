@@ -25,6 +25,27 @@
             label: 'TON',
             address: 'UQBRZI9s95gtehUkm_NESZ-HJOmhJlHn025uu_Uqn1xfhlCR',
             color: '#0088cc'
+        },
+
+        {
+            id: 'eth',
+            label: 'Ethereum',
+            address: '0x08DCB85468d46E1D48094d8945B762fCF6F3AD64',
+            color: '#627eea'
+        },
+
+        {
+            id: 'usdt',
+            label: 'USDT (TRC20)',
+            address: 'TUadZfsYhCsCEje852r4mWichUWvGcvY5E',
+            color: '#009494'
+        },
+
+        {
+            id: 'btc',
+            label: 'Bitcoin',
+            address: 'bc1q485z2g5gan0qmdyrg2r672ua2tukk08ns92s56',
+            color: '#f8931a'
         }
     ];
 

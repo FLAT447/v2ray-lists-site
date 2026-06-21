@@ -23,16 +23,16 @@
 
     // Жёсткие ссылки (fallback если API недоступен)
     const FALLBACK_URLS = {
-        'v2rayNG': 'https://github.com/2dust/v2rayNG/releases/download/2.2.3/v2rayNG_2.2.3-fdroid_universal.apk',
-        'Throne-win10': 'https://github.com/throneproj/Throne/releases/download/1.1.5/Throne-1.1.5-windows64.zip',
-        'Throne-win7': 'https://github.com/throneproj/Throne/releases/download/1.1.5/Throne-1.1.5-windowslegacy64.zip',
-        'Throne-linux': 'https://github.com/throneproj/Throne/releases/download/1.1.5/Throne-1.1.5-linux-amd64.zip',
+        'v2rayNG': 'https://github.com/2dust/v2rayNG/releases/download/2.2.5/v2rayNG_2.2.5-universal.apk',
+        'Throne-win10': 'https://github.com/throneproj/Throne/releases/download/1.1.6/Throne-1.1.6-windows64.zip',
+        'Throne-win7': 'https://github.com/throneproj/Throne/releases/download/1.1.6/Throne-1.1.6-windowslegacy64.zip',
+        'Throne-linux': 'https://github.com/throneproj/Throne/releases/download/1.1.6/Throne-1.1.6-linux-amd64.zip',
         'Hiddify': 'https://github.com/hiddify/hiddify-app/releases/download/latest/Hiddify-MacOS.dmg'
     };
 
     // Данные для запросов к API GitHub
     const GITHUB_REPOS = {
-        'v2rayNG': { owner: '2dust', repo: 'v2rayNG', asset: 'v2rayNG_.*-fdroid_universal.apk' },
+        'v2rayNG': { owner: '2dust', repo: 'v2rayNG', asset: 'v2rayNG_.*-universal.apk' },
         'Throne': { owner: 'throneproj', repo: 'Throne', assets: { win10: 'windows64-installer.exe', win7: 'windowslegacy64.zip', linux: 'linux-amd64.zip' } },
         'Hiddify': { owner: 'hiddify', repo: 'hiddify-app', asset: 'Hiddify-MacOS.dmg' }
     };
