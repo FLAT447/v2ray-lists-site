@@ -78,7 +78,7 @@
 
     onMount(async () => {
         try {
-            const res = await fetch('https://gitverse.ru/api/repos/FLAT447/my-repo/raw/branch/main/stats.json');
+            const res = await fetch('https://github.com/FLAT447/v2ray-lists/raw/refs/heads/main/stats.json');
             if (res.ok) {
                 stats = await res.json();
             }
