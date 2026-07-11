@@ -17,8 +17,7 @@
         { id: 'white_full', name: 'WHITE FULL', type: 'sni', statKey: 'white_full' }
     ];
 
-    function getUrl(id, format) {
-        const base = 'https://github.com/FLAT447/v2ray-lists/raw/refs/heads/main';
+    function getUrl(id, format, mirror) {
         const names = {
             white_lite: 'WHITE_LITE',
             black_lte: 'BLACK_LTE',
@@ -26,10 +25,15 @@
             black_full: 'BLACK_FULL'
         };
         const name = names[id];
-        
-        if (format === 'clash') return `${base}/CLASH/${name}.yaml`;
-        if (format === 'base64') return `${base}/BASE64/${name}.txt`;
-        return `${base}/${name}.txt`;
+
+        let filePath = `${name}.txt`;
+        if (format === 'clash') filePath = `CLASH/${name}.yaml`;
+        if (format === 'base64') filePath = `BASE64/${name}.txt`;
+
+        if (mirror === 'gitverse') {
+            return `https://gitverse.ru/api/repos/FLAT447/my-repo/raw/branch/main/${filePath}`;
+        }
+        return `https://github.com/FLAT447/v2ray-lists/raw/refs/heads/main/${filePath}`;
     }
 
     let currentView = $state('list');
@@ -47,11 +51,19 @@
         black_full: 'txt'
     });
 
+    let mirrors = $state({
+        white_lite: 'github',
+        black_lte: 'github',
+        white_full: 'github',
+        black_full: 'github'
+    });
+
     const configs = $derived(
         baseConfigs.map(c => ({
             ...c,
             format: formats[c.id],
-            url: getUrl(c.id, formats[c.id])
+            mirror: mirrors[c.id],
+            url: getUrl(c.id, formats[c.id], mirrors[c.id])
         }))
     );
 
@@ -66,7 +78,7 @@
 
     onMount(async () => {
         try {
-            const res = await fetch('https://raw.githubusercontent.com/FLAT447/v2ray-lists/main/stats.json');
+            const res = await fetch('https://gitverse.ru/api/repos/FLAT447/my-repo/raw/branch/main/stats.json');
             if (res.ok) {
                 stats = await res.json();
             }
@@ -217,6 +229,19 @@
                         </span>
                     </div>
 
+                    <div class="card__mirror">
+                        <button
+                            class="card__mirror-btn"
+                            class:card__mirror-btn--active={mirrors[conf.id] === 'github'}
+                            onclick={() => mirrors[conf.id] = 'github'}
+                        >GitHub</button>
+                        <button
+                            class="card__mirror-btn"
+                            class:card__mirror-btn--active={mirrors[conf.id] === 'gitverse'}
+                            onclick={() => mirrors[conf.id] = 'gitverse'}
+                        >GitVerse</button>
+                    </div>
+
                     <div class="card__formats">
                         <button 
                             class="card__format-btn" 
@@ -286,6 +311,19 @@
                             />
                             {conf.name}
                         </span>
+                    </div>
+
+                    <div class="card__mirror" style="width: 100%; box-sizing: border-box;">
+                        <button
+                            class="card__mirror-btn"
+                            class:card__mirror-btn--active={mirrors[conf.id] === 'github'}
+                            onclick={() => mirrors[conf.id] = 'github'}
+                        >GitHub</button>
+                        <button
+                            class="card__mirror-btn"
+                            class:card__mirror-btn--active={mirrors[conf.id] === 'gitverse'}
+                            onclick={() => mirrors[conf.id] = 'gitverse'}
+                        >GitVerse</button>
                     </div>
 
                     <div class="card__formats" style="width: 100%; box-sizing: border-box;">
@@ -466,6 +504,30 @@
     }
     .card__format-btn:hover { opacity: 0.8; }
     .card__format-btn--active { background: var(--surface-color); color: var(--blue-color); opacity: 1; }
+
+    .card__mirror {
+        display: flex;
+        background: var(--crust-color);
+        padding: 3px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        gap: 2px;
+    }
+    .card__mirror-btn {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: var(--text-color);
+        padding: 6px 0;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 7px;
+        opacity: 0.5;
+        transition: background 0.2s, opacity 0.2s, color 0.2s;
+    }
+    .card__mirror-btn:hover { opacity: 0.8; }
+    .card__mirror-btn--active { background: var(--surface-color); color: var(--blue-color); opacity: 1; }
 
     .card {
         position: relative; /* Добавлено для абсолютного позиционирования бейджа */
