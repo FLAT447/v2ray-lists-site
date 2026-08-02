@@ -30,7 +30,7 @@ jobs:
       - name: Deploy Main Site
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.MY_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           keep_files: true
 
