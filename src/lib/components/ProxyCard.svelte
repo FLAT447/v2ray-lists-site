@@ -5,6 +5,7 @@
 	import { pushToast } from '$lib/toast.svelte.js';
 	import { copyText } from '$lib/clipboard.js';
 	import { reveal } from '$lib/reveal.js';
+	import { stats, proxyStats } from '$lib/stats.svelte.js';
 	import LinkBox from './LinkBox.svelte';
 
 	let { proxy, delay = 0 } = $props();
@@ -14,6 +15,7 @@
 	let content = $state('');
 
 	const url = $derived(activeMirror ? mirrors[activeMirror](proxy.file) : '');
+	const st = $derived(proxyStats(proxy.name));
 
 	async function fetchText(key) {
 		const ctrl = new AbortController();
@@ -93,6 +95,32 @@
 		</button>
 	{:else}
 		<LinkBox value={url} label={i18n.t('proxy.link')} />
+
+		<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-on-surface-variant">
+			<span>
+				<span class="material-symbols-outlined align-middle" style="font-size:16px">list_alt</span>
+				{i18n.t('card.proxies')}:
+				{#if st}
+					<b class="text-on-surface">{st.count}</b>
+				{:else if stats.status === 'ready'}
+					—
+				{:else}
+					{i18n.t('card.statsFailed')}
+				{/if}
+			</span>
+			<span>
+				<span class="material-symbols-outlined align-middle" style="font-size:16px">schedule</span>
+				{i18n.t('card.updated')}:
+				{#if st}
+					<b class="text-on-surface">{st.updated}</b>
+				{:else if stats.status === 'ready'}
+					—
+				{:else}
+					{i18n.t('card.statsFailed')}
+				{/if}
+			</span>
+		</div>
+
 		<div class="flex flex-wrap gap-3">
 			<button class="md-filled" onclick={copyAll}>
 				<span class="material-symbols-outlined">file_copy</span>

@@ -1,6 +1,7 @@
 <script>
 	import { i18n } from '$lib/i18n.svelte.js';
 	import { mirrors, mirrorLabels, subPath, formats } from '$lib/config.js';
+	import { stats, subStats } from '$lib/stats.svelte.js';
 	import { reveal } from '$lib/reveal.js';
 	import LinkBox from './LinkBox.svelte';
 	import SelectMenu from './SelectMenu.svelte';
@@ -11,6 +12,7 @@
 	let format = $state('TXT');
 
 	const url = $derived(mirrors[mirror](subPath(sub.file, format)));
+	const st = $derived(subStats(sub.name));
 
 	const mirrorOptions = $derived(
 		Object.keys(mirrors).map((m) => ({ value: m, label: mirrorLabels[m] }))
@@ -30,4 +32,29 @@
 	</div>
 
 	<LinkBox value={url} label={i18n.t('proxy.link')} toast={i18n.t('subs.copied')} />
+
+	<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-on-surface-variant">
+		<span>
+			<span class="material-symbols-outlined align-middle" style="font-size:16px">list_alt</span>
+			{i18n.t('card.configs')}:
+			{#if st}
+				<b class="text-on-surface">{st.count}</b>
+			{:else if stats.status === 'ready'}
+				—
+			{:else}
+				{i18n.t('card.statsFailed')}
+			{/if}
+		</span>
+		<span>
+			<span class="material-symbols-outlined align-middle" style="font-size:16px">schedule</span>
+			{i18n.t('card.updated')}:
+			{#if st}
+				<b class="text-on-surface">{st.updated}</b>
+			{:else if stats.status === 'ready'}
+				—
+			{:else}
+				{i18n.t('card.statsFailed')}
+			{/if}
+		</span>
+	</div>
 </div>

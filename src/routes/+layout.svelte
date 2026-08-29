@@ -5,8 +5,11 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Toast from '$lib/components/Toast.svelte';
 	import Background from '$lib/components/Background.svelte';
+	import { loadStats } from '$lib/stats.svelte.js';
 
 	let { children } = $props();
+
+	loadStats();
 </script>
 
 <svelte:head>
