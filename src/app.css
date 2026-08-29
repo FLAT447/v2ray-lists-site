@@ -125,7 +125,7 @@
 	--radius-3xl: var(--md-sys-shape-corner-3xl);
 	--radius-full: var(--md-sys-shape-corner-full);
 
-	--font-sans: 'Roboto Flex', 'Roboto', system-ui, sans-serif;
+	--font-sans: 'Google Sans', 'Roboto Flex', 'Roboto', system-ui, sans-serif;
 }
 
 /* ===================== Base ===================== */
@@ -137,7 +137,7 @@
 	body {
 		background: var(--md-sys-color-surface);
 		color: var(--md-sys-color-on-surface);
-		font-family: 'Roboto Flex', system-ui, sans-serif;
+		font-family: 'Google Sans', 'Roboto Flex', system-ui, sans-serif;
 		-webkit-font-smoothing: antialiased;
 		min-height: 100vh;
 	}
