@@ -1,4 +1,11 @@
-node_modules/
-dist/
-mtproxy-site/node_modules/
-mtproxy-site/dist/
+node_modules
+/dist
+/build
+/.svelte-kit
+.agents
+skills-lock.json
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log

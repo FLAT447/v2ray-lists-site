@@ -1,4 +1,4 @@
-name: Combined Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -32,35 +32,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          keep_files: true
-
-  # Задание для MTProxy
-  build_mtproxy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: |
-          cd mtproxy-site
-          npm install
-
-      - name: Build
-        run: |
-          cd mtproxy-site
-          npm run build
-
-      - name: Deploy MTProxy
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./mtproxy-site/dist # Убедитесь, что путь к сборке MTProxy верный
-          destination_dir: mtproxy # Положит файлы в подпапку /mtproxy на хостинге
           keep_files: true
