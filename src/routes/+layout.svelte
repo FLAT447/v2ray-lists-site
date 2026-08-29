@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>V2Ray Lists — бесплатные VPN конфигурации и MTProxy</title>
+	<title>V2Ray Lists Site</title>
 </svelte:head>
 
 <Background />
