@@ -34,7 +34,7 @@ export const proxyFiles = [
 ];
 
 export const social = {
-	telegram: 'https://t.me/flat447',
+	telegram: 'https://t.me/flat4470',
 	tiktok: 'https://tiktok.com/@flflat447'
 };
 
