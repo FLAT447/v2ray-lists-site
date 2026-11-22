@@ -41,23 +41,23 @@ export const social = {
 export const wallets = [
 	{
 		key: 'ton',
-		label: { ru: 'TON', en: 'TON' },
-		address: 'UQBRZI9s95gtehUkm_NESZ-HJOmhJlHn025uu_Uqn1xfhlCR'
+		label: { ru: 'GRAM', en: 'GRAM' },
+		address: 'UQDqE26tfZV4qes9G7pCRZ8xSHJDw_fxqxj3yd9rTA4HEnCj'
 	},
 	{
 		key: 'usdt',
 		label: { ru: 'USDT (TRC20)', en: 'USDT (TRC20)' },
-		address: 'TUadZfsYhCsCEje852r4mWichUWvGcvY5E'
+		address: 'TJGGZSd8pzwGaCNFt2UdDyKXN7EyYLMz6x'
 	},
 	{
 		key: 'eth',
 		label: { ru: 'ETH', en: 'ETH' },
-		address: '0x08DCB85468d46E1D48094d8945B762fCF6F3AD64'
+		address: '0x91FB5B028ac58f47903d9398A513934a2289565B'
 	},
 	{
 		key: 'btc',
 		label: { ru: 'BTC', en: 'BTC' },
-		address: 'bc1q485z2g5gan0qmdyrg2r672ua2tukk08ns92s56'
+		address: 'bc1qmljmyh720tkgy23ensuuydkfgquwpqw2vaw48m'
 	}
 ];
 
